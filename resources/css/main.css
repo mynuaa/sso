@@ -1,0 +1,141 @@
+*{
+	outline:none;
+	font-weight:lighter;
+	font-family:"Microsoft Yahei UI Light","微软雅黑","SimHei";
+}
+html,body{
+	margin:0;
+	padding:0;
+	font-size:1em;
+	overflow-x:hidden;
+}
+.background{
+	position:absolute;
+	top:0;
+	left:0;
+	width:100%;
+	min-width:960px;
+	height:100%;
+	z-index:-1;
+	background:url(../img/bgimg.jpg) no-repeat;
+	background-size:contain;
+}
+header{
+	height:39px;
+	background:url(../img/toptb.png) repeat-x;
+}
+.container{
+	max-width:960px;
+	margin:0 auto;
+	padding:0 0.2em;
+}
+.nav-ul{
+	display:inline-block;
+	list-style-type:none;
+	margin:0;
+	margin-left:0.5em;
+	padding:0;
+}
+.nav-ul li{
+	display:inline-block;
+	padding:0 0.8em;
+	height:39px;
+	line-height:39px;
+	color:#FFF;
+	font-size:0.9em;
+}
+.nav-ul li:hover{
+	background:#06C;
+}
+.zfjlogo{
+	max-width:75%;
+}
+.tabs{
+	overflow:hidden;
+	max-width:400px;
+	margin:0 auto;
+	text-align:center;
+}
+.tab{
+	display:inline-block;
+	padding:0.5em 0;
+	float:left;
+	cursor:pointer;
+	box-sizing:border-box;
+}
+.tabs.v1 .tab{width:100%;}
+.tabs.v2 .tab{width:50%;}
+.tabs.v3 .tab{width:33.33333333%;}
+.tabs.v4 .tab{width:25%;}
+.tab-current{
+	border-bottom:1px solid #000;
+}
+.groups{
+	max-width:400px;
+	margin:0 auto;
+	padding:1em 0;
+	text-shadow:;
+}
+.group{
+	display:none;
+}
+.group-current{
+	display:block;
+}
+form{
+	display:table;
+	max-width:400px;
+}
+.form-group{
+	display:table-row;
+}
+.form-group>*{
+	display:table-cell;
+	padding:0.3em 0.5em;
+	height:2em;
+	vertical-align:middle;
+}
+.form-group .field{
+	font-weight:bold;
+	color:#333;
+	text-align:right;
+}
+input{
+	border:1px solid #BBB;
+	border-radius:4px;
+	padding:0.5em;
+}
+input[disabled]{
+	cursor:no-drop;
+}
+input[type=button],input[type=submit]{
+	padding:0.5em 2em;
+	background:#06C;
+	color:#FFF;
+	font-weight:bold;
+	font-size:0.9em;
+	border:none;
+}
+input[type=button]:hover,input[type=submit]:hover{
+	background:#09C;
+	cursor:pointer;
+}
+input[type=text]:focus,input[type=password]:focus,input[type=email]:focus{
+	border-color:#06C;
+}
+.form-footer{
+	margin:1em auto;
+	padding-top:1em;
+	text-align:center;
+	margin:0 auto;
+}
+.left{
+	text-align:left;
+}
+.center{
+	margin-left:auto;
+	margin-right:auto;
+	text-align:center;
+}
+.mt1{margin-top:1em;}
+.mb1{margin-bottom:1em;}
