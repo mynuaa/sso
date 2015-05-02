@@ -13,7 +13,7 @@ if (isset($_POST['token'])) {
 	$result = json_decode($result, true);
 	switch ($result['uid']) {
 	case -1:
-		alert('验证失败：用户名或密码错误', '?page=login');
+		alert('验证失败：' . $result['msg'], '?page=login');
 		break;
 	case 0:
 		$_SESSION['myauth_token'] = $result['token'];
