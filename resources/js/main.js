@@ -1,6 +1,6 @@
 // 将fid中的标签页切换到gid
 function switchTo(fid,gid){
-	var frame=document.querySelectorAll("#frame"+fid);
+	var frame=document.getElementById("frame"+fid);
 	if(!frame){
 		console.error("Error: frame with id = fid not found.");
 		return;

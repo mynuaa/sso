@@ -16,7 +16,6 @@ if($uid > 0) {
 	}
 	else {
 		// 登录成功
-		$_SESSION['myauth_uid'] = $uid;
 		$result = array(
 			'uid' => $uid
 		);

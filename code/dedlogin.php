@@ -21,7 +21,6 @@ if (dedverify($param['username'], $param['password'])) {
 		}
 		else {
 			// 登录成功
-			$_SESSION['myauth_uid'] = $t;
 			$result = array(
 				'uid' => $t
 			);

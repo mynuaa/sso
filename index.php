@@ -22,27 +22,9 @@ if (isset($_GET['action'])) {
 			require_once "code/{$param['type']}login.php";
 		break;
 	case 'logout':
-		require_once 'code/logout.php';
-		break;
 	case 'complete':
-		require_once 'code/complete.php';
-		break;
-	case 'user':
-		$result = array(
-			'uid' => isset($_SESSION['myauth_uid']) ? $_SESSION['myauth_uid'] : -1
-		);
-		echo json_encode($result);
-	case 'pmlist':
-		require_once 'code/pmlist.php';
-		break;
-	case 'pmwin':
-		require_once 'code/pmwin.php';
-		break;
-	case 'friend':
-		require_once 'code/friend.php';
-		break;
-	case 'avatar':
-		require_once 'code/avatar.php';
+	case 'getuser':
+		require_once 'code/' . $_GET['action'] . '.php';
 		break;
 	}
 }

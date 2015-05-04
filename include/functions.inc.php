@@ -47,8 +47,13 @@ function createHeader() {
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
 	<meta name="format-detection" content="telphone=no,email=no">
 	<meta name="msapplication-tap-highlight" content="no">
-	<title>纸飞机用户登录</title>
+	<title>用户登录 - 纸飞机南航青年网络社区</title>
 	<link rel="stylesheet" href="resources/css/main.css">
+	<!--[if lt IE 10]>
+	<script src="resources/js/ieBetter.js"></script>
+	<script src="resources/js/html5.js"></script>
+	<script src="resources/js/classList.min.js"></script>
+	<![endif]-->
 </head>
 <body>
 	<div class="background"></div>
@@ -64,10 +69,14 @@ function createHeader() {
 		</div>
 	</header>
 	<div class="container center">
-		<!--[if lt IE 9]>
-		<div class="tip tip-warning">你正在使用IE的一个不安全版本！<a href="http://browsehappy.com/" target="_blank">点击这里</a>下载现代浏览器。</div>
+		<img src="resources/img/logo.png" alt="纸飞机南航青年网络社区" class="zfjlogo mt1 mb1">
+		<!--[if IE 8]>
+		<div class="tip tip-warning">你正在使用IE的一个旧版本，<a href="http://browsehappy.com/" target="_blank">点击这里</a>下载现代浏览器。</div>
 		<![endif]-->
-			<img src="resources/img/logo.png" alt="纸飞机南航青年网络社区" class="zfjlogo mt1 mb1">
+		<!--[if IE 7]>
+		<div class="tip tip-danger">你正在使用的IE浏览器已不被支持！<a href="http://browsehappy.com/" target="_blank">点击这里</a>下载现代浏览器。</div>
+		<![endif]-->
+		<div class="tip tip-info">新用户可用教务处账号注册，注册后将自动绑定。</div>
 EOF;
 	echo $str;
 }

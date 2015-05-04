@@ -68,6 +68,9 @@ if (isset($_POST['action'])) {
 			$result = json_decode($result, true);
 			if ($result['uid'] >= 0) {
 				$uid = ($result['uid'] > 0) ? $result['uid'] : uc_get_user($arr['username'])[0];
+				if ($arr['username'] !== $_POST['username']) {
+					alert('该学号已被绑定！', $_SERVER['REQUEST_URI']);
+				}
 				$db->query("INSERT INTO `myauth` (`auth_id`, `auth_ded`) VALUES ($uid, '{$_POST['username']}')");
 				$_SESSION['myauth_uid'] = $uid;
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);

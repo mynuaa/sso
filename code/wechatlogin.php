@@ -13,7 +13,6 @@ if(!$t) {
 }
 else {
 	// 登录成功
-	$_SESSION['myauth_uid'] = $t;
 	$result = array(
 		'uid' => $t
 	);

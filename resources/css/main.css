@@ -23,6 +23,10 @@ html,body{
 header{
 	height:39px;
 	background:url(../img/toptb.png) repeat-x;
+	overflow:hidden;
+}
+header a{
+	text-decoration:none;
 }
 .container{
 	max-width:960px;
@@ -139,3 +143,30 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus{
 }
 .mt1{margin-top:1em;}
 .mb1{margin-bottom:1em;}
+.tip{
+	margin:1em 0;
+	padding:0.5em 0;
+	border:1px solid;
+	font-size:0.9em;
+	border-radius:0.3em;
+}
+.tip-warning{
+	border-color:#BF6500;
+	color:#BF6500;
+	background:#FF9;
+}
+.tip-info{
+	border-color:#06C;
+	color:#06C;
+	background:#D4F0FF;
+}
+.tip-success{
+	border-color:green;
+	color:green;
+	background:#CFC;
+}
+.tip-danger{
+	border-color:red;
+	color:red;
+	background:#FDD;
+}
