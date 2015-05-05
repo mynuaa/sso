@@ -26,6 +26,12 @@ if (isset($_POST['token'])) {
 	}
 }
 
+if (isset($_GET['redirect_uri']))
+	jumpTo(base64_decode($_GET['redirect_uri']));
+
+// 生成微信登录的加密串
+$queryCode = sha1(rand(10000) . "\t" . time());
+
 ?>
 <?php createHeader(); ?>
 		<div id="frame1" class="frame">
@@ -33,14 +39,15 @@ if (isset($_POST['token'])) {
 			<h2>你好，<?php echo uc_get_user($_SESSION['myauth_uid'], 1)[1]; ?>。</h2>
 			<input type="button" onclick="window.location.href='?action=logout'" value="退出登录">
 		<?php else : ?>
-			<div class="tabs v2">
+			<div class="tabs v3">
 				<div id="tab1" class="tab tab-current">论坛账号</div>
 				<div id="tab2" class="tab">学号</div>
+				<div id="tab3" class="tab">微信号</div>
 			</div>
 			<div class="groups">
 				<div id="group1" class="group group-current">
 					<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
-						<input type="hidden" name="token" value="<?php echo base64_encode(md5(rand(10000))) ?>">
+						<input type="hidden" name="token" value="<?php echo base64_encode(sha1(rand(10000))) ?>">
 						<input type="hidden" name="type" value="dz">
 						<div class="form-group">
 							<div><span class="field">账号</span></div>
@@ -57,7 +64,7 @@ if (isset($_POST['token'])) {
 				</div>
 				<div id="group2" class="group">
 					<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
-						<input type="hidden" name="token" value="<?php echo base64_encode(md5(rand(10000))) ?>">
+						<input type="hidden" name="token" value="<?php echo base64_encode(sha1(rand(10000))) ?>">
 						<input type="hidden" name="type" value="ded">
 						<div class="form-group">
 							<div><span class="field">学号</span></div>
@@ -72,8 +79,18 @@ if (isset($_POST['token'])) {
 						<input type="button" value="登录" onclick="document.querySelector('#group2>form').submit()">
 					</div>
 				</div>
+				<div id="group2" class="group">
+					<div>
+						<img id="wechat_qrcode" src="http://qr.liantu.com/api.php?text=<?php echo $queryCode; ?>" alt="扫码登录" style="width:200px;height:200px;border:2px solid;border-radius:0.5em;margin-bottom:0.5em">
+						<div id="wechat_tip" style="margin:0 1em;font-size:0.9em;text-align:left">* 请在公众号“飞机耳朵”的菜单中找到“纸飞机→万能扫码”，并将手机摄像头对准上方二维码。</div>
+					</div>
+				</div>
 			</div>
 		<?php endif; ?>
 		</div>
 	</div>
+	<script>
+		var queryCode="<?php echo $queryCode; ?>";
+	</script>
+	<script src="resources/js/wechat_query.js"></script>
 <?php createFooter(); ?>

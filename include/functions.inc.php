@@ -1,5 +1,12 @@
 <?php
 
+function allAscii($str) {
+	foreach ($str as $char) {
+		if ($char < 1 || char > 127)
+			return false;
+	}
+	return true;
+}
 function ajax($a) {
 	$a['url'] = $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . $a['url'];
 	switch ($a['method']) {
@@ -76,7 +83,7 @@ function createHeader() {
 		<!--[if IE 7]>
 		<div class="tip tip-danger">你正在使用的IE浏览器已不被支持！<a href="http://browsehappy.com/" target="_blank">点击这里</a>下载现代浏览器。</div>
 		<![endif]-->
-		<div class="tip tip-info">新用户可用教务处账号注册，注册后将自动绑定。</div>
+		<div class="tip tip-info">新用户可用教务处账号直接登录。</div>
 EOF;
 	echo $str;
 }

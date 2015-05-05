@@ -1,3 +1,21 @@
+function ajax(a){
+	if(!a||!a.url)return false;
+	var xhr=new XMLHttpRequest();
+	xhr.open(a.method,a.url,true);
+	xhr.withCredentials=true;
+	xhr.setRequestHeader("Content-Type",a.type?a.type:"application/json");
+	xhr.onreadystatechange=function(){
+		if(xhr.readyState==4){
+			switch(xhr.status){
+				case 200:(a.success?a.success(xhr.responseText):null);break;
+				default:(a.failed?a.failed(xhr.status,a.url):null);break;
+			}
+		}
+	}
+	xhr.timeout=a.wait?a.wait:20000;
+	xhr.ontimeout=function(){return false;}
+	xhr.send(a.content?a.content:"");
+}
 // 将fid中的标签页切换到gid
 function switchTo(fid,gid){
 	var frame=document.getElementById("frame"+fid);

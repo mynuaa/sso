@@ -95,7 +95,7 @@ if (isset($_POST['action'])) {
 				<div id="group1" class="group group-current">
 					<p>请验证你的教务处信息</p>
 					<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
-						<input type="hidden" name="token" value="<?php echo base64_encode(md5(rand(10000))) ?>">
+						<input type="hidden" name="token" value="<?php echo base64_encode(sha1(rand(10000))) ?>">
 						<input type="hidden" name="action" value="bind">
 						<input type="hidden" name="target" value="ded">
 						<div class="form-group">
@@ -131,7 +131,7 @@ if (isset($_POST['action'])) {
 			<div class="groups">
 				<div id="group1" class="group group-current">
 					<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
-						<input type="hidden" name="token" value="<?php echo base64_encode(md5(rand(10000))) ?>">
+						<input type="hidden" name="token" value="<?php echo base64_encode(sha1(rand(10000))) ?>">
 						<input type="hidden" name="action" value="new">
 						<input type="hidden" name="target" value="dz">
 						<div class="form-group">
@@ -154,7 +154,7 @@ if (isset($_POST['action'])) {
 				<div id="group2" class="group">
 					<p>请验证你的论坛信息</p>
 					<form id="dzlogin" action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
-						<input type="hidden" name="token" value="<?php echo base64_encode(md5(rand(10000))) ?>">
+						<input type="hidden" name="token" value="<?php echo base64_encode(sha1(rand(10000))) ?>">
 						<input type="hidden" name="action" value="bind">
 						<input type="hidden" name="target" value="dz">
 						<div class="form-group">
