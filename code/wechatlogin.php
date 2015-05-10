@@ -11,11 +11,11 @@ if ($param['action'] === 'set') {
 }
 else if ($param['action'] === 'get') {
 	$t = $db->result_first("SELECT `auth_id` FROM `myauth` WHERE `auth_logincode` = '{$param['queryCode']}'");
-	if(!$t) {
+	if(isset($_SESSION['myauth_uid']) || !$t) {
 		// 需要填写更多信息
 		$result = array(
 			'uid' => -1,
-			'msg' => '该微信未绑定'
+			'msg' => '没有信息'
 		);
 	}
 	else {
