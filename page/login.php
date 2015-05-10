@@ -26,9 +26,6 @@ if (isset($_POST['token'])) {
 	}
 }
 
-if (isset($_GET['redirect_uri']))
-	jumpTo(base64_decode($_GET['redirect_uri']));
-
 // 生成微信登录的加密串
 $queryCode = sha1(rand(10000) . "\t" . time());
 
