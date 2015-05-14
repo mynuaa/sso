@@ -1,5 +1,6 @@
 function getWechatLoginStatus(){
 	if(document.hidden)return;
+	if(document.getElementById("group3").className.indexOf("group-current")<0)return;
 	ajax({
 		url:"?action=login",
 		method:"POST",
@@ -15,4 +16,4 @@ function getWechatLoginStatus(){
 		}
 	});
 }
-setInterval(getWechatLoginStatus,3000);
+setInterval(getWechatLoginStatus,2000);
