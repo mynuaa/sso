@@ -17,7 +17,7 @@ if (dedverify($param['username'], $param['password'])) {
 			'token' => rawurlencode(uc_authcode("{$param['username']}\tded\t" . time() . "\t" . $param['password'], 'ENCODE', 'myauth'))
 		);
 	}
-	else if ($count > intval($t)) {
+	else if ($order > intval($t)) {
 		$result = array(
 			'uid' => -1,
 			'msg' => '没有该子帐号'
