@@ -24,10 +24,13 @@ if (dedverify($param['username'], $param['password'])) {
 		);
 	}
 	else {
-		$t = $db->result_first("SELECT `auth_id` FROM `myauth` WHERE `auth_ded` = '{$param['username']}' LIMIT {$order}, 1");
+		$t = $db->query("SELECT `auth_id` FROM `myauth` WHERE `auth_ded` = '{$param['username']}'");
+		while ($order--) {
+			$t = $db->fetch_array($t);
+		}
 		// 登录成功
 		$result = array(
-			'uid' => $t
+			'uid' => $t['auth_id']
 		);
 	}
 }
