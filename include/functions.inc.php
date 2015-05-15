@@ -33,13 +33,13 @@ function ajax($a) {
 function alert($content, $redirect = NULL) {
 	echo '<script>';
 	echo 'alert("' . $content . '");';
-	echo 'window.location.href="' . ($redirect ? $redirect : $_SERVER['REQUEST_URI']) . '"';
+	echo 'window.location.replace("' . ($redirect ? $redirect : $_SERVER['REQUEST_URI']) . '")';
 	echo '</script>';
 	exit();
 }
 function jumpTo($url = NULL) {
 	echo '<script>';
-	echo 'window.location.href="' . ($url ? $url : $_SERVER['REQUEST_URI']) . '"';
+	echo 'window.location.replace("' . ($url ? $url : $_SERVER['REQUEST_URI']) . '")';
 	echo '</script>';
 	exit();
 }
