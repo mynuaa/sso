@@ -2,29 +2,33 @@
 
 (!isset($param['username']) || !isset($param['password'])) && die();
 
+// 分离输入中的子帐号
+$split = split(':', $param['username']);
+$param['username'] = $split[0];
+$order = (count($split) == 2) ? intval($split[1]) : 1;
+if ($order < 1) $order = 1;
+
 if (dedverify($param['username'], $param['password'])) {
 	$t = $db->result_first("SELECT COUNT(*) FROM `myauth` WHERE `auth_ded` = '{$param['username']}'");
-	if (intval($t) > 1) {
+	if (intval($t) == 0) {
+		// 需要填写更多信息
+		$result = array(
+			'uid' => 0,
+			'token' => rawurlencode(uc_authcode("{$param['username']}\tded\t" . time() . "\t" . $param['password'], 'ENCODE', 'myauth'))
+		);
+	}
+	else if ($count > $t) {
 		$result = array(
 			'uid' => -1,
-			'msg' => '有多于一个昵称与此学号绑定'
+			'msg' => '没有该子帐号'
 		);
 	}
 	else {
-		$t = $db->result_first("SELECT `auth_id` FROM `myauth` WHERE `auth_ded` = '{$param['username']}'");
-		if(!$t) {
-			// 需要填写更多信息
-			$result = array(
-				'uid' => 0,
-				'token' => rawurlencode(uc_authcode("{$param['username']}\tded\t" . time() . "\t" . $param['password'], 'ENCODE', 'myauth'))
-			);
-		}
-		else {
-			// 登录成功
-			$result = array(
-				'uid' => $t
-			);
-		}
+		$t = $db->result_first("SELECT `auth_id` FROM `myauth` WHERE `auth_ded` = '{$param['username']}' LIMIT {$order}, 1");
+		// 登录成功
+		$result = array(
+			'uid' => $t
+		);
 	}
 }
 else {
