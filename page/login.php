@@ -39,7 +39,7 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 			<div class="tabs v3">
 				<div id="tab1" class="tab tab-current">论坛账号</div>
 				<div id="tab2" class="tab">学号</div>
-				<div id="tab3" class="tab">微信号</div>
+				<!-- <div id="tab3" class="tab">微信号</div> -->
 			</div>
 			<div class="groups">
 				<div id="group1" class="group group-current">
@@ -76,12 +76,12 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 						<input type="button" value="登录" onclick="document.querySelector('#group2>form').submit()">
 					</div>
 				</div>
-				<div id="group3" class="group">
+				<!-- <div id="group3" class="group">
 					<div>
 						<img id="wechat_qrcode" src="http://qr.liantu.com/api.php?text=<?php echo $queryCode; ?>" alt="扫码登录" style="width:200px;height:200px;border:2px solid;border-radius:0.5em;margin-bottom:0.5em">
 						<div id="wechat_tip" style="margin:0 1em;font-size:0.9em;text-align:left">* 请在公众号“飞机耳朵”的菜单中找到“纸飞机→万能扫码”，并将手机摄像头对准上方二维码。</div>
 					</div>
-				</div>
+				</div> -->
 			</div>
 		<?php endif; ?>
 		</div>
