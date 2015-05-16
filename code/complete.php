@@ -13,12 +13,21 @@ $info = array(
 if ($info['from'] === 'dz') {
 	(!isset($param['username']) || !isset($param['password'])) && die();
 	if (dedverify($param['username'], $param['password'])) {
-		$sql = "INSERT INTO `myauth` (`auth_dz`, `auth_ded`) VALUES ('{$info['user']}', '{$param['username']}')";
-		$db->query($sql);
-		$user = uc_get_user($info['user']);
-		$result = array(
-			'uid' => intval($user[0])
-		);
+		$t = $db->result_first("SELECT COUNT(*) FROM `myauth` WHERE `auth_ded` = '{$param['password']}'");
+		if (intval($t) >= 2) {
+			$result = array(
+				'uid' => -1,
+				'msg' => '该学号已绑定两个账号，无法继续绑定'
+			);
+		}
+		else {
+			$sql = "INSERT INTO `myauth` (`auth_dz`, `auth_ded`) VALUES ('{$info['user']}', '{$param['username']}')";
+			$db->query($sql);
+			$user = uc_get_user($info['user']);
+			$result = array(
+				'uid' => intval($user[0])
+			);
+		}
 	}
 	else {
 		$result = array(

@@ -67,10 +67,12 @@ if (isset($_POST['action'])) {
 			));
 			$result = json_decode($result, true);
 			if ($result['uid'] >= 0) {
-				$uid = ($result['uid'] > 0) ? $result['uid'] : uc_get_user($arr['username'])[0];
-				if ($arr['username'] !== $_POST['username']) {
-					alert('该学号已被绑定！', $_SERVER['REQUEST_URI']);
+				$number = $db->result_first("SELECT COUNT(*) FROM `myauth` WHERE `auth_ded` = '{$_POST['username']}'");
+				$number = intval($number);
+				if ($number >= 2) {
+					alert('该学号已绑定两个账号，无法继续绑定', $_SERVER['REQUEST_URI']);
 				}
+				$uid = ($result['uid'] > 0) ? $result['uid'] : uc_get_user($arr['username'])[0];
 				$db->query("INSERT INTO `myauth` (`auth_id`, `auth_ded`) VALUES ($uid, '{$_POST['username']}')");
 				$_SESSION['myauth_uid'] = $uid;
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
