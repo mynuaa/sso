@@ -24,7 +24,7 @@ if (dedverify($param['username'], $param['password'])) {
 		);
 	}
 	else {
-		$t = $db->query("SELECT `auth_id` FROM `myauth` WHERE `auth_ded` = '{$param['username']}'");
+		$t = $db->query("SELECT `auth_id` FROM `myauth` WHERE `auth_ded` = '{$param['username']}' ORDER BY `auth_id`");
 		while ($order--) {
 			$row = $db->fetch_array($t);
 		}
