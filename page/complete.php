@@ -18,6 +18,7 @@ if (isset($_POST['action'])) {
 			$uid = uc_user_register($_POST['username'], $arr['password'], $_POST['email']);
 			if ($uid > 0) {
 				$db->query("INSERT INTO `myauth` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')");
+				$_COOKIE['myauth_uid'] = uc_authcode(sha1(rand(10000)) . "\t" . $uid);
 				$_SESSION['myauth_uid'] = $uid;
 				unset($_SESSION['myauth_token']);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
@@ -50,6 +51,7 @@ if (isset($_POST['action'])) {
 			if ($result['uid'] >= 0) {
 				$uid = ($result['uid'] > 0) ? $result['uid'] : uc_get_user($_POST['username'])[0];
 				$db->query("INSERT INTO `myauth` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')");
+				$_COOKIE['myauth_uid'] = uc_authcode(sha1(rand(10000)) . "\t" . $uid);
 				$_SESSION['myauth_uid'] = $uid;
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 			}
@@ -74,6 +76,7 @@ if (isset($_POST['action'])) {
 				}
 				$uid = ($result['uid'] > 0) ? $result['uid'] : uc_get_user($arr['username'])[0];
 				$db->query("INSERT INTO `myauth` (`auth_id`, `auth_ded`) VALUES ($uid, '{$_POST['username']}')");
+				$_COOKIE['myauth_uid'] = uc_authcode(sha1(rand(10000)) . "\t" . $uid);
 				$_SESSION['myauth_uid'] = $uid;
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 			}

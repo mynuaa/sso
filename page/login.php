@@ -20,6 +20,7 @@ if (isset($_POST['token'])) {
 		jumpTo('?page=complete&redirect_uri=' . (isset($_GET['redirect_uri']) ? $_GET['redirect_uri'] : base64_encode($_SERVER['REQUEST_URI'])));
 		break;
 	default:
+		$_COOKIE['myauth_uid'] = uc_authcode(sha1(rand(10000)) . "\t" . $result['uid']);
 		$_SESSION['myauth_uid'] = $result['uid'];
 		jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 		break;
