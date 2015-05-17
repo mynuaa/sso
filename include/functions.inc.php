@@ -1,7 +1,7 @@
 <?php
 
 function makeLogin($uid) {
-	setcookie('myauth_uid', uc_authcode(sha1(rand(10000)) . "\t" . $uid, 'ENCODE', 'myauth'), time() + 3600 * 10000);
+	setcookie('myauth_uid', uc_authcode(sha1(rand(10000)) . "\t" . $uid, 'ENCODE', 'myauth'), time() + 3600 * 10000, '/');
 	$_SESSION['myauth_uid'] = $uid;
 }
 function allAscii($str) {
