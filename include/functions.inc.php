@@ -1,5 +1,9 @@
 <?php
 
+function makeLogin($uid) {
+	setcookie('myauth_uid', uc_authcode(sha1(rand(10000)) . "\t" . $uid), time() + 3600 * 24 * 10000);
+	$_SESSION['myauth_uid'] = $uid;
+}
 function allAscii($str) {
 	foreach ($str as $char) {
 		if ($char < 1 || char > 127)
