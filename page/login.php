@@ -56,7 +56,7 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 						</div>
 					</form>
 					<div class="form-footer">
-						<input type="button" value="登录" onclick="document.querySelector('#group2>form').submit()">
+						<input type="button" value="登录" onclick="document.querySelector('#group1>form').submit()">
 					</div>
 				</div>
 				<div id="group2" class="group">
@@ -73,7 +73,7 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 						</div>
 					</form>
 					<div class="form-footer">
-						<input type="button" value="登录" onclick="document.querySelector('#group1>form').submit()">
+						<input type="button" value="登录" onclick="document.querySelector('#group2>form').submit()">
 					</div>
 				</div>
 				<div id="group3" class="group">
