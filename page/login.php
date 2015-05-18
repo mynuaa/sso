@@ -26,14 +26,23 @@ if (isset($_POST['token'])) {
 	}
 }
 
+if (isset($_COOKIE['myauth_uid'])) {
+	$uid = explode("\t", uc_authcode($_COOKIE['myauth_uid'], 'DECODE', 'myauth'));
+	$uid = intval($uid[1]);
+	$user = uc_get_user($uid, 1)[1];
+}
+else {
+	$user = NULL;
+}
+
 // 生成微信登录的加密串
 $queryCode = sha1(rand(10000) . "\t" . time());
 
 ?>
 <?php createHeader(); ?>
 		<div id="frame1" class="frame">
-		<?php if (isset($_SESSION['myauth_uid'])) : ?>
-			<h2>你好，<?php echo uc_get_user($_SESSION['myauth_uid'], 1)[1]; ?>。</h2>
+		<?php if ($user != NULL) : ?>
+			<h2>你好，<?php echo $user ?>。</h2>
 			<input type="button" onclick="window.location.href='?action=logout'" value="退出登录">
 		<?php else : ?>
 			<div class="tabs v3">

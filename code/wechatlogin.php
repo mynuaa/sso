@@ -11,7 +11,7 @@ if ($param['action'] === 'set') {
 }
 else if ($param['action'] === 'get') {
 	$t = $db->result_first("SELECT `auth_id` FROM `myauth` WHERE `auth_logincode` = '{$param['queryCode']}'");
-	if(isset($_SESSION['myauth_uid']) || !$t) {
+	if(isset($_COOKIE['myauth_uid']) || !$t) {
 		// 需要填写更多信息
 		$result = array(
 			'uid' => -1,
@@ -25,7 +25,7 @@ else if ($param['action'] === 'get') {
 		$result = array(
 			'uid' => $t
 		);
-		$_SESSION['myauth_uid'] = $t;
+		makeLogin($t);
 	}
 	echo json_encode($result);
 }
