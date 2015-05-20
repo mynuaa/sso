@@ -1,8 +1,8 @@
 <?php
 
-(!isset($_SESSION['myauth_token'])) && die();
+(!isset($_COOKIE['myauth_token'])) && die();
 
-$arr = explode("\t", uc_authcode(rawurldecode($_SESSION['myauth_token']), 'DECODE', 'myauth'));
+$arr = explode("\t", uc_authcode(rawurldecode($_COOKIE['myauth_token']), 'DECODE', 'myauth'));
 $arr = array(
 	'username' => $arr[0],
 	'from' => $arr[1],
@@ -19,7 +19,7 @@ if (isset($_POST['action'])) {
 			if ($uid > 0) {
 				$db->query("INSERT INTO `myauth` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')");
 				makeLogin($uid);
-				unset($_SESSION['myauth_token']);
+				unset($_COOKIE['myauth_token']);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 			}
 			$msg = array(
@@ -67,10 +67,12 @@ if (isset($_POST['action'])) {
 			));
 			$result = json_decode($result, true);
 			if ($result['uid'] >= 0) {
-				$number = $db->result_first("SELECT COUNT(*) FROM `myauth` WHERE `auth_ded` = '{$_POST['username']}'");
-				$number = intval($number);
-				if ($number >= 2) {
-					alert('该学号已绑定两个账号，无法继续绑定', $_SERVER['REQUEST_URI']);
+				if ($result['uid'] > 0) {
+					$number = $db->result_first("SELECT COUNT(*) FROM `myauth` WHERE `auth_ded` = '{$_POST['username']}'");
+					$number = intval($number);
+					if ($number >= 2) {
+						alert('该学号已绑定两个账号，无法继续绑定', $_SERVER['REQUEST_URI']);
+					}
 				}
 				$uid = ($result['uid'] > 0) ? $result['uid'] : uc_get_user($arr['username'])[0];
 				$db->query("INSERT INTO `myauth` (`auth_id`, `auth_ded`) VALUES ($uid, '{$_POST['username']}')");
