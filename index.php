@@ -24,6 +24,8 @@ if (isset($_GET['action'])) {
 	case 'logout':
 	case 'complete':
 	case 'getuser':
+	case 'getusercount':
+	case 'switchuser':
 		require_once 'code/' . $_GET['action'] . '.php';
 		break;
 	}

@@ -24,7 +24,23 @@ function usrverify($stuid, $password) {
 }
 // 研究生登录
 function gsmverify($gsmid, $password) {
-	return true;
+	$post = "__VIEWSTATE=dDwyMTQxMjc4NDIxOztsPF9jdGwwOkltYWdlQnV0dG9uMTtfY3RsMDpJbWFnZUJ1dHRvbjI7Pj78sij5U3iFob2ThyY%2Ff0kGvKvB8Q%3D%3D&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x=31&_ctl0%3AImageButton1.y=36&_ctl0%3Atxtpassword={$password}";
+	$url = "http://gsmis.nuaa.edu.cn/nuaapyxx/login.aspx";
+	$curl = curl_init();
+	curl_setopt_array($curl, [
+		CURLOPT_HTTPHEADER, array(
+			"Content-type: application/x-www-form-urlencoded",
+			"Referer: http://gsmis.nuaa.edu.cn/nuaapyxx/login.aspx"
+		),
+		CURLOPT_URL => $url,
+		CURLOPT_POST => 1,
+		CURLOPT_POSTFIELDS => $post,
+		CURLOPT_RETURNTRANSFER => 1,
+	]);
+	$response = curl_exec($curl);
+	curl_close($curl);
+	$response = json_decode($response, true);
+	return $response['status'] == 0;
 }
 // 教师登录
 function hrverify($tid, $password) {

