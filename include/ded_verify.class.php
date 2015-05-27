@@ -24,7 +24,7 @@ function usrverify($stuid, $password) {
 }
 // 研究生登录
 function gsmverify($gsmid, $password) {
-	$post = "__VIEWSTATE=dDwyMTQxMjc4NDIxOztsPF9jdGwwOkltYWdlQnV0dG9uMTtfY3RsMDpJbWFnZUJ1dHRvbjI7Pj78sij5U3iFob2ThyY%2Ff0kGvKvB8Q%3D%3D&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x=31&_ctl0%3AImageButton1.y=36&_ctl0%3Atxtpassword={$password}";
+	$post = "__VIEWSTATE=dDwyMTQxMjc4NDIxOztsPF9jdGwwOkltYWdlQnV0dG9uMTtfY3RsMDpJbWFnZUJ1dHRvbjI7Pj7KSxKImeVBLqKpqtr2HBd2EiYYfQ==&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x=31&_ctl0%3AImageButton1.y=36&_ctl0%3Atxtpassword={$password}";
 	$url = "http://gsmis.nuaa.edu.cn/nuaapyxx/login.aspx";
 	$curl = curl_init();
 	curl_setopt_array($curl, [
@@ -38,9 +38,9 @@ function gsmverify($gsmid, $password) {
 		CURLOPT_RETURNTRANSFER => 1,
 	]);
 	$response = curl_exec($curl);
+	$http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 	curl_close($curl);
-	$response = json_decode($response, true);
-	return $response['status'] == 0;
+	return $http_code == 302;
 }
 // 教师登录
 function hrverify($tid, $password) {
@@ -64,7 +64,7 @@ function dedverify($username, $password) {
 		// 教师登录
 		(preg_match("/^7020/", $username) && hrverify($username, $password)) ||
 		// 研究生登录
-		(preg_match("/(^SX|^SY|^BX)/", $username) && gsmverify($username, $password)) ||
+		(preg_match("/(^SX|^SY|^SZ|^BX)/", $username) && gsmverify($username, $password)) ||
 		// 本科生登录
 		usrverify($username, $password)
 	);
