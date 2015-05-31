@@ -46,7 +46,7 @@ function jumpTo($url = NULL) {
 	echo '</script>';
 	exit();
 }
-function createHeader() {
+function createHeader($pagetitle = '用户登录') {
 	$str = <<<EOF
 <!DOCTYPE html>
 <html lang="zh">
@@ -57,7 +57,7 @@ function createHeader() {
 	<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
 	<meta name="format-detection" content="telphone=no,email=no">
 	<meta name="msapplication-tap-highlight" content="no">
-	<title>用户登录 - 纸飞机南航青年网络社区</title>
+	<title>$pagetitle - 纸飞机南航青年网络社区</title>
 	<link rel="stylesheet" href="resources/css/main.css">
 	<!--[if lt IE 10]>
 	<script src="resources/js/ieBetter.js"></script>

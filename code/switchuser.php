@@ -10,7 +10,7 @@ $newuid = $_GET['id'];
 $ded = $db->result_first("SELECT `auth_ded` FROM `myauth` WHERE `auth_id` = {$uid}");
 $newded = $db->result_first("SELECT `auth_ded` FROM `myauth` WHERE `auth_id` = {$newuid}");
 
-if ($ded == $newded)
+if ($ded == $newded && $ded != '000')
 	makeLogin($newuid);
 
 ?>

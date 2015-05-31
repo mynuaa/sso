@@ -39,7 +39,7 @@ else {
 $queryCode = sha1(rand(10000) . "\t" . time());
 
 ?>
-<?php createHeader(); ?>
+<?php createHeader('用户登录'); ?>
 		<div id="frame1" class="frame">
 		<?php if ($user != NULL) : ?>
 			<h2>你好，<?php echo $user ?>。</h2>

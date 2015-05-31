@@ -85,7 +85,7 @@ if (isset($_POST['action'])) {
 }
 
 ?>
-<?php createHeader(); ?>
+<?php createHeader('完善信息'); ?>
 		<h2>请完善您的信息</h2>
 		<div id="frame1" class="frame">
 <?php if ($arr['from'] === 'dz') : ?>

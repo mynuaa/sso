@@ -25,5 +25,3 @@ $dbcharset = 'utf8';
 
 $cookiedomain = '';
 $cookiepath = '/';
-
-?>
