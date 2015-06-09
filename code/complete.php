@@ -58,5 +58,3 @@ if ($info['from'] === 'wechat') {
 }
 
 echo json_encode($result);
-
-?>

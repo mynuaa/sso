@@ -24,13 +24,13 @@ function usrverify($stuid, $password) {
 }
 // 研究生登录
 function gsmverify($gsmid, $password) {
-	$post = "__VIEWSTATE=dDwyMTQxMjc4NDIxOztsPF9jdGwwOkltYWdlQnV0dG9uMTtfY3RsMDpJbWFnZUJ1dHRvbjI7Pj7KSxKImeVBLqKpqtr2HBd2EiYYfQ==&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x=31&_ctl0%3AImageButton1.y=36&_ctl0%3Atxtpassword={$password}";
+	$post = "__VIEWSTATE=dDwyMTQxMjc4NDIxOztsPF9jdGwwOkltYWdlQnV0dG9uMTtfY3RsMDpJbWFnZUJ1dHRvbjI7Pj6LQm91VHCZYpaxALHym/3rIdPrwQ==&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x=31&_ctl0%3AImageButton1.y=36&_ctl0%3Atxtpassword={$password}";
 	$url = "http://gsmis.nuaa.edu.cn/nuaapyxx/login.aspx";
 	$curl = curl_init();
 	curl_setopt_array($curl, [
 		CURLOPT_HTTPHEADER, array(
 			"Content-type: application/x-www-form-urlencoded",
-			"Referer: http://gsmis.nuaa.edu.cn/nuaapyxx/login.aspx"
+			"Origin: http://gsmis.nuaa.edu.cn"
 		),
 		CURLOPT_URL => $url,
 		CURLOPT_POST => 1,
@@ -69,5 +69,3 @@ function dedverify($username, $password) {
 		usrverify($username, $password)
 	);
 }
-
-?>
