@@ -62,11 +62,8 @@ function dedverify($username, $password) {
 	$username = urlencode($username);
 	$password = urlencode($password);
 	return (
-		// 教师登录
 		(preg_match("/^7020/", $username) && hrverify($username, $password)) ||
-		// 研究生登录
 		(preg_match("/(^SX|^SY|^SZ|^BX)/", $username) && gsmverify($username, $password)) ||
-		// 本科生登录
 		usrverify($username, $password)
 	);
 }
