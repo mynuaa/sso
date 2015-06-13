@@ -3,7 +3,7 @@
 // 本科生登录
 function usrverify($stuid, $password) {
 	$url = "http://ded.nuaa.edu.cn/NetEAn/User/check.asp";
-	$post = "user=".$stuid."&pwd=".$password;
+	$post = "user=" . $stuid . "&pwd=" . $password;
 	$cookie = tempnam('/tmp', 'MYAUTH_');
 	$curl = curl_init();
 	curl_setopt_array($curl, [
@@ -24,6 +24,8 @@ function usrverify($stuid, $password) {
 }
 // 研究生登录
 function gsmverify($gsmid, $password) {
+	$gsmid = $gsmid;
+	$password = $password;
 	$post = "__VIEWSTATE=dDwyMTQxMjc4NDIxOztsPF9jdGwwOkltYWdlQnV0dG9uMTtfY3RsMDpJbWFnZUJ1dHRvbjI7Pj6LQm91VHCZYpaxALHym/3rIdPrwQ==&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x=31&_ctl0%3AImageButton1.y=36&_ctl0%3Atxtpassword={$password}";
 	$url = "http://gsmis.nuaa.edu.cn/nuaapyxx/login.aspx";
 	$curl = curl_init();
@@ -44,10 +46,7 @@ function gsmverify($gsmid, $password) {
 }
 // 教师登录
 function hrverify($tid, $password) {
-	$url = "http://net.nuaa.edu.cn/api/verifyUser.do?token=dd64533c961eb9d527a608f9cd13fb06&username="
-		.urlencode($tid)
-		."&password="
-		.urlencode($password);
+	$url = "http://net.nuaa.edu.cn/api/verifyUser.do?token=dd64533c961eb9d527a608f9cd13fb06&username={$tid}&password={$password}";
 	$curl = curl_init();
 	curl_setopt_array($curl, [
 		CURLOPT_URL => $url,
@@ -60,6 +59,8 @@ function hrverify($tid, $password) {
 }
 
 function dedverify($username, $password) {
+	$username = urlencode($username);
+	$password = urlencode($password);
 	return (
 		// 教师登录
 		(preg_match("/^7020/", $username) && hrverify($username, $password)) ||
