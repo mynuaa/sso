@@ -26,7 +26,16 @@ function usrverify($stuid, $password) {
 function gsmverify($gsmid, $password) {
 	$gsmid = $gsmid;
 	$password = $password;
-	$post = "__VIEWSTATE=dDwyMTQxMjc4NDIxOztsPF9jdGwwOkltYWdlQnV0dG9uMTtfY3RsMDpJbWFnZUJ1dHRvbjI7Pj6LQm91VHCZYpaxALHym/3rIdPrwQ==&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x=31&_ctl0%3AImageButton1.y=36&_ctl0%3Atxtpassword={$password}";
+	$prepare_curl = curl_init();
+	curl_setopt_array($prepare_curl, [
+		CURLOPT_URL => "http://gsmis.nuaa.edu.cn/nuaapyxx/login.aspx",
+		CURLOPT_RETURNTRANSFER => 1,
+	]);
+	preg_match('/name="__VIEWSTATE" value=".+?"/', curl_exec($prepare_curl), $viewstate);
+	$viewstate = substr($viewstate[0], 26);
+	$viewstate = preg_replace('/"/', '', $viewstate);
+	curl_close($prepare_curl);
+	$post = "__VIEWSTATE={$viewstate}&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x=31&_ctl0%3AImageButton1.y=36&_ctl0%3Atxtpassword={$password}";
 	$url = "http://gsmis.nuaa.edu.cn/nuaapyxx/login.aspx";
 	$curl = curl_init();
 	curl_setopt_array($curl, [
