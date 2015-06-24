@@ -63,6 +63,7 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 							<div><span class="field">密码</span></div>
 							<div><input type="password" name="password" class="area" required></div>
 						</div>
+						<input type="submit" class="hidden">
 					</form>
 					<div class="form-footer">
 						<input type="button" value="登录" onclick="document.querySelector('#group1>form').submit()">
@@ -80,6 +81,7 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 							<div><span class="field">密码</span></div>
 							<div><input type="password" name="password" class="area" required></div>
 						</div>
+						<input type="submit" class="hidden">
 					</form>
 					<div class="form-footer">
 						<input type="button" value="登录" onclick="document.querySelector('#group2>form').submit()">

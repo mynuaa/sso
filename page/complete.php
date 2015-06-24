@@ -112,6 +112,7 @@ if (isset($_POST['action'])) {
 							<div><span class="field">教务处密码</span></div>
 							<div><input type="password" name="password" class="area"></div>
 						</div>
+						<input type="submit" class="hidden">
 					</form>
 					<div class="form-footer">
 						<input type="button" value="教务处激活" onclick="document.querySelector('#group1>form').submit()">
@@ -148,6 +149,7 @@ if (isset($_POST['action'])) {
 							<div><span class="field">论坛昵称</span></div>
 							<div><input type="text" name="username" class="area" required></div>
 						</div>
+						<input type="submit" class="hidden">
 					</form>
 					<div class="form-footer">
 						<input type="button" value="完成注册" onclick="document.querySelector('#group1>form').submit()">
@@ -171,6 +173,7 @@ if (isset($_POST['action'])) {
 							<div><span class="field">密码</span></div>
 							<div><input type="password" name="password" class="area"></div>
 						</div>
+						<input type="submit" class="hidden">
 					</form>
 					<div class="form-footer mb1">
 						<input type="button" value="绑定论坛" onclick="document.querySelector('#group2>form').submit()">
