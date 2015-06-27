@@ -18,7 +18,7 @@ define('UC_APPID', 1);
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpw = '';
-$dbname = 'ucenter';
+$dbname = 'myauth';
 $pconnect = 0;
 $tablepre = '';
 $dbcharset = 'utf8';

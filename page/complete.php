@@ -17,7 +17,7 @@ if (isset($_POST['action'])) {
 		case 'dz':
 			$uid = uc_user_register($_POST['username'], $arr['password'], $_POST['email']);
 			if ($uid > 0) {
-				$db->query("INSERT INTO `myauth` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')");
+				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')");
 				makeLogin($uid);
 				unset($_COOKIE['myauth_token']);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
@@ -49,7 +49,7 @@ if (isset($_POST['action'])) {
 			$result = json_decode($result, true);
 			if ($result['uid'] >= 0) {
 				$uid = uc_get_user($_POST['username'])[0];
-				$db->query("INSERT INTO `myauth` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')");
+				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')");
 				makeLogin($uid);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 			}
@@ -67,13 +67,13 @@ if (isset($_POST['action'])) {
 			));
 			$result = json_decode($result, true);
 			if ($result['uid'] >= 0) {
-				$number = $db->result_first("SELECT COUNT(*) FROM `myauth` WHERE `auth_ded` = '{$_POST['username']}'");
+				$number = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '{$_POST['username']}'");
 				$number = intval($number);
 				if ($number >= 2) {
 					alert('该学号已绑定两个账号，无法继续绑定', $_SERVER['REQUEST_URI']);
 				}
 				$uid = uc_get_user($arr['username'])[0];
-				$db->query("INSERT INTO `myauth` (`auth_id`, `auth_ded`) VALUES ($uid, '{$_POST['username']}')");
+				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$_POST['username']}')");
 				makeLogin($uid);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 			}

@@ -71,8 +71,8 @@ function createHeader($pagetitle = '用户登录') {
 		<div class="container">
 			<nav>
 				<ul class="nav-ul">
-					<a href="http://my.nuaa.edu.cn/portal.php"><li>门户</li></a>
-					<a href="http://my.nuaa.edu.cn/forum.php"><li>论坛</li></a>
+					<a href="/portal.php"><li>门户</li></a>
+					<a href="/forum.php"><li>论坛</li></a>
 					<a href="/mall/"><li>商城</li></a>
 				</ul>
 			</nav>

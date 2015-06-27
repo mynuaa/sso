@@ -6,7 +6,7 @@
 list($uid, $username, $password, $email) = uc_user_login($param['username'], $param['password']);
 
 if($uid > 0) {
-	$t = $db->result_first("SELECT `auth_id` FROM `myauth` WHERE `auth_id` = $uid");
+	$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_id` = $uid");
 	if(!$t) {
 		// 需要填写更多信息
 		$result = array(

@@ -6,8 +6,8 @@ $uid = uc_authcode($_COOKIE['myauth_uid'], 'DECODE', 'myauth');
 $uid = explode("\t", $uid);
 $uid = $uid[1];
 
-$auth_ded = $db->result_first("SELECT `auth_ded` FROM `myauth` WHERE `auth_id` = $uid");
-$authcount = $db->result_first("SELECT COUNT(*) FROM `myauth` WHERE `auth_ded` = '$auth_ded'");
+$auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = $uid");
+$authcount = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '$auth_ded'");
 $errormsg = '';
 if ($auth_ded == '000')
 	$errormsg = '你的验证信息不完整，无法注册新马甲。';
@@ -19,7 +19,7 @@ if (isset($_POST['token'])) {
 		alert('注册失败：两次输入的密码不一致');
 	$uid = uc_user_register($_POST['username'], $_POST['password'], $_POST['email']);
 	if ($uid > 0) {
-		$db->query("INSERT INTO `myauth` (`auth_id`, `auth_ded`) VALUES ($uid, '$auth_ded')");
+		$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '$auth_ded')");
 		makeLogin($uid);
 		jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : '/sso/?page=login');
 	}

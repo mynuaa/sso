@@ -13,7 +13,7 @@ $info = array(
 if ($info['from'] === 'dz') {
 	(!isset($param['username']) || !isset($param['password'])) && die();
 	if (dedverify($param['username'], $param['password'])) {
-		$t = $db->result_first("SELECT COUNT(*) FROM `myauth` WHERE `auth_ded` = '{$param['password']}'");
+		$t = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '{$param['password']}'");
 		if (intval($t) >= 2) {
 			$result = array(
 				'uid' => -1,
@@ -21,8 +21,8 @@ if ($info['from'] === 'dz') {
 			);
 		}
 		else {
-			$sql = "INSERT INTO `myauth` (`auth_dz`, `auth_ded`) VALUES ('{$info['user']}', '{$param['username']}')";
-			$db->query($sql);
+			$sql = "INSERT INTO `sso` (`auth_dz`, `auth_ded`) VALUES ('{$info['user']}', '{$param['username']}')";
+			$myauth->query($sql);
 			$user = uc_get_user($info['user']);
 			$result = array(
 				'uid' => intval($user[0])

@@ -9,7 +9,7 @@ $order = (count($split) == 2) ? intval($split[1]) : 1;
 if ($order < 1) $order = 1;
 
 if (dedverify($param['username'], $param['password'])) {
-	$t = $db->result_first("SELECT COUNT(*) FROM `myauth` WHERE `auth_ded` = '{$param['username']}'");
+	$t = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '{$param['username']}'");
 	if (intval($t) == 0) {
 		// 需要填写更多信息
 		$result = array(
@@ -24,9 +24,9 @@ if (dedverify($param['username'], $param['password'])) {
 		);
 	}
 	else {
-		$t = $db->query("SELECT `auth_id` FROM `myauth` WHERE `auth_ded` = '{$param['username']}' ORDER BY `auth_id`");
+		$t = $myauth->query("SELECT `auth_id` FROM `sso` WHERE `auth_ded` = '{$param['username']}' ORDER BY `auth_id`");
 		while ($order--) {
-			$row = $db->fetch_array($t);
+			$row = $myauth->fetch_array($t);
 		}
 		// 登录成功
 		$result = array(

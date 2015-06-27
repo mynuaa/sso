@@ -4,9 +4,9 @@ isset($param['uid']) || die();
 
 $result = array();
 
-$sql = "SELECT * FROM `myauth` WHERE `auth_id` = {$param['uid']}";
-$query = $db->query($sql);
-while ($row = $db->fetch_array($query)) {
+$sql = "SELECT * FROM `sso` WHERE `auth_id` = {$param['uid']}";
+$query = $myauth->query($sql);
+while ($row = $myauth->fetch_array($query)) {
 	$result []= $row;
 }
 
