@@ -9,7 +9,7 @@ if ($param['action'] === 'set') {
 	$myauth->query($sql);
 	$rows = $myauth->query("SELECT * FROM `sso` WHERE `auth_wechat` = '{$queryCode[2]}'");
 	$rows = $rows->fetch_assoc();
-	echo "Login code: {$rows['auth_logincode']}";
+	echo 'Login code: ' . json_encode($rows);
 }
 else if ($param['action'] === 'get') {
 	$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
