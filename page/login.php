@@ -48,7 +48,7 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 			<div class="tabs v3">
 				<div id="tab1" class="tab tab-current">学号</div>
 				<div id="tab2" class="tab">论坛账号</div>
-				<div id="tab3" class="tab" style="color:#BBB">微信号</div>
+				<div id="tab3" class="tab">微信号</div>
 			</div>
 			<div class="groups">
 				<div id="group1" class="group group-current">
