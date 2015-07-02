@@ -1,5 +1,7 @@
 <?php
 
+$redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI'];
+
 if (isset($_POST['token'])) {
 	$result = ajax(array(
 		'url' => '?action=login',
@@ -21,7 +23,7 @@ if (isset($_POST['token'])) {
 		break;
 	default:
 		makeLogin($result['uid']);
-		jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
+		jumpTo($redirect_uri);
 		break;
 	}
 }
