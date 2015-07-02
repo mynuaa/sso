@@ -6,7 +6,7 @@ if ($param['action'] === 'set') {
 	$queryCode = explode("\t", $queryCode);
 	(allAscii($queryCode[0]) && allAscii($queryCode[1]) && allAscii($queryCode[2])) || die();
 	$myauth->query("UPDATE `sso` SET `auth_logincode` = '{$queryCode[0]}' WHERE `auth_wechat` = '{$queryCode[2]}'");
-	echo "UPDATE `sso` SET `auth_logincode` = '{$queryCode[0]}' WHERE `auth_wechat` = '{$queryCode[2]}'";
+	echo $myauth->affected_rows;
 	exit('');
 }
 else if ($param['action'] === 'get') {
@@ -29,5 +29,3 @@ else if ($param['action'] === 'get') {
 	}
 	echo json_encode($result);
 }
-
-?>
