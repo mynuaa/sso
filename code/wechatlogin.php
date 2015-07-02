@@ -7,7 +7,18 @@ if ($param['action'] === 'set') {
 	(allAscii($queryCode[0]) && allAscii($queryCode[1]) && allAscii($queryCode[2])) || die();
 	$sql = "UPDATE `sso` SET `auth_logincode` = '{$queryCode[0]}' WHERE `auth_wechat` = '{$queryCode[2]}'";
 	$myauth->query($sql);
-	$rows = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_wechat` = '{$queryCode[2]}'");
+	$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_wechat` = '{$queryCode[2]}'");
+	switch (intval($cnt)) {
+	case 0:
+		echo '请根据页面提示以绑定账号:)';
+		break;
+	case 1:
+		echo '登录成功:)';
+		break;
+	case 2:
+		echo '请在浏览器中选择你要登录的账号:)';
+		break;
+	}
 }
 else if ($param['action'] === 'get') {
 	$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
