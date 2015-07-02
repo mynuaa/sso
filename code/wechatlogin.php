@@ -5,11 +5,11 @@ if ($param['action'] === 'set') {
 	$queryCode = uc_authcode($param['queryCode'], 'DECODE', 'myauth');
 	$queryCode = explode("\t", $queryCode);
 	(allAscii($queryCode[0]) && allAscii($queryCode[1]) && allAscii($queryCode[2])) || die();
-	echo $sql = "UPDATE `sso` SET `auth_logincode` = '{$queryCode[0]}' WHERE `auth_wechat` = '{$queryCode[2]}'";
+	$sql = "UPDATE `sso` SET `auth_logincode` = '{$queryCode[0]}' WHERE `auth_wechat` = '{$queryCode[2]}'";
 	$myauth->query($sql);
-	$rows = $myauth->query("SELECT `auth_logincode` FROM `sso` WHERE `auth_wechat` = '{$queryCode[2]}'");
+	$rows = $myauth->query("SELECT * FROM `sso` WHERE `auth_wechat` = '{$queryCode[2]}'");
 	$rows = $rows->fetch_assoc();
-	echo "\n\nQuery successful. " . $rows['auth_logincode'] . " row(s) affected.";
+	echo "Login code: {$rows['auth_logincode']}";
 }
 else if ($param['action'] === 'get') {
 	$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
