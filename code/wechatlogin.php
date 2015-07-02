@@ -7,7 +7,8 @@ if ($param['action'] === 'set') {
 	(allAscii($queryCode[0]) && allAscii($queryCode[1]) && allAscii($queryCode[2])) || die();
 	echo $sql = "UPDATE `sso` SET `auth_logincode` = '{$queryCode[0]}' WHERE `auth_wechat` = '{$queryCode[2]}'";
 	$myauth->query($sql);
-	echo "\n\nQuery successful. " . $myauth->affected_rows . " row(s) affected.";
+	$rows = $myauth->result_first("SELECT `auth_logincode` FROM `sso` WHERE `auth_wechat` = '{$queryCode[2]}'");
+	echo "\n\nQuery successful. " . $rows . " row(s) affected.";
 }
 else if ($param['action'] === 'get') {
 	$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
