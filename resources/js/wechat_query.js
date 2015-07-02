@@ -1,5 +1,6 @@
 function getWechatLoginStatus(){
 	if(document.hidden)return;
+	if(!document.getElementById("group3"))return;
 	if(document.getElementById("group3").className.indexOf("group-current")<0)return;
 	ajax({
 		url:"?action=login",
