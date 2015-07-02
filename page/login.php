@@ -99,6 +99,7 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 	</div>
 	<script>
 		var queryCode="<?php echo $queryCode; ?>";
+		var redirect_uri="<?php echo base64_decode($redirect_uri); ?>";
 	</script>
 	<script src="resources/js/wechat_query.js"></script>
 <?php createFooter(); ?>

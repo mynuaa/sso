@@ -12,7 +12,7 @@ function getWechatLoginStatus(){
 		success:function(d){
 			if(d=="")return;
 			d=JSON.parse(d);
-			if(d.uid>0)window.location.reload();
+			if(d.uid>0)window.location.href=redirect_uri;
 		}
 	});
 }
