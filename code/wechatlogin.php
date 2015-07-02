@@ -6,7 +6,7 @@ if ($param['action'] === 'set') {
 	$queryCode = explode("\t", $queryCode);
 	(allAscii($queryCode[0]) && allAscii($queryCode[1]) && allAscii($queryCode[2])) || die();
 	$myauth->query("UPDATE `sso` SET `auth_logincode` = '{$queryCode[0]}' WHERE `auth_wechat` = '{$queryCode[2]}'");
-	echo $myauth->error;
+	echo "UPDATE `sso` SET `auth_logincode` = '{$queryCode[0]}' WHERE `auth_wechat` = '{$queryCode[2]}'";
 	exit('');
 }
 else if ($param['action'] === 'get') {
