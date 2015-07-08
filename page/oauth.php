@@ -1,5 +1,12 @@
 <?
 
+// TODO: 判定应用是否合法
+$appid = $_GET['appid'];
+$appinfo = $myauth->result_first("SELECT `appsecret` FROM `oauth_info` WHERE `appid` = '{$appid}'");
+$timestamp = $_GET['timestamp'];
+$validatecode = uc_authcode($appid . $appsecret . $timestamp, 'ENCODE', 'myauth');
+if ($validatecode !== $_GET['authcode']) die('该应用未被授权！');
+
 if (isset($_GET['access_token'])) {
 	$result = array();
 	if (isset($_GET['uid']))
@@ -20,7 +27,6 @@ if (isset($_POST['token'])) {
 	$result = json_decode($result, true);
 	if ($result['uid'] > 0) {
 		$access_token = uc_authcode(sha1(base64_encode($_POST['username']) . rand(10000)), 'ENCODE', 'myauth');
-		$appid = $_GET['appid'];
 		$myauth->query("INSERT INTO `oauth_tokens` (`token_text`, `token_appid`, `token_uid`) VALUES('{$access_token}', '{$appid}', '{$result['uid']}')");
 
 		?>
@@ -32,6 +38,7 @@ if (isset($_POST['token'])) {
 		</script>
 		<?
 
+		exit();
 	}
 	else if ($result['uid'] === 0) {
 		setcookie('myauth_token', $result['token'], time() + 3600 * 10000, '/');
