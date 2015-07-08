@@ -4,9 +4,10 @@
 $appid = $_GET['appid'];
 $appsecret = $myauth->result_first("SELECT `appsecret` FROM `oauth_info` WHERE `appid` = '{$appid}'");
 $timestamp = $_GET['timestamp'];
-$validatecode = urlencode(uc_authcode($appid . $appsecret . $timestamp, 'ENCODE', 'myauth'));
-echo $appid, ' ', $appsecret, ' ', $timestamp, ' ', $validatecode, ' ', $_GET['authcode'];
-if ($validatecode !== $_GET['authcode']) die('该应用未被授权！');
+$validatecode = implode(urldecode(uc_authcode($_GET['authcode'], 'DECODE', 'myauth')));
+if ($validatecode[0] != $appid ||
+	$validatecode[1] != $appsecret ||
+	$validatecode[2] != $timestamp) die('该应用未被授权！');
 
 if (isset($_GET['access_token'])) {
 	$result = array();
