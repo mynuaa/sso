@@ -2,6 +2,7 @@
 
 $redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI'];
 
+// 从表单发过来的信息（不包括微信登录）
 if (isset($_POST['token'])) {
 	$result = ajax(array(
 		'url' => '?action=login',

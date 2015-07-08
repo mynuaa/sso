@@ -21,22 +21,40 @@ if ($param['action'] === 'set') {
 	}
 }
 else if ($param['action'] === 'get') {
-	$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
-	if(isset($_COOKIE['myauth_uid']) || !$t) {
-		// 需要填写更多信息
-		$result = array(
-			'uid' => -1,
-			'msg' => '没有信息'
-		);
+	// 已登录
+	if (isset($_COOKIE['myauth_uid'])) {
+		$result = array('uid' => -1);
 	}
 	else {
-		// 删除登录凭证
-		$myauth->query("UPDATE `sso` SET `auth_logincode` = NULL WHERE `auth_logincode` = '{$param['queryCode']}'");
-		// 登录成功
-		$result = array(
-			'uid' => $t
-		);
-		makeLogin($t);
+		// 当前微信登录码绑定的总账号数
+		$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
+		switch (intval($cnt)) {
+		// 没有找到：绑定
+		case 0:
+			$result = array(
+				'uid' => 0,
+				'token' => rawurlencode(uc_authcode("{$param['queryCode']}\twechat\t" . time(), 'ENCODE', 'myauth'))
+			);
+			setcookie('myauth_token', $result['token'], time() + 3600 * 10000, '/');
+			break;
+		// 绑定一个账号：直接登录
+		case 1:
+			$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
+			// 删除登录凭证
+			$myauth->query("UPDATE `sso` SET `auth_logincode` = NULL WHERE `auth_logincode` = '{$param['queryCode']}'");
+			// 登录成功
+			$result = array('uid' => [$t]);
+			makeLogin($t);
+			break;
+		// 绑定两个账号：选择登录账号
+		case 2:
+			$result = array('uid' => []);
+			$t = $myauth->query("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
+			while ($ids = $t->fetch_assoc())
+				$result['uid'] []= $ids['auth_id'];
+			$myauth->query("UPDATE `sso` SET `auth_logincode` = NULL WHERE `auth_logincode` = '{$param['queryCode']}'");
+			break;
+		}
 	}
 	echo json_encode($result);
 }

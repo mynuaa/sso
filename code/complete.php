@@ -55,6 +55,20 @@ if ($info['from'] === 'ded') {
 	}
 }
 if ($info['from'] === 'wechat') {
+	(!isset($param['stuid']) ||
+	 !isset($param['password']) ||
+	 !isset($param['username']) ||
+	 !isset($param['email'])) && die();
+	$t = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '{$param['password']}'");
+	if (intval($t) >= 2) {
+		$result = array(
+			'uid' => -1,
+			'msg' => '该微信已绑定两个账号，无法继续绑定'
+		);
+	}
+	else {
+		// 
+	}
 }
 
 echo json_encode($result);
