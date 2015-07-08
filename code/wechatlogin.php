@@ -29,14 +29,6 @@ else if ($param['action'] === 'get') {
 		// 当前微信登录码绑定的总账号数
 		$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
 		switch (intval($cnt)) {
-		// 没有找到：绑定
-		case 0:
-			$result = array(
-				'uid' => 0,
-				'token' => rawurlencode(uc_authcode("{$param['queryCode']}\twechat\t" . time(), 'ENCODE', 'myauth'))
-			);
-			setcookie('myauth_token', $result['token'], time() + 3600 * 10000, '/');
-			break;
 		// 绑定一个账号：直接登录
 		case 1:
 			$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
