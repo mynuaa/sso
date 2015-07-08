@@ -20,6 +20,7 @@ if (isset($_POST['token'])) {
 	$result = json_decode($result, true);
 	if ($result['uid'] > 0) {
 		$access_token = uc_authcode(sha1(base64_encode($_POST['username']) . rand(10000)), 'ENCODE', 'myauth');
+		$appid = $_GET['appid'];
 		$myauth->query("INSERT INTO `oauth_tokens` (`token_text`, `token_appid`, `token_uid`) VALUES('{$access_token}', '{$appid}', '{$result['uid']}')");
 
 		?>
