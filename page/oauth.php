@@ -5,6 +5,7 @@ $appid = $_GET['appid'];
 $appsecret = $myauth->result_first("SELECT `appsecret` FROM `oauth_info` WHERE `appid` = '{$appid}'");
 $timestamp = $_GET['timestamp'];
 $validatecode = implode("\t", uc_authcode(urldecode($_GET['authcode']), 'DECODE', 'myauth'));
+var_dump($validatecode);
 if ($validatecode[0] != $appid ||
 	$validatecode[1] != $appsecret ||
 	$validatecode[2] != $timestamp) die('该应用未被授权！');
