@@ -2,8 +2,9 @@
 
 // TODO: 判定应用是否合法
 $appid = $_GET['appid'];
-$appinfo = $myauth->result_first("SELECT `appsecret` FROM `oauth_info` WHERE `appid` = '{$appid}'");
+$appsecret = $myauth->result_first("SELECT `appsecret` FROM `oauth_info` WHERE `appid` = '{$appid}'");
 $timestamp = $_GET['timestamp'];
+echo $appid, ' ', $appsecret, ' ', $timestamp, ' ', $validatecode, ' ', $_GET['authcode'];
 $validatecode = uc_authcode($appid . $appsecret . $timestamp, 'ENCODE', 'myauth');
 if ($validatecode !== $_GET['authcode']) die('该应用未被授权！');
 
