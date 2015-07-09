@@ -10,6 +10,7 @@ html,body{
 	overflow-x:hidden;
 }
 .hidden{display:none;}
+b{font-weight:bold !important;}
 .background{
 	position:absolute;
 	top:0;
@@ -105,7 +106,7 @@ form{
 	color:#333;
 	text-align:right;
 }
-input{
+input,textarea{
 	border:1px solid #BBB;
 	border-radius:4px;
 	padding:0.5em;
@@ -170,4 +171,7 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus{
 	border-color:red;
 	color:red;
 	background:#FDD;
+}
+.green{
+	color:#1ABC9C;
 }

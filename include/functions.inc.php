@@ -86,7 +86,6 @@ function createHeader($pagetitle = '用户登录') {
 		<!--[if IE 7]>
 		<div class="tip tip-danger">你正在使用的IE浏览器已不被支持！<a href="http://browsehappy.com/" target="_blank">点击这里</a>下载现代浏览器。</div>
 		<![endif]-->
-		<div class="tip tip-info">新用户可用教务处账号注册。</div>
 EOF;
 	echo $str;
 }

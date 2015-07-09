@@ -101,11 +101,11 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="action" value="bind">
 						<input type="hidden" name="target" value="ded">
 						<div class="form-group">
-							<div><span class="field">账号</span></div>
+							<div><span class="field">论坛昵称</span></div>
 							<div><input type="text" value="<?php echo $arr['username']; ?>" disabled></div>
 						</div>
 						<div class="form-group">
-							<div><span class="field">学号</span></div>
+							<div><span class="field">学号/工号</span></div>
 							<div><input type="text" name="username" class="area"></div>
 						</div>
 						<div class="form-group">
@@ -138,16 +138,16 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="action" value="new">
 						<input type="hidden" name="target" value="dz">
 						<div class="form-group">
-							<div><span class="field">学号</span></div>
+							<div><span class="field">学号/工号</span></div>
 							<div><span class="area"><input type="text" value="<?php echo $arr['username']; ?>" disabled></span></div>
-						</div>
-						<div class="form-group">
-							<div><span class="field">邮箱</span></div>
-							<div><input type="email" name="email" class="area" required></div>
 						</div>
 						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
 							<div><input type="text" name="username" class="area" required></div>
+						</div>
+						<div class="form-group">
+							<div><span class="field">邮箱</span></div>
+							<div><input type="email" name="email" class="area" required></div>
 						</div>
 						<input type="submit" class="hidden">
 					</form>
@@ -162,16 +162,16 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="action" value="bind">
 						<input type="hidden" name="target" value="dz">
 						<div class="form-group">
-							<div><span class="field">学号</span></div>
+							<div><span class="field">学号/工号</span></div>
 							<div><span class="area"><input type="text" value="<?php echo $arr['username']; ?>" disabled></span></div>
-						</div>
-						<div class="form-group">
-							<div><span class="field">账号</span></div>
-							<div><input type="text" name="username" class="area"></div>
 						</div>
 						<div class="form-group">
 							<div><span class="field">密码</span></div>
 							<div><input type="password" name="password" class="area"></div>
+						</div>
+						<div class="form-group">
+							<div><span class="field">论坛昵称</span></div>
+							<div><input type="text" name="username" class="area"></div>
 						</div>
 						<input type="submit" class="hidden">
 					</form>

@@ -43,13 +43,15 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 
 ?>
 <?php createHeader('用户登录'); ?>
+		<div class="tip tip-info">最快捷的方法就是用学号/工号登录</div>
+		<div class="tip tip-info">不知道学号/工号？2015级新生请点击<a class="green" href="?page=freshman"><b>这里</b></a>，商家请点击<a class="green" href="?page=malluser"><b>这里</b></a></div>
 		<div id="frame1" class="frame">
 		<?php if ($user != NULL) : ?>
 			<h2>你好，<?php echo $user ?>。</h2>
 			<input type="button" onclick="window.location.href='?action=logout'" value="退出登录">
 		<?php else : ?>
 			<div class="tabs v3">
-				<div id="tab1" class="tab tab-current">学号</div>
+				<div id="tab1" class="tab tab-current">学号/工号</div>
 				<div id="tab2" class="tab">论坛账号</div>
 				<div id="tab3" class="tab">微信号</div>
 			</div>
@@ -59,7 +61,7 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 						<input type="hidden" name="token" value="<?php echo base64_encode(sha1(rand(10000))) ?>">
 						<input type="hidden" name="type" value="ded">
 						<div class="form-group">
-							<div><span class="field">学号</span></div>
+							<div><span class="field">学号/工号</span></div>
 							<div><input type="text" name="username" class="area" required></div>
 						</div>
 						<div class="form-group">
@@ -77,11 +79,11 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 						<input type="hidden" name="token" value="<?php echo base64_encode(sha1(rand(10000))) ?>">
 						<input type="hidden" name="type" value="dz">
 						<div class="form-group">
-							<div><span class="field">账号</span></div>
+							<div><span class="field">论坛昵称</span></div>
 							<div><input type="text" name="username" class="area" required></div>
 						</div>
 						<div class="form-group">
-							<div><span class="field">密码</span></div>
+							<div><span class="field">论坛密码</span></div>
 							<div><input type="password" name="password" class="area" required></div>
 						</div>
 						<input type="submit" class="hidden">
