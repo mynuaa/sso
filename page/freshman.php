@@ -38,7 +38,7 @@ else {
 ?>
 <?php createHeader('新生注册'); ?>
 		<div class="tip tip-info">注册成功后，请使用论坛账号登录</div>
-		<div class="tip tip-info">本页面将在2015级新生允许登录教务处后关闭，届时新生请通过<b>教务处账号</b>激活</div>
+		<div class="tip tip-warning">本页面将在2015级新生允许登录教务处后关闭，届时新生请通过<b>教务处账号</b>激活</div>
 		<div id="frame1" class="frame">
 		<?php if ($user != NULL) : ?>
 			<h2>你好，<?php echo $user ?>。</h2>
