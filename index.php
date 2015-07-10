@@ -32,7 +32,7 @@ if (isset($_GET['action'])) {
 }
 else if (isset($_GET['page'])) {
 	// 通过page判断需要的页面
-	if (in_array($_GET['page'], array('login', 'complete', 'newrepeat', 'oauth', 'freshman', 'shop')))
+	if (in_array($_GET['page'], array('login', 'complete', 'newrepeat', 'oauth', 'freshman', 'malluser')))
 		require_once 'page/' . $_GET['page'] . '.php';
 }
 else {
