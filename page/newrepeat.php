@@ -9,7 +9,7 @@ $uid = $uid[1];
 $auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = $uid");
 $authcount = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '$auth_ded'");
 $errormsg = '';
-if ($auth_ded == '000')
+if (!in_array($auth_ded, array('JUST4TEST', 'FRESHMAN', 'MALLUSER')))
 	$errormsg = '你的验证信息不完整，无法注册新马甲。';
 else if (intval($authcount) >= 2)
 	$errormsg = '你已经有两个马甲了。';
