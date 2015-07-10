@@ -36,7 +36,7 @@ else {
 }
 
 ?>
-<?php createHeader('新生注册'); ?>
+<?php createHeader('商家注册'); ?>
 		<div class="tip tip-info">注册成功后，请使用论坛账号登录</div>
 		<div id="frame1" class="frame">
 		<?php if ($user != NULL) : ?>
