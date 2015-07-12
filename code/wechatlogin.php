@@ -1,4 +1,4 @@
-<?php
+<?
 
 if ($param['action'] === 'set') {
 	// 解密queryCode

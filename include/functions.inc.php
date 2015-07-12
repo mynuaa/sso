@@ -1,4 +1,4 @@
-<?php
+<?
 
 function makeLogin($uid, $role = NULL) {
 	setcookie('myauth_uid',
@@ -103,5 +103,3 @@ function createFooter() {
 EOF;
 	echo $str;
 }
-
-?>

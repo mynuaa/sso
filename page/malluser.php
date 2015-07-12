@@ -1,4 +1,4 @@
-<?php
+<?
 
 $redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI'];
 
@@ -36,17 +36,17 @@ else {
 }
 
 ?>
-<?php createHeader('商家注册'); ?>
+<? createHeader('商家注册'); ?>
 		<div class="tip tip-info">注册成功后，请使用论坛账号登录</div>
 		<div id="frame1" class="frame">
-		<?php if ($user != NULL) : ?>
-			<h2>你好，<?php echo $user ?>。</h2>
+		<? if ($user != NULL) : ?>
+			<h2>你好，<? echo $user ?>。</h2>
 			<input type="button" onclick="window.location.href='?action=logout'" value="退出登录">
-		<?php else : ?>
+		<? else : ?>
 			<div class="groups">
 				<div id="group1" class="group-current">
-					<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
-						<input type="hidden" name="token" value="<?php echo base64_encode(sha1(rand(10000))) ?>">
+					<form action="<? echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
+						<input type="hidden" name="token" value="<? echo base64_encode(sha1(rand(10000))) ?>">
 						<input type="hidden" name="type" value="dz">
 						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
@@ -79,7 +79,9 @@ else {
 					</div>
 				</div>
 			</div>
-		<?php endif; ?>
+		<? endif; ?>
 		</div>
 	</div>
-<?php createFooter(); ?>
+<?
+
+createFooter();

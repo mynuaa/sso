@@ -1,4 +1,4 @@
-<?php
+<?
 
 // 本科生登录
 function usrverify($stuid, $password) {

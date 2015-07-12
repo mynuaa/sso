@@ -1,4 +1,4 @@
-<?php
+<?
 
 isset($param['token']) || die();
 

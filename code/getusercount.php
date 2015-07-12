@@ -1,4 +1,4 @@
-<?php
+<?
 
 (!isset($_COOKIE['myauth_uid'])) && die();
 
@@ -18,5 +18,3 @@ while ($row = $myauth->fetch_array($result)) {
 }
 
 echo implode("\t", $t);
-
-?>

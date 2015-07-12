@@ -1,4 +1,4 @@
-<?php
+<?
 
 isset($param['uid']) || die();
 
@@ -11,5 +11,3 @@ while ($row = $myauth->fetch_array($query)) {
 }
 
 echo json_encode($result);
-
-?>

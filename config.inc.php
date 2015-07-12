@@ -1,4 +1,4 @@
-<?php
+<?
 
 define('UC_CONNECT', 'mysql');
 define('UC_DBHOST', 'localhost');

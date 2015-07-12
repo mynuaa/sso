@@ -1,4 +1,4 @@
-<?php
+<?
 
 (!isset($_COOKIE['myauth_uid'])) && die();
 
@@ -35,14 +35,14 @@ if (isset($_POST['token'])) {
 }
 
 ?>
-<?php createHeader('设置新马甲'); ?>
+<? createHeader('设置新马甲'); ?>
 		<h2>设置新马甲</h2>
 		<div id="frame1" class="frame">
 			<div class="groups">
 				<div id="group1" class="group group-current">
-				<?php if ($errormsg == '') : ?>
-					<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off" onsubmit="formCheck()">
-						<input type="hidden" name="token" value="<?php echo base64_encode(sha1(rand(10000))) ?>">
+				<? if ($errormsg == '') : ?>
+					<form action="<? echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off" onsubmit="formCheck()">
+						<input type="hidden" name="token" value="<? echo base64_encode(sha1(rand(10000))) ?>">
 						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
 							<div><input type="text" name="username" class="area" required></div>
@@ -63,10 +63,10 @@ if (isset($_POST['token'])) {
 					<div class="form-footer">
 						<input type="button" value="完成注册" onclick="document.querySelector('#group1>form').submit()">
 					</div>
-				<?php else : ?>
+				<? else : ?>
 					<h4><?=$errormsg?></h4>
 					<input type="button" value="返回" onclick="history.go(-1)">
-				<?php endif; ?>
+				<? endif; ?>
 				</div>
 			</div>
 		</div>
@@ -78,4 +78,6 @@ if (isset($_POST['token'])) {
 		return false;
 	}
 	</script>
-<?php createFooter(); ?>
+<?
+
+createFooter();

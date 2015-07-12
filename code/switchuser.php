@@ -1,4 +1,4 @@
-<?php
+<?
 
 (!isset($_COOKIE['myauth_uid'])) && die();
 
@@ -12,5 +12,3 @@ $newded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = 
 
 if ($ded == $newded && !in_array($auth_ded, array('JUST4TEST', 'FRESHMAN', 'MALLUSER')))
 	makeLogin($newuid);
-
-?>

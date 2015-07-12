@@ -1,4 +1,4 @@
-<?php
+<?
 
 (!isset($param['username']) || !isset($param['password'])) && die();
 
@@ -29,5 +29,3 @@ else {
 }
 
 echo json_encode($result);
-
-?>

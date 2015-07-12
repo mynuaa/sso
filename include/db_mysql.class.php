@@ -1,4 +1,4 @@
-<?php
+<?
 
 class dbstuff {
 
@@ -117,5 +117,3 @@ class dbstuff {
 		echo 'SQL Error:<br />'.$message.'<br />'.$sql;
 	}
 }
-
-?>

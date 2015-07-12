@@ -1,4 +1,4 @@
-<?php
+<?
 
 $redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI'];
 
@@ -42,14 +42,14 @@ else {
 $queryCode = sha1(rand(10000) . "\t" . time());
 
 ?>
-<?php createHeader('用户登录'); ?>
+<? createHeader('用户登录'); ?>
 		<div class="tip tip-info">最快捷的方法就是用学号/工号登录</div>
 		<div class="tip tip-info">不知道学号/工号？2015级新生请点击<a class="green" href="?page=freshman"><b>这里</b></a>，商家请点击<a class="green" href="?page=malluser"><b>这里</b></a></div>
 		<div id="frame1" class="frame">
-		<?php if ($user != NULL) : ?>
-			<h2>你好，<?php echo $user ?>。</h2>
+		<? if ($user != NULL) : ?>
+			<h2>你好，<? echo $user ?>。</h2>
 			<input type="button" onclick="window.location.href='?action=logout'" value="退出登录">
-		<?php else : ?>
+		<? else : ?>
 			<div class="tabs v3">
 				<div id="tab1" class="tab tab-current">学号/工号</div>
 				<div id="tab2" class="tab">论坛账号</div>
@@ -57,8 +57,8 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 			</div>
 			<div class="groups">
 				<div id="group1" class="group group-current">
-					<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
-						<input type="hidden" name="token" value="<?php echo base64_encode(sha1(rand(10000))) ?>">
+					<form action="<? echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
+						<input type="hidden" name="token" value="<? echo base64_encode(sha1(rand(10000))) ?>">
 						<input type="hidden" name="type" value="ded">
 						<div class="form-group">
 							<div><span class="field">学号/工号</span></div>
@@ -75,8 +75,8 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 					</div>
 				</div>
 				<div id="group2" class="group">
-					<form action="<?php echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
-						<input type="hidden" name="token" value="<?php echo base64_encode(sha1(rand(10000))) ?>">
+					<form action="<? echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
+						<input type="hidden" name="token" value="<? echo base64_encode(sha1(rand(10000))) ?>">
 						<input type="hidden" name="type" value="dz">
 						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
@@ -94,17 +94,19 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 				</div>
 				<div id="group3" class="group">
 					<div>
-						<img id="wechat_qrcode" src="http://qr.liantu.com/api.php?text=wechat://<?php echo $queryCode; ?>" alt="扫码登录" style="width:200px;height:200px;border:2px solid;border-radius:0.5em;margin-bottom:0.5em">
+						<img id="wechat_qrcode" src="http://qr.liantu.com/api.php?text=wechat://<? echo $queryCode; ?>" alt="扫码登录" style="width:200px;height:200px;border:2px solid;border-radius:0.5em;margin-bottom:0.5em">
 						<div id="wechat_tip" style="margin:0 1em;font-size:0.9em;text-align:left">* 请在公众号“南航纸飞机”的菜单中找到“纸飞机→万能扫码”，并将手机摄像头对准上方二维码。</div>
 					</div>
 				</div>
 			</div>
-		<?php endif; ?>
+		<? endif; ?>
 		</div>
 	</div>
 	<script>
-		var queryCode="<?php echo $queryCode; ?>";
-		var redirect_uri="<?php echo $redirect_uri; ?>";
+		var queryCode="<? echo $queryCode; ?>";
+		var redirect_uri="<? echo $redirect_uri; ?>";
 	</script>
 	<script src="resources/js/wechat_query.js"></script>
-<?php createFooter(); ?>
+<?
+
+createFooter();
