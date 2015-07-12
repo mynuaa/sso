@@ -36,7 +36,7 @@ if (isset($_POST['token'])) {
 		window.opener.postMessage(JSON.stringify({
 				access_token:"<?=$access_token?>"
 			}),
-			window.opener.location.origin
+			"<?=(isset($_GET['origin']) ? $_GET['origin'] : $_SERVER['HTTP_HOST'])?>"
 		);
 		window.close();
 		</script>
