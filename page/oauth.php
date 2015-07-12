@@ -4,7 +4,7 @@
 $appid = $_GET['appid'];
 $appsecret = $myauth->result_first("SELECT `appsecret` FROM `oauth_info` WHERE `appid` = '{$appid}'");
 $timestamp = $_GET['timestamp'];
-$validatecode = explode("\t", uc_authcode(urldecode($_GET['authcode']), 'DECODE', 'myauth'));
+$validatecode = explode("\t", uc_authcode(base64_decode($_GET['authcode']), 'DECODE', 'myauth'));
 if ($validatecode[0] != $appid ||
 	$validatecode[1] != $appsecret ||
 	$validatecode[2] != $timestamp) die('该应用未被授权！');
@@ -28,14 +28,16 @@ if (isset($_POST['token'])) {
 	));
 	$result = json_decode($result, true);
 	if ($result['uid'] > 0) {
-		$access_token = uc_authcode(sha1(base64_encode($_POST['username']) . rand(10000)), 'ENCODE', 'myauth');
+		$access_token = base64_encode(uc_authcode(sha1(base64_encode($_POST['username']) . rand(10000)) . "\t" . $result['uid'], 'ENCODE', 'myauth'));
 		$myauth->query("INSERT INTO `oauth_tokens` (`token_text`, `token_appid`, `token_uid`) VALUES('{$access_token}', '{$appid}', '{$result['uid']}')");
 
 		?>
 		<script>
-		window.opener.receiveMyauthMessage(JSON.stringify({
-			access_token:"<?=$access_token?>"
-		}));
+		window.opener.postMessage(JSON.stringify({
+				access_token:"<?=$access_token?>"
+			}),
+			window.opener.location.origin
+		);
 		window.close();
 		</script>
 		<?

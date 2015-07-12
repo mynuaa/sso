@@ -1,7 +1,13 @@
 <?php
 
 function makeLogin($uid, $role = NULL) {
-	setcookie('myauth_uid', uc_authcode(sha1(rand(10000)) . "\t" . $uid . ($role ? ("\t" . $role) : ''), 'ENCODE', 'myauth'), time() + 3600 * 10000, '/');
+	setcookie('myauth_uid',
+			  uc_authcode(sha1(rand(10000)) . "\t" . $uid . ($role ? ("\t" . $role) : ''), 'ENCODE', 'myauth'),
+			  time() + 3600 * 10000,
+			  '/',
+			  NULL,
+			  NULL,
+			  true);
 }
 function allAscii($str) {
 	foreach ($str as $char) {
