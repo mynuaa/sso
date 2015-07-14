@@ -21,19 +21,18 @@ if (isset($_GET['action'])) {
 		if (in_array($param['type'], array('dz', 'ded', 'wechat')))
 			require_once "code/{$param['type']}login.php";
 		break;
-	case 'logout':
-	case 'complete':
-	case 'getuser':
-	case 'getusercount':
-	case 'switchuser':
-		require_once 'code/' . $_GET['action'] . '.php';
+	default:
+		$file = "code/{$_GET['action']}.php";
+		if (file_exists($file))
+			require_once $file;
 		break;
 	}
 }
 else if (isset($_GET['page'])) {
 	// 通过page判断需要的页面
-	if (in_array($_GET['page'], array('login', 'complete', 'newrepeat', 'oauth', 'freshman', 'malluser')))
-		require_once 'page/' . $_GET['page'] . '.php';
+	$file = "page/{$_GET['page']}.php";
+	if (file_exists($file))
+		require_once $file;
 }
 else {
 	die();
