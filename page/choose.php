@@ -20,8 +20,25 @@ if (count($uid) === 1) {
 	$result = json_decode($result, true);
 	// 选择的uid在结果中
 	if (in_array($uid[0], $result['uid'])) {
-		makeLogin($uid[0]);
-		jumpTo($redirect_uri);
+		if (isset($_GET['inoauth'])) {
+			$username = uc_get_user($uid[0], 1)[1];
+			$access_token = base64_encode(uc_authcode(sha1(base64_encode($username) . rand(10000)) . "\t" . $uid[0], 'ENCODE', 'myauth'));
+			$myauth->query("INSERT INTO `oauth_tokens` (`token_text`, `token_appid`, `token_uid`) VALUES('{$access_token}', '{$appid}', '{$uid[0]}')");
+			?>
+			<script>
+			window.opener.postMessage(JSON.stringify({
+					access_token:"<?=$access_token?>"
+				}),
+				"http://<?=(isset($_GET['origin']) ? $_GET['origin'] : $_SERVER['HTTP_HOST'])?>"
+			);
+			window.close();
+			</script>
+			<?
+		}
+		else {
+			makeLogin($uid[0]);
+			jumpTo($redirect_uri);
+		}
 	}
 	exit();
 }
