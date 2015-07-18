@@ -36,10 +36,13 @@ foreach ($uid as $value)
 		<div id="frame1" class="frame">
 			<div class="groups">
 				<div id="group1" class="group group-current">
-					<ul>
+					<ul class="userlist">
 						<? foreach ($users as $uid => $username): ?>
 						<a href="/sso/?page=choose&uid=<?=$uid?>&code=<?=$code?>&redirect_uri=<?=$redirect_uri?>">
-							<li><?=$username?></li>
+							<li title="以<?=$username?>的身份登录">
+								<img src="/ucenter/avatar.php?uid=<?=$uid?>&size=big" alt="<?=$username?>">
+								<div><?=$username?></div>
+							</li>
 						</a>
 						<? endforeach; ?>
 					</ul>
