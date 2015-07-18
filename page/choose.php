@@ -41,7 +41,7 @@ foreach ($uid as $value)
 						<? foreach ($users as $uid => $username): ?>
 						<a href="/sso/?page=choose&uid=<?=$uid?>&code=<?=$code?>&redirect_uri=<?=$redirect_uri?>">
 							<li title="以<?=$username?>的身份登录">
-								<img src="/ucenter/avatar.php?uid=<?=$uid?>&size=big" alt="<?=$username?>">
+								<img src="/ucenter/avatar.php?uid=<?=$uid?>&size=middle" alt="<?=$username?>">
 								<div><?=$username?></div>
 							</li>
 						</a>
