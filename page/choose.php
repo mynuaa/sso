@@ -39,7 +39,11 @@ foreach ($uid as $value)
 					<h3>请选择一个账号来登录</h3>
 					<ul class="userlist">
 						<? foreach ($users as $uid => $username): ?>
-						<a href="/sso/?page=choose&uid=<?=$uid?>&code=<?=$code?>&redirect_uri=<?=$redirect_uri?>">
+							<? if (isset($_GET['inoauth'])): ?>
+								<a href="/sso/?page=oauth&uid=<?=$uid?>&code=<?=$code?>">
+							<? else: ?>
+								<a href="/sso/?page=choose&uid=<?=$uid?>&code=<?=$code?>&redirect_uri=<?=$redirect_uri?>">
+							<? endif; ?>
 							<li title="以<?=$username?>的身份登录">
 								<img src="/ucenter/avatar.php?uid=<?=$uid?>&size=middle" alt="<?=$username?>">
 								<div><?=$username?></div>

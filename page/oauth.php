@@ -16,6 +16,62 @@ if (isset($_GET['access_token'])) {
 	exit(json_encode($result));
 }
 
+if (isset($_COOKIE['myauth_oauth_querycode'])) {
+	$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_logincode` = '{$_COOKIE['myauth_oauth_querycode']}'");
+	switch (intval($cnt)) {
+	case 1:
+		$t = $myauth->result_first("SELECT * FROM `sso` WHERE `auth_logincode` = '{$_COOKIE['myauth_oauth_querycode']}'");
+		$myauth->query("UPDATE `sso` SET `auth_logincode` = NULL WHERE `auth_logincode` = '{$_COOKIE['myauth_oauth_querycode']}'");
+		$access_token = base64_encode(uc_authcode(sha1(base64_encode(uc_get_user($t['auth_id'], 1)[1]) . rand(10000)) . "\t" . $t['auth_id'], 'ENCODE', 'myauth'));
+		$myauth->query("INSERT INTO `oauth_tokens` (`token_text`, `token_appid`, `token_uid`) VALUES('{$access_token}', '{$appid}', '{$t['auth_id']}')");
+
+		?>
+		<script>
+		window.opener.postMessage(JSON.stringify({
+				access_token:"<?=$access_token?>"
+			}),
+			"http://<?=(isset($_GET['origin']) ? $_GET['origin'] : $_SERVER['HTTP_HOST'])?>"
+		);
+		window.close();
+		</script>
+		<?
+
+		exit();
+		break;
+	case 2:
+		if (!isset($_GET['myauth_oauth_wechat_uid'])) break;
+		$result = ajax(array(
+			'url' => '?action=login',
+			'method' => 'POST',
+			'content' => json_encode(array(
+				'type' => 'wechat',
+				'queryCode' => $_COOKIE['myauth_oauth_querycode'],
+				'action' => 'get'
+			))
+		));
+		$result = json_decode($result, true);
+		if (in_array($_GET['myauth_oauth_wechat_uid'], $result['uid'])) {
+			$t = $myauth->result_first("SELECT * FROM `sso` WHERE `auth_id` = '{$_GET['myauth_oauth_wechat_uid']}'");
+			$myauth->query("UPDATE `sso` SET `auth_logincode` = NULL WHERE `auth_logincode` = '{$_COOKIE['myauth_oauth_querycode']}'");
+			$access_token = base64_encode(uc_authcode(sha1(base64_encode(uc_get_user($t['auth_id'], 1)[1]) . rand(10000)) . "\t" . $t['auth_id'], 'ENCODE', 'myauth'));
+			$myauth->query("INSERT INTO `oauth_tokens` (`token_text`, `token_appid`, `token_uid`) VALUES('{$access_token}', '{$appid}', '{$t['auth_id']}')");
+
+			?>
+			<script>
+			window.opener.postMessage(JSON.stringify({
+					access_token:"<?=$access_token?>"
+				}),
+				"http://<?=(isset($_GET['origin']) ? $_GET['origin'] : $_SERVER['HTTP_HOST'])?>"
+			);
+			window.close();
+			</script>
+			<?
+
+			exit();
+		}
+		break;
+	}
+}
 if (isset($_POST['token'])) {
 	$result = ajax(array(
 		'url' => '?action=login',
@@ -113,6 +169,7 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 	</div>
 	<script>
 		var queryCode="wechat://<?=$queryCode?>";
+		var oauth=true;
 	</script>
 	<script src="resources/js/wechat_query.js"></script>
 <? createFooter(); ?>

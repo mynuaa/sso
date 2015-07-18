@@ -22,7 +22,7 @@ if ($param['action'] === 'set') {
 }
 else if ($param['action'] === 'get') {
 	// 已登录
-	if (isset($_COOKIE['myauth_uid'])) {
+	if (isset($_COOKIE['myauth_uid']) && !isset($_GET['inoauth'])) {
 		$result = array('uid' => -1);
 	}
 	else {
