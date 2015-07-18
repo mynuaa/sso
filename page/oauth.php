@@ -168,7 +168,7 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 		</div>
 	</div>
 	<script>
-		var queryCode="wechat://<?=$queryCode?>";
+		var queryCode="<?=$queryCode?>";
 		var oauth=true;
 	</script>
 	<script src="resources/js/wechat_query.js"></script>
