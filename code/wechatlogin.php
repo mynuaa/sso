@@ -63,7 +63,7 @@ else if ($param['action'] === 'bind') {
 		else {
 			$sql = "UPDATE `sso` SET `auth_wechat` = '{$openid}' WHERE `auth_id` = '{$uid}'";
 			$myauth->query($sql);
-			$result = '绑定成功！';
+			$result = $sql . ' ' . '绑定成功！';
 		}
 	}
 	echo $result;
