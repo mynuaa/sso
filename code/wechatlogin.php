@@ -10,7 +10,7 @@ if ($param['action'] === 'set') {
 	$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_wechat` = '{$queryCode[2]}'");
 	switch (intval($cnt)) {
 	case 0:
-		echo '请根据页面提示以绑定账号:)';
+		echo '你还没有绑定微信哦:)';
 		break;
 	case 1:
 		echo '登录成功:)';
@@ -49,4 +49,24 @@ else if ($param['action'] === 'get') {
 		}
 	}
 	echo json_encode($result);
+}
+else if ($param['action'] === 'bind') {
+	if (!isset($_COOKIE['myauth_uid']))
+		$result = '微信绑定需要先登录:(';
+	else {
+		$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_id` = '{$uid}'");
+		if (intval($cnt) > 0)
+			$result = '你的纸飞机账号已经绑定微信啦，不能重复绑定哦:)';
+		else {
+			$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_wechat` = '{$openid}'");
+			if (intval($cnt) >= 2)
+				$result = '一个微信号最多只能绑定两个纸飞机账号呢:)';
+			else {
+				$sql = "UPDATE `sso` SET `auth_wechat` = '{$openid}' WHERE `auth_id` = '{$uid}'";
+				$myauth->query($sql);
+				$result = '绑定成功！';
+			}
+		}
+	}
+	echo $result;
 }
