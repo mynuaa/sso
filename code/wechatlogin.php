@@ -52,8 +52,8 @@ else if ($param['action'] === 'get') {
 }
 else if ($param['action'] === 'bind') {
 	list($uid, $nop, $openid) = uc_authcode($hash, 'DECODE', 'myauth');
-	$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_id` = '{$uid}'");
-	if (intval($cnt) > 0)
+	$wechat = $myauth->result_first("SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = '{$uid}'");
+	if ($wechat != NULL)
 		$result = '你的纸飞机账号已经绑定微信啦，不能重复绑定哦:)';
 	else {
 		$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_wechat` = '{$openid}'");
