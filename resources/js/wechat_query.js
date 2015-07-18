@@ -17,7 +17,10 @@ function getWechatLoginStatus(){
 			if(d.uid==-1)return;
 			else if(d.uid==0)window.location.href="?page=complete&code="+queryCode+"&redirect_uri="+redirect_uri;
 			else if(d.uid.length==1)window.location.href=redirect_uri;
-			else if(d.uid.length==2)window.location.href="?page=choose&code="+queryCode+"&redirect_uri="+redirect_uri;
+			else if(d.uid.length==2){
+				var uid=d.uid.join(":");
+				window.location.href="?page=choose&uid="+uid+"&code="+queryCode+"&redirect_uri="+redirect_uri;
+			}
 		}
 	});
 }
