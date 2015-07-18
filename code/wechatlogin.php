@@ -40,9 +40,9 @@ else if ($param['action'] === 'get') {
 			break;
 		// 绑定两个账号：选择登录账号
 		case 2:
-			$result = array('uid' => []);
+			$result = array('uid' => array());
 			$t = $myauth->query("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
-			while ($ids = $t->fetch_assoc())
+			while ($ids = $myauth->fetch_array($t))
 				$result['uid'] []= $ids['auth_id'];
 			$myauth->query("UPDATE `sso` SET `auth_logincode` = NULL WHERE `auth_logincode` = '{$param['queryCode']}'");
 			break;
