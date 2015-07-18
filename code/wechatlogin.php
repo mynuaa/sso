@@ -52,7 +52,7 @@ else if ($param['action'] === 'get') {
 }
 else if ($param['action'] === 'bind') {
 	$arr = uc_authcode($hash, 'DECODE', 'myauth');
-	print_r($arr);
+	die(json_encode($arr));
 	list($uid, $nop, $openid) = $arr;
 	$wechat = $myauth->result_first("SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = '{$uid}'");
 	if ($wechat != NULL)
