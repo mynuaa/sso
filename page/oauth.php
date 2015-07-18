@@ -114,6 +114,7 @@ $queryCode = sha1(rand(10000) . "\t" . time());
 	<script>
 		var queryCode="<?=$queryCode?>";
 		var oauth=true;
+		var origin="<?=$_GET['origin']?>";
 	</script>
 	<script src="resources/js/wechat_query.js"></script>
 <? createFooter(); ?>
