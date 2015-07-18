@@ -29,7 +29,7 @@ if (count($uid) === 1) {
 // 列出全部用户
 $users = array();
 foreach ($uid as $value)
-	$users[$uid] = uc_get_user($uid, true)[1];
+	$users[$value] = uc_get_user($value, 1)[1];
 
 ?>
 <? createHeader('选择登录账号'); ?>
