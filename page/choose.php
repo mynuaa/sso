@@ -22,8 +22,8 @@ if (count($uid) === 1) {
 	if (in_array($uid[0], $result)) {
 		makeLogin($uid[0]);
 		jumpTo($redirect_uri);
-		exit();
 	}
+	exit();
 }
 
 // 列出全部用户
