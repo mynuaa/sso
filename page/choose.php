@@ -17,7 +17,7 @@ if (count($uid) === 1) {
 			'action' => 'get'
 		))
 	));
-	$result = json_decode($result);
+	$result = json_decode($result, true);
 	// 选择的uid在结果中
 	if (in_array($uid[0], $result['uid'])) {
 		makeLogin($uid[0]);
