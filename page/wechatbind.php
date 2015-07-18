@@ -9,7 +9,7 @@ $sql = "SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = $uid";
 $result = $myauth->result_first($sql);
 
 // 生成微信绑定的加密串
-$queryCode = uc_authcode($uid . "\t" . sha1(rand(10000) . "\t" . time()), 'ENCODE', 'myauth');
+$queryCode = base64_encode(uc_authcode($uid . "\t" . sha1(rand(10000) . "\t" . time()), 'ENCODE', 'myauth'));
 
 ?>
 <? createHeader('微信绑定'); ?>
