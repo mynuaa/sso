@@ -57,7 +57,7 @@ foreach ($uid as $value)
 					<ul class="userlist">
 						<? foreach ($users as $uid => $username): ?>
 							<? if (isset($_GET['inoauth'])): ?>
-								<a href="/sso/?page=oauth&uid=<?=$uid?>&code=<?=$code?>">
+								<a href="/sso/?page=choose&uid=<?=$uid?>&code=<?=$code?>&inoauth">
 							<? else: ?>
 								<a href="/sso/?page=choose&uid=<?=$uid?>&code=<?=$code?>&redirect_uri=<?=$redirect_uri?>">
 							<? endif; ?>
