@@ -36,6 +36,7 @@ foreach ($uid as $value)
 		<div id="frame1" class="frame">
 			<div class="groups">
 				<div id="group1" class="group group-current">
+					<h3>请选择一个账号来登录</h3>
 					<ul class="userlist">
 						<? foreach ($users as $uid => $username): ?>
 						<a href="/sso/?page=choose&uid=<?=$uid?>&code=<?=$code?>&redirect_uri=<?=$redirect_uri?>">
