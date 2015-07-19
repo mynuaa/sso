@@ -166,12 +166,12 @@ if (isset($_POST['action'])) {
 							<div><span class="area"><input type="text" value="<? echo $arr['username']; ?>" disabled></span></div>
 						</div>
 						<div class="form-group">
-							<div><span class="field">密码</span></div>
-							<div><input type="password" name="password" class="area"></div>
-						</div>
-						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
 							<div><input type="text" name="username" class="area"></div>
+						</div>
+						<div class="form-group">
+							<div><span class="field">密码</span></div>
+							<div><input type="password" name="password" class="area"></div>
 						</div>
 						<input type="submit" class="hidden">
 					</form>
