@@ -49,7 +49,8 @@ if (isset($_POST['action'])) {
 			$result = json_decode($result, true);
 			if ($result['uid'] >= 0) {
 				$uid = uc_get_user($_POST['username'])[0];
-				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')");
+				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')
+								ON DUPLICATE KEY UPDATE `auth_ded` = '{$arr['username']}'");
 				makeLogin($uid);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 			}
