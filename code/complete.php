@@ -21,7 +21,8 @@ if ($info['from'] === 'dz') {
 			);
 		}
 		else {
-			$sql = "INSERT INTO `sso` (`auth_dz`, `auth_ded`) VALUES ('{$info['user']}', '{$param['username']}')";
+			$sql = "INSERT INTO `sso` (`auth_dz`, `auth_ded`) VALUES ('{$info['user']}', '{$param['username']}')
+					ON DUPLICATE KEY UPDATE `auth_ded` = '{$param['username']}'";
 			$myauth->query($sql);
 			$user = uc_get_user($info['user']);
 			$result = array(
