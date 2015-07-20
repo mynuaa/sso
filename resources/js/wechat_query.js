@@ -24,7 +24,6 @@ function getWechatLoginStatus(){
 }
 function getWechatBindStatus(){
 	if(document.hidden)return;
-	if(!document.getElementById("bind-successful"))return;
 	if(!document.getElementById("group3"))return;
 	if(document.getElementById("group3").className.indexOf("group-current")<0)return;
 	ajax({
@@ -43,7 +42,8 @@ function getWechatBindStatus(){
 		}
 	});
 }
+var isLogin=!document.getElementById("bind-successful");
 setInterval(function(){
-	getWechatLoginStatus();
-	getWechatBindStatus();
+	if(isLogin)getWechatLoginStatus();
+	else getWechatBindStatus();
 },2000);
