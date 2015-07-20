@@ -22,4 +22,28 @@ function getWechatLoginStatus(){
 		}
 	});
 }
-setInterval(getWechatLoginStatus,2000);
+function getWechatBindStatus(){
+	if(document.hidden)return;
+	if(!document.getElementById("bind-successful"))return;
+	if(!document.getElementById("group3"))return;
+	if(document.getElementById("group3").className.indexOf("group-current")<0)return;
+	ajax({
+		url:"?action=login&inoauth",
+		method:"POST",
+		content:JSON.stringify({
+			type:"wechat",
+			action:"querybind",
+			uid:uid
+		}),
+		success:function(d){
+			if(d=="")return;
+			if(d=="1"){
+				document.getElementById("bind-successful").style.display="block";
+			}
+		}
+	});
+}
+setInterval(function(){
+	getWechatLoginStatus();
+	getWechatBindStatus();
+},2000);
