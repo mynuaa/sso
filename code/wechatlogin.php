@@ -1,6 +1,7 @@
 <?
 
-if ($param['action'] === 'set') {
+switch ($param['action']) {
+case 'set':
 	// 解密queryCode
 	$queryCode = uc_authcode($param['queryCode'], 'DECODE', 'myauth');
 	$queryCode = explode("\t", $queryCode);
@@ -19,8 +20,8 @@ if ($param['action'] === 'set') {
 		echo '请在浏览器中选择你要登录的账号:)';
 		break;
 	}
-}
-else if ($param['action'] === 'get') {
+	break;
+case 'get':
 	// 已登录
 	if (isset($_COOKIE['myauth_uid']) && !isset($_GET['inoauth'])) {
 		$result = array('uid' => -1);
@@ -49,8 +50,8 @@ else if ($param['action'] === 'get') {
 		}
 	}
 	echo json_encode($result);
-}
-else if ($param['action'] === 'bind') {
+	break;
+case 'bind':
 	list($uid, $openid) = explode("\t", uc_authcode($param['hash'], 'DECODE', 'myauth'));
 	$wechat = $myauth->result_first("SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = '{$uid}'");
 	if ($wechat != NULL)
@@ -66,4 +67,13 @@ else if ($param['action'] === 'bind') {
 		}
 	}
 	echo $result;
+	break;
+case 'querybind':
+	if (isset($param['uid']))
+		$uid = $param['uid'];
+	else
+		die();
+	$wechat = $myauth->result_first("SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = '{$uid}'");
+	exit(($wechat != NULL) ? true : '');
+	break;
 }
