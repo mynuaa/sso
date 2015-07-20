@@ -38,6 +38,7 @@ function getWechatBindStatus(){
 			if(d=="")return;
 			if(d=="1"){
 				document.getElementById("bind-successful").style.display="block";
+				setTimeout(function(){window.close()},3000);
 			}
 		}
 	});
