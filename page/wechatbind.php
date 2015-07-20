@@ -24,7 +24,7 @@ $queryCode = base64_encode(uc_authcode($uid . "\t" . sha1(rand(10000) . "\t" . t
 						<img id="wechat_qrcode" src="http://my.nuaa.edu.cn/mytools/?tool=qrcode&text=wechatbind://<?=$queryCode?>" alt="扫码登录" style="width:200px;height:200px;border:2px solid;border-radius:0.5em;margin-bottom:0.5em">
 						<div id="wechat_tip" style="margin:0 1em;font-size:0.9em;text-align:left">* 请在公众号“南航纸飞机”的菜单中找到“纸飞机→万能扫码”，并将手机摄像头对准上方二维码。</div>
 					</div>
-					<div id="bind-successful" style="display:none;text-align:center">绑定成功！</div>
+					<h2 id="bind-successful" style="display:none;text-align:center">绑定成功！</h2>
 				<? else: ?>
 					<h4><?=$errormsg?></h4>
 					<input type="button" value="返回" onclick="history.go(-1)">
