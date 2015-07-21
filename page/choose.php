@@ -40,6 +40,7 @@ if (count($uid) === 1) {
 			jumpTo($redirect_uri);
 		}
 	}
+	$myauth->query("UPDATE `sso` SET `auth_logincode` = NULL WHERE `auth_logincode` = '{$code}'");
 	exit();
 }
 

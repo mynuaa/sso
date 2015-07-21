@@ -33,8 +33,6 @@ case 'get':
 		// 绑定一个账号：直接登录
 		case 1:
 			$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
-			// 删除登录凭证
-			$myauth->query("UPDATE `sso` SET `auth_logincode` = NULL WHERE `auth_logincode` = '{$param['queryCode']}'");
 			// 登录成功
 			$result = array('uid' => [$t]);
 			makeLogin($t);
@@ -45,7 +43,6 @@ case 'get':
 			$t = $myauth->query("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
 			while ($ids = $myauth->fetch_array($t))
 				$result['uid'] []= $ids['auth_id'];
-			// 此处不应当删除登录凭证，因为到了后面选择账号的页面上还需要它
 			break;
 		}
 	}
