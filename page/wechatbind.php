@@ -27,7 +27,7 @@ $queryCode = base64_encode(uc_authcode($uid . "\t" . sha1(rand(10000) . "\t" . t
 					<h2 id="bind-successful" style="display:none;text-align:center">绑定成功！三秒后页面关闭……</h2>
 				<? else: ?>
 					<h4><?=$errormsg?></h4>
-					<input type="button" value="返回" onclick="history.go(-1)">
+					<input type="button" value="关闭" onclick="window.close()">
 				<? endif; ?>
 				</div>
 			</div>
