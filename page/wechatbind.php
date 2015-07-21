@@ -35,6 +35,7 @@ $queryCode = base64_encode(uc_authcode($uid . "\t" . sha1(rand(10000) . "\t" . t
 	</div>
 	<script>
 		var uid=<?=$uid?>;
+		var oauth=true;
 	</script>
 	<script src="resources/js/wechat_query.js"></script>
 <?
