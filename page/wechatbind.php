@@ -9,7 +9,7 @@ $auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` 
 $authcount = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '$auth_ded'");
 $errormsg = '';
 if (in_array($auth_ded, array('JUST4TEST', 'FRESHMAN'/*, 'MALLUSER'*/)))
-	$errormsg = '你的验证信息不完整，无法注册新马甲。';
+	$errormsg = '你的验证信息不完整，无法绑定微信。';
 $sql = "SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = $uid";
 $result = $myauth->result_first($sql);
 if ($result != NULL)
