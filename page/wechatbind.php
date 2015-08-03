@@ -1,8 +1,8 @@
 <?
 // 此页面必须登录
 isset($_COOKIE['myauth_uid']) || die();
-$uid = explode("\t", uc_authcode($_COOKIE['myauth_uid'], 'DECODE', 'myauth'));
-$uid = intval($uid[1]);
+$uid = json_decode(my_decrypt($_COOKIE['myauth_uid']), true);
+$uid = intval($uid['uid']);
 $user = uc_get_user($uid, 1)[1];
 
 $auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = $uid");
@@ -16,7 +16,7 @@ if ($result != NULL)
 	$errormsg = '你的纸飞机账号已经绑定微信了哦:)';
 
 // 生成微信绑定的加密串
-$queryCode = base64_encode(uc_authcode($uid . "\t" . sha1(rand(10000) . "\t" . time()), 'ENCODE', 'myauth'));
+$logincode = my_encrypt($uid);
 
 ?>
 <? createHeader('微信绑定'); ?>
@@ -26,7 +26,7 @@ $queryCode = base64_encode(uc_authcode($uid . "\t" . sha1(rand(10000) . "\t" . t
 				<div id="group3" class="group group-current">
 				<? if ($errormsg == '') : ?>
 					<div>
-						<img id="wechat_qrcode" src="http://my.nuaa.edu.cn/mytools/?tool=qrcode&text=wechatbind://<?=$queryCode?>" alt="扫码登录" style="width:200px;height:200px;border:2px solid;border-radius:0.5em;margin-bottom:0.5em">
+						<img id="wechat_qrcode" src="http://my.nuaa.edu.cn/mytools/?tool=qrcode&text=wechatbind://<?=$logincode?>" alt="扫码登录" style="width:200px;height:200px;border:2px solid;border-radius:0.5em;margin-bottom:0.5em">
 						<div id="wechat_tip" style="margin:0 1em;font-size:0.9em;text-align:left">* 请在公众号“南航纸飞机”的菜单中找到“纸飞机→万能扫码”，并将手机摄像头对准上方二维码。</div>
 					</div>
 					<h2 id="bind-successful" style="display:none;text-align:center">绑定成功！三秒后页面关闭……</h2>

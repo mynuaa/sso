@@ -1,20 +1,9 @@
 <?
 
-function makeLogin($uid, $role = NULL) {
-	setcookie('myauth_uid',
-			  uc_authcode(sha1(rand(10000)) . "\t" . $uid . ($role ? ("\t" . $role) : ''), 'ENCODE', 'myauth'),
-			  time() + 3600 * 10000,
-			  '/',
-			  NULL,
-			  NULL,
-			  true);
-}
-function allAscii($str) {
-	foreach ($str as $char) {
-		if ($char < 1 || char > 127)
-			return false;
-	}
-	return true;
+function make_login($uid, $appid = 'discuz', $role = null) {
+	$arr = ['uid' => $uid];
+	if ($role) $arr['role'] = $role;
+	setcookie('myauth_uid', my_encrypt(json_encode($arr), $appid), time() + 3600 * 10000, '/', NULL, NULL, true);
 }
 function ajax($a) {
 	$a['url'] = $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . $a['url'];
@@ -53,6 +42,7 @@ function jumpTo($url = NULL) {
 	exit();
 }
 function createHeader($pagetitle = '用户登录') {
+	$public_key = PUBLIC_KEY_FOR_JS;
 	$str = <<<EOF
 <!DOCTYPE html>
 <html lang="zh">
@@ -70,6 +60,8 @@ function createHeader($pagetitle = '用户登录') {
 	<script src="resources/js/html5.js"></script>
 	<script src="resources/js/classList.min.js"></script>
 	<![endif]-->
+	<script src="resources/js/my_encrypt.js"></script>
+	<script>var key=makeKeyPair("{$public_key}")</script>
 </head>
 <body>
 	<div class="background"></div>
@@ -96,10 +88,22 @@ EOF;
 	echo $str;
 }
 function createFooter() {
-	$str = <<<EOF
-	<script src="resources/js/main.js"></script>
-</body>
-</html>
-EOF;
-	echo $str;
+	echo '<script src="resources/js/main.js"></script></body></html>';
+}
+function get_public_key($appid) {
+	$result = $GLOBALS['myauth']->result_first("SELECT `public_key` FROM `oauth_info` WHERE `appid` = '{$appid}'");
+	return $result ? $result : '';
+}
+// 通过其它应用的公钥加密
+function my_encrypt($str, $appid = null) {
+	$public_key = $appid ? openssl_pkey_get_public(get_public_key($appid)) : openssl_pkey_get_public(PUBLIC_KEY);
+	openssl_public_encrypt($str, $encrypted, $public_key) || die('failed');
+	return base64_encode($encrypted);
+}
+// 通过本应用的私钥解密
+function my_decrypt($str) {
+	$encrypted = base64_decode($str);
+	$private_key = openssl_pkey_get_private(PRIVATE_KEY);
+	openssl_private_decrypt($encrypted, $str, $private_key) || die('failed');
+	return $str;
 }

@@ -2,13 +2,8 @@
 
 (!isset($_COOKIE['myauth_token'])) && die();
 
-$arr = explode("\t", uc_authcode(rawurldecode($_COOKIE['myauth_token']), 'DECODE', 'myauth'));
-$arr = array(
-	'username' => $arr[0],
-	'from' => $arr[1],
-	'time' => $arr[2],
-	'password' => $arr[3]
-);
+$arr = my_decrypt($_COOKIE['myauth_token']);
+$arr = json_decode($arr, true);
 
 if (isset($_POST['action'])) {
 	switch ($_POST['action']) {
@@ -18,7 +13,7 @@ if (isset($_POST['action'])) {
 			$uid = uc_user_register($_POST['username'], $arr['password'], $_POST['email']);
 			if ($uid > 0) {
 				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')");
-				makeLogin($uid);
+				make_login($uid);
 				unset($_COOKIE['myauth_token']);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 			}
@@ -51,7 +46,7 @@ if (isset($_POST['action'])) {
 				$uid = uc_get_user($_POST['username'])[0];
 				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')
 								ON DUPLICATE KEY UPDATE `auth_ded` = '{$arr['username']}'");
-				makeLogin($uid);
+				make_login($uid);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 			}
 			alert('验证失败！', $_SERVER['REQUEST_URI']);
@@ -75,7 +70,7 @@ if (isset($_POST['action'])) {
 				}
 				$uid = uc_get_user($arr['username'])[0];
 				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$_POST['username']}')");
-				makeLogin($uid);
+				make_login($uid);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 			}
 			alert('验证失败！', $_SERVER['REQUEST_URI']);

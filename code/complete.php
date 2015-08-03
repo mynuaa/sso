@@ -2,12 +2,13 @@
 
 isset($param['token']) || die();
 
-$param['token'] = rawurldecode($param['token']);
-$info = explode("\t", uc_authcode($param['token'], 'DECODE', 'myauth'));
+// 解密密码
+$param['password'] = my_decrypt($param['password']);
+
+$info = explode("\t", my_decrypt($param['token']));
 $info = array(
 	'user' => $info[0],
 	'from' => $info[1],
-	'time' => $info[2]
 );
 
 if ($info['from'] === 'dz') {

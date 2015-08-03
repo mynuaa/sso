@@ -11,7 +11,7 @@ if (isset($_POST['token'])) {
 	$uid = uc_user_register($_POST['username'], $_POST['password'], $_POST['email']);
 	if ($uid > 0) {
 		$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, 'MALLUSER')");
-		makeLogin($uid, 'MALLUSER');
+		make_login($uid, null, 'MALLUSER');
 		unset($_COOKIE['myauth_token']);
 		jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 	}
@@ -27,19 +27,19 @@ if (isset($_POST['token'])) {
 }
 
 if (isset($_COOKIE['myauth_uid'])) {
-	$uid = explode("\t", uc_authcode($_COOKIE['myauth_uid'], 'DECODE', 'myauth'));
-	$uid = intval($uid[1]);
+	$uid = json_decode(my_decrypt($_COOKIE['myauth_uid']), true);
+	$uid = intval($uid['uid']);
 	$user = uc_get_user($uid, 1)[1];
 }
 else {
-	$user = NULL;
+	$user = null;
 }
 
 ?>
 <? createHeader('商家注册'); ?>
 		<div class="tip tip-info">注册成功后，请使用论坛账号登录</div>
 		<div id="frame1" class="frame">
-		<? if ($user != NULL) : ?>
+		<? if ($user != null) : ?>
 			<h2>你好，<? echo $user ?>。</h2>
 			<input type="button" onclick="window.location.href='?action=logout'" value="退出登录">
 		<? else : ?>

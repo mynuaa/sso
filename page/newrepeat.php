@@ -2,9 +2,9 @@
 
 (!isset($_COOKIE['myauth_uid'])) && die();
 
-$uid = uc_authcode($_COOKIE['myauth_uid'], 'DECODE', 'myauth');
-$uid = explode("\t", $uid);
-$uid = $uid[1];
+$uid = json_decode(my_decrypt($_COOKIE['myauth_uid']), true);
+$uid = intval($uid['uid']);
+$user = uc_get_user($uid, 1)[1];
 
 $auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = $uid");
 $authcount = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '$auth_ded'");
@@ -20,7 +20,7 @@ if (isset($_POST['token'])) {
 	$uid = uc_user_register($_POST['username'], $_POST['password'], $_POST['email']);
 	if ($uid > 0) {
 		$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '$auth_ded')");
-		makeLogin($uid);
+		make_login($uid);
 		jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : '/sso/?page=login');
 	}
 	$msg = array(

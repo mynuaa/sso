@@ -3,10 +3,6 @@
 require_once 'config.inc.php';
 require_once 'include/init.inc.php';
 
-$myauth = new dbstuff;
-$myauth->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
-unset($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
-
 require_once 'uc_client/client.php';
 
 if (isset($_GET['action'])) {

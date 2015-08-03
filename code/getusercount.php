@@ -2,7 +2,7 @@
 
 (!isset($_COOKIE['myauth_uid'])) && die();
 
-$uid = uc_authcode($_COOKIE['myauth_uid'], 'DECODE', 'myauth');
+$uid = my_encrypt($_COOKIE['myauth_uid']);
 $uid = explode("\t", $uid)[1];
 
 $auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = $uid");

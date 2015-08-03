@@ -2,13 +2,13 @@
 
 switch ($param['action']) {
 case 'set':
-	// 解密queryCode
-	$queryCode = uc_authcode($param['queryCode'], 'DECODE', 'myauth');
-	$queryCode = explode("\t", $queryCode);
-	(allAscii($queryCode[0]) && allAscii($queryCode[1]) && allAscii($queryCode[2])) || die();
-	$sql = "UPDATE `sso` SET `auth_logincode` = '{$queryCode[0]}' WHERE `auth_wechat` = '{$queryCode[2]}'";
+	// 解密code
+	$code = json_decode($code, true);
+	$logincode = my_decrypt($code['code'], $code['appid']);
+	$openid = my_decrypt($code['openid'], $code['appid']);
+	$sql = "UPDATE `sso` SET `auth_logincode` = '{$logincode}' WHERE `auth_wechat` = '{$openid}'";
 	$myauth->query($sql);
-	$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_wechat` = '{$queryCode[2]}'");
+	$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_wechat` = '{$openid}'");
 	switch (intval($cnt)) {
 	case 0:
 		echo '你还没有绑定微信哦:)';
@@ -28,19 +28,19 @@ case 'get':
 	}
 	else {
 		// 当前微信登录码绑定的总账号数
-		$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
+		$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_logincode` = '{$param['code']}'");
 		switch (intval($cnt)) {
 		// 绑定一个账号：直接登录
 		case 1:
-			$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
+			$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['code']}'");
 			// 登录成功
 			$result = array('uid' => [$t]);
-			makeLogin($t);
+			make_login($t);
 			break;
 		// 绑定两个账号：选择登录账号
 		case 2:
 			$result = array('uid' => array());
-			$t = $myauth->query("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['queryCode']}'");
+			$t = $myauth->query("SELECT `auth_id` FROM `sso` WHERE `auth_logincode` = '{$param['code']}'");
 			while ($ids = $myauth->fetch_array($t))
 				$result['uid'] []= $ids['auth_id'];
 			break;
@@ -49,7 +49,9 @@ case 'get':
 	echo json_encode($result);
 	break;
 case 'bind':
-	list($uid, $openid) = explode("\t", uc_authcode($param['hash'], 'DECODE', 'myauth'));
+	$data = json_decode(my_decrypt($param['hash']), true);
+	$uid = $data['uid'];
+	$openid = $data['openid'];
 	$wechat = $myauth->result_first("SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = '{$uid}'");
 	if ($wechat != NULL)
 		$result = '你的纸飞机账号已经绑定微信啦，不能重复绑定哦:)';

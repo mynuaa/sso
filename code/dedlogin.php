@@ -2,6 +2,9 @@
 
 (!isset($param['username']) || !isset($param['password'])) && die();
 
+// 解密密码
+$param['password'] = my_decrypt($param['password']);
+
 // 分离输入中的子帐号
 $split = split(':', $param['username']);
 $param['username'] = $split[0];
@@ -14,7 +17,7 @@ if (dedverify($param['username'], $param['password'])) {
 		// 需要填写更多信息
 		$result = array(
 			'uid' => 0,
-			'token' => rawurlencode(uc_authcode("{$param['username']}\tded\t" . time() . "\t" . $param['password'], 'ENCODE', 'myauth'))
+			'token' => my_encrypt("ded\t{$param['username']}\t{$param['password']}")
 		);
 	}
 	else if ($order > intval($t)) {

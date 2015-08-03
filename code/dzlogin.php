@@ -2,6 +2,9 @@
 
 (!isset($param['username']) || !isset($param['password'])) && die();
 
+// 解密密码
+$param['password'] = my_decrypt($param['password']);
+
 // 验证登录
 list($uid, $username, $password, $email) = uc_user_login($param['username'], $param['password']);
 
@@ -11,7 +14,7 @@ if($uid > 0) {
 		// 需要填写更多信息
 		$result = array(
 			'uid' => 0,
-			'token' => rawurlencode(uc_authcode("$username\tdz\t" . time() . "\t" . $param['password'], 'ENCODE', 'myauth'))
+			'token' => my_encrypt("dz\t{$username}\t{$param['password']}")
 		);
 	}
 	else {

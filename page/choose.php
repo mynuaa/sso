@@ -22,7 +22,9 @@ if (count($uid) === 1) {
 	if (in_array($uid[0], $result['uid'])) {
 		if (isset($_GET['inoauth'])) {
 			$username = uc_get_user($uid[0], 1)[1];
-			$access_token = base64_encode(uc_authcode(sha1(base64_encode($username) . rand(10000)) . "\t" . $uid[0], 'ENCODE', 'myauth'));
+			// 此处应保证token的随机性
+			$access_token = sha1($username . "\t" . $uid[0]);
+			// 将生成的token插入数据库
 			$myauth->query("INSERT INTO `oauth_tokens` (`token_text`, `token_appid`, `token_uid`) VALUES('{$access_token}', '{$appid}', '{$uid[0]}')");
 			?>
 			<script>
@@ -36,7 +38,7 @@ if (count($uid) === 1) {
 			<?
 		}
 		else {
-			makeLogin($uid[0]);
+			make_login($uid[0]);
 			jumpTo($redirect_uri);
 		}
 	}

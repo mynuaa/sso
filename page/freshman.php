@@ -11,7 +11,7 @@ if (isset($_POST['token'])) {
 	$uid = uc_user_register($_POST['username'], $_POST['password'], $_POST['email']);
 	if ($uid > 0) {
 		$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, 'FRESHMAN')");
-		makeLogin($uid, 'FRESHMAN');
+		make_login($uid, null, 'FRESHMAN');
 		unset($_COOKIE['myauth_token']);
 		jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 	}
@@ -27,8 +27,8 @@ if (isset($_POST['token'])) {
 }
 
 if (isset($_COOKIE['myauth_uid'])) {
-	$uid = explode("\t", uc_authcode($_COOKIE['myauth_uid'], 'DECODE', 'myauth'));
-	$uid = intval($uid[1]);
+	$uid = my_decrypt(json_decode($_COOKIE['myauth_uid'], true));
+	$uid = intval($uid['uid']);
 	$user = uc_get_user($uid, 1)[1];
 }
 else {
