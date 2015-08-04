@@ -13,7 +13,7 @@ if (count($uid) === 1) {
 		'method' => 'POST',
 		'content' => json_encode(array(
 			'type' => 'wechat',
-			'queryCode' => $code,
+			'code' => $code,
 			'action' => 'get'
 		))
 	));

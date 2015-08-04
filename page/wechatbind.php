@@ -1,6 +1,7 @@
 <?
+
 // 此页面必须登录
-isset($_COOKIE['myauth_uid']) || die();
+isset($_COOKIE['myauth_uid']) || $errormsg = '请先登录！';
 $uid = json_decode(my_decrypt($_COOKIE['myauth_uid']), true);
 $uid = intval($uid['uid']);
 $user = uc_get_user($uid, 1)[1];
@@ -16,7 +17,7 @@ if ($result != NULL)
 	$errormsg = '你的纸飞机账号已经绑定微信了哦:)';
 
 // 生成微信绑定的加密串
-$logincode = my_encrypt($uid);
+$logincode = sha1(rand(1000) . time());
 
 ?>
 <? createHeader('微信绑定'); ?>

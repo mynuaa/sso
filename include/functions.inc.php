@@ -1,6 +1,6 @@
 <?
 
-function make_login($uid, $appid = 'discuz', $role = null) {
+function make_login($uid, $appid = null, $role = null) {
 	$arr = ['uid' => $uid];
 	if ($role) $arr['role'] = $role;
 	setcookie('myauth_uid', my_encrypt(json_encode($arr), $appid), time() + 3600 * 10000, '/', NULL, NULL, true);

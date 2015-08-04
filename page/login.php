@@ -30,12 +30,12 @@ if (isset($_POST['token'])) {
 }
 
 if (isset($_COOKIE['myauth_uid'])) {
-	$uid = json_decode(my_decrypt($_COOKIE['myauth_uid']), true);
+	$uid = json_decode(my_decrypt($_COOKIE['myauth_uid'], 'discuz'), true);
 	$uid = intval($uid['uid']);
 	$user = uc_get_user($uid, 1)[1];
 }
 else {
-	$user = NULL;
+	$user = null;
 }
 
 // 生成微信登录的加密串
@@ -46,7 +46,7 @@ $code = sha1(rand(10000) . "\t" . time());
 		<div class="tip tip-info">最快捷的方法就是用学号/工号登录</div>
 		<div class="tip tip-info">不知道学号/工号？2015级新生请点击<a class="green" href="?page=freshman"><b>这里</b></a>，商家请点击<a class="green" href="?page=malluser"><b>这里</b></a></div>
 		<div id="frame1" class="frame">
-		<? if ($user != NULL) : ?>
+		<? if ($user != null) : ?>
 			<h2>你好，<?=$user?>。</h2>
 			<input type="button" onclick="window.location.href='?action=logout'" value="退出登录">
 		<? else : ?>
@@ -103,7 +103,7 @@ $code = sha1(rand(10000) . "\t" . time());
 		</div>
 	</div>
 	<script>
-		var queryCode="<?=$code?>";
+		var code="<?=$code?>";
 		var redirect_uri="<?=$redirect_uri?>";
 		var bredirect_uri="<?=base64_encode($redirect_uri)?>";
 		var oauth=false;

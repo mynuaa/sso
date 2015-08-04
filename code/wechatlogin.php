@@ -3,9 +3,8 @@
 switch ($param['action']) {
 case 'set':
 	// 解密code
-	$code = json_decode($code, true);
-	$logincode = my_decrypt($code['code'], $code['appid']);
-	$openid = my_decrypt($code['openid'], $code['appid']);
+	$logincode = my_decrypt($param['code']);
+	$openid = my_decrypt($param['openid']);
 	$sql = "UPDATE `sso` SET `auth_logincode` = '{$logincode}' WHERE `auth_wechat` = '{$openid}'";
 	$myauth->query($sql);
 	$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_wechat` = '{$openid}'");
