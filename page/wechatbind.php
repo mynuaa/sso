@@ -5,7 +5,7 @@ isset($_COOKIE['myauth_uid']) || $errormsg = '请先登录！';
 
 // 获取用户信息
 $uid = json_decode(my_decrypt($_COOKIE['myauth_uid']), true);
-$uid = intval($uid['uid']);
+$uid = $uid['uid'];
 $user = uc_get_user($uid, 1)[1];
 
 $auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = $uid");
