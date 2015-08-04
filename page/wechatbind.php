@@ -2,6 +2,8 @@
 
 // 此页面必须登录
 isset($_COOKIE['myauth_uid']) || $errormsg = '请先登录！';
+
+// 获取用户信息
 $uid = json_decode(my_decrypt($_COOKIE['myauth_uid']), true);
 $uid = intval($uid['uid']);
 $user = uc_get_user($uid, 1)[1];
@@ -13,11 +15,11 @@ if (in_array($auth_ded, array('JUST4TEST', 'FRESHMAN'/*, 'MALLUSER'*/)))
 	$errormsg = '你的验证信息不完整，无法绑定微信。';
 $sql = "SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = $uid";
 $result = $myauth->result_first($sql);
-if ($result != NULL)
+if ($result != null)
 	$errormsg = '你的纸飞机账号已经绑定微信了哦:)';
 
 // 生成微信绑定的加密串
-$logincode = sha1(rand(1000) . time());
+$logincode = my_encrypt($uid);
 
 ?>
 <? createHeader('微信绑定'); ?>

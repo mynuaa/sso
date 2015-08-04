@@ -52,7 +52,7 @@ case 'bind':
 	$uid = $data['uid'];
 	$openid = $data['openid'];
 	$wechat = $myauth->result_first("SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = '{$uid}'");
-	if ($wechat != NULL)
+	if ($wechat != null)
 		$result = '你的纸飞机账号已经绑定微信啦，不能重复绑定哦:)';
 	else {
 		$cnt = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_wechat` = '{$openid}'");
@@ -72,6 +72,6 @@ case 'querybind':
 	else
 		die();
 	$wechat = $myauth->result_first("SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = '{$uid}'");
-	exit(($wechat != NULL) ? true : '');
+	exit(($wechat != null) ? true : '');
 	break;
 }
