@@ -40,17 +40,17 @@ else {
 		<div class="tip tip-warning">本页面将在2015级新生允许登录教务处后关闭，届时新生请通过<b>教务处账号</b>激活</div>
 		<div id="frame1" class="frame">
 		<? if ($user != NULL) : ?>
-			<h2>你好，<? echo $user ?>。</h2>
+			<h2>你好，<?=$user?>。</h2>
 			<input type="button" onclick="window.location.href='?action=logout'" value="退出登录">
 		<? else : ?>
 			<div class="groups">
 				<div id="group1" class="group-current">
-					<form action="<? echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
-						<input type="hidden" name="token" value="<? echo base64_encode(sha1(rand(10000))) ?>">
+					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off">
+						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="dz">
 						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
-							<div><input type="text" name="username" class="area" required autofocus></div>
+							<div><input type="text" name="username" class="area" required autofocus check-valid="username"></div>
 						</div>
 						<div class="form-group">
 							<div><span class="field">论坛密码</span></div>
@@ -62,7 +62,7 @@ else {
 						</div>
 						<div class="form-group">
 							<div><span class="field">邮箱</span></div>
-							<div><input type="email" name="email" class="area" required></div>
+							<div><input type="email" name="email" class="area" required check-valid="email"></div>
 						</div>
 						<div class="form-group">
 							<div><span class="field">验证信息</span></div>

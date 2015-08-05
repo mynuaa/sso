@@ -49,7 +49,7 @@ else {
 						<input type="hidden" name="type" value="dz">
 						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
-							<div><input type="text" name="username" class="area" required autofocus></div>
+							<div><input type="text" name="username" class="area" required autofocus check-valid="username"></div>
 						</div>
 						<div class="form-group">
 							<div><span class="field">论坛密码</span></div>
@@ -61,7 +61,7 @@ else {
 						</div>
 						<div class="form-group">
 							<div><span class="field">邮箱</span></div>
-							<div><input type="email" name="email" class="area" required></div>
+							<div><input type="email" name="email" class="area" required check-valid="email"></div>
 						</div>
 						<div class="form-group">
 							<div><span class="field">验证信息</span></div>

@@ -42,6 +42,26 @@ function switchTo(fid,gid){
 		}
 	}
 }
+function checkValid(dom) {
+	var param=dom.getAttribute("check-valid"),
+		value=dom.value;
+	if(value=="")return;
+	ajax({
+		url:"/sso/?action=check&param="+param+"&value="+value,
+		method:"GET",
+		success:function(d){
+			d=JSON.parse(d);
+			if(d.msg==""){
+				dom.parentNode.className=dom.parentNode.className.replace(" failed","");
+				dom.parentNode.removeAttribute("data-msg");
+			}
+			else{
+				dom.parentNode.setAttribute("data-msg",d.msg);
+				dom.parentNode.className+=" failed";
+			}
+		}
+	});
+}
 (function(window){
 	var frames=document.querySelectorAll(".frame");
 	for(var i=0;i<frames.length;i++){
@@ -55,5 +75,10 @@ function switchTo(fid,gid){
 				};
 			})(fid,gid));
 		}
+	}
+	var checklist=document.querySelectorAll("[check-valid]");
+	for(var i=0;i<checklist.length;i++){
+		checklist[i].onfocus=function(){this.parentNode.className=this.parentNode.className.replace(" failed","")};
+		checklist[i].onblur=function(){checkValid(this)};
 	}
 })(window);

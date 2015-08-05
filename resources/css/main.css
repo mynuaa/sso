@@ -96,6 +96,7 @@ form{
 	display:table-row;
 }
 .form-group>*{
+	position:relative;
 	display:table-cell;
 	padding:0.3em 0.5em;
 	height:2em;
@@ -203,4 +204,17 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus{
 	width:120px;
 	height:120px;
 	border-radius:0.4em;
+}
+.failed input{
+	border:1px solid red;
+}
+.failed:after{
+	content:attr(data-msg);
+	display:inline-block;
+	position:absolute;
+	left:1em;
+	top:-1.2em;
+	font-size:0.9em;
+	color:red;
+	background:#FFF;
 }

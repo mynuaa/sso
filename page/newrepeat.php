@@ -44,11 +44,11 @@ if (isset($_POST['token'])) {
 						<input type="hidden" name="token" value="<? echo base64_encode(sha1(rand(10000))) ?>">
 						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
-							<div><input type="text" name="username" class="area" required></div>
+							<div><input type="text" name="username" class="area" required check-valid="username"></div>
 						</div>
 						<div class="form-group">
 							<div><span class="field">邮箱</span></div>
-							<div><input type="email" name="email" class="area" required></div>
+							<div><input type="email" name="email" class="area" required check-valid="email"></div>
 						</div>
 						<div class="form-group">
 							<div><span class="field">密码</span></div>
