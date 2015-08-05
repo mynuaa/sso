@@ -7,8 +7,6 @@ isset($_COOKIE['myauth_uid']) || $errormsg = '请先登录！';
 
 // 获取用户信息
 $uid = getuid();
-var_dump($uid);
-die();
 $user = uc_get_user($uid, 1)[1];
 
 $auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = $uid");
@@ -19,6 +17,8 @@ $result = $myauth->result_first($sql);
 if ($result != null)
 	$errormsg = '你的纸飞机账号已经绑定微信了哦:)';
 
+var_dump($uid);
+die();
 // 生成微信绑定的加密串
 $logincode = my_encrypt($uid, 'zfjoffice');
 
