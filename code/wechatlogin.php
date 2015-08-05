@@ -49,7 +49,6 @@ case 'get':
 	break;
 case 'bind':
 	$data = json_decode(my_decrypt($param['hash']), true);
-	echo my_decrypt($param['hash']);
 	$uid = $data['uid'];
 	$openid = $data['openid'];
 	$wechat = $myauth->result_first("SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = '{$uid}'");
