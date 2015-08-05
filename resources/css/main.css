@@ -212,9 +212,10 @@ input[type=text]:focus,input[type=password]:focus,input[type=email]:focus{
 	content:attr(data-msg);
 	display:inline-block;
 	position:absolute;
-	left:1em;
-	top:-1.2em;
-	font-size:0.9em;
-	color:red;
 	background:#FFF;
+	color:red;
+	font-size:0.9em;
+	width:200px;
+	padding:0.35em;
+	text-align:left;
 }
