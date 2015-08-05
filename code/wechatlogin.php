@@ -60,6 +60,7 @@ case 'bind':
 			$result = '一个微信号最多只能绑定两个纸飞机账号呢:)';
 		else {
 			echo $sql = "UPDATE `sso` SET `auth_wechat` = '{$openid}' WHERE `auth_id` = '{$uid}'";
+			die();
 			$myauth->query($sql);
 			$result = '绑定成功！';
 		}
