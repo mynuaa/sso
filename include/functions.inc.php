@@ -66,6 +66,7 @@ function createHeader($pagetitle = '用户登录') {
 	<title>$pagetitle - 纸飞机南航青年网络社区</title>
 	<link rel="stylesheet" href="resources/css/main.css">
 	<!--[if lt IE 10]>
+	<script src="resources/js/base64.js"></script>
 	<script src="resources/js/ieBetter.js"></script>
 	<script src="resources/js/html5.js"></script>
 	<script src="resources/js/classList.min.js"></script>
