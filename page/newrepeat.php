@@ -2,7 +2,8 @@
 
 (!isset($_COOKIE['myauth_uid'])) && die();
 
-$uid = json_decode(my_decrypt($_COOKIE['myauth_uid']), true);
+$uid = my_decrypt($_COOKIE['myauth_uid']) || setcookie('myauth_uid', '', time() - 3600);
+$uid = json_decode($uid, true);
 $uid = intval($uid['uid']);
 $user = uc_get_user($uid, 1)[1];
 
