@@ -49,6 +49,7 @@ case 'get':
 	break;
 case 'bind':
 	$data = json_decode(my_decrypt($param['hash']), true);
+	echo my_decrypt($param['hash']);
 	$uid = $data['uid'];
 	$openid = $data['openid'];
 	$wechat = $myauth->result_first("SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = '{$uid}'");
@@ -59,8 +60,6 @@ case 'bind':
 		if (intval($cnt) >= 2)
 			$result = '一个微信号最多只能绑定两个纸飞机账号呢:)';
 		else {
-			echo $sql = "UPDATE `sso` SET `auth_wechat` = '{$openid}' WHERE `auth_id` = '{$uid}'";
-			die();
 			$myauth->query($sql);
 			$result = '绑定成功！';
 		}
