@@ -12,8 +12,7 @@ function getuid() {
 	}
 	if (!$uid) return false;
 	$uid = json_decode($uid, true);
-	$uid = intval($uid['uid']);
-	return $uid;
+	return $uid['uid'];
 }
 function ajax($a) {
 	$a['url'] = $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . $a['url'];
