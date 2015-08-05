@@ -27,9 +27,7 @@ if (isset($_POST['token'])) {
 }
 
 if (isset($_COOKIE['myauth_uid'])) {
-	$uid = my_decrypt($_COOKIE['myauth_uid']) || setcookie('myauth_uid', '', time() - 3600);
-    $uid = json_decode($uid, true);
-    $uid = intval($uid['uid']);
+	$uid = getuid();
 	$user = uc_get_user($uid, 1)[1];
 }
 else {

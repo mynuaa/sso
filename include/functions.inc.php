@@ -5,6 +5,16 @@ function make_login($uid, $appid = null, $role = null) {
 	if ($role) $arr['role'] = $role;
 	setcookie('myauth_uid', my_encrypt(json_encode($arr), $appid), time() + 3600 * 10000, '/', NULL, NULL, true);
 }
+function getuid() {
+	if (!($uid = my_decrypt($_COOKIE['myauth_uid']))) {
+		setcookie('myauth_uid', '', time() - 3600);
+		return false;
+	}
+	if (!$uid) return false;
+	$uid = json_decode($uid, true);
+	$uid = intval($uid['uid']);
+	return $uid;
+}
 function ajax($a) {
 	$a['url'] = $_SERVER['SERVER_NAME'] . $_SERVER['PHP_SELF'] . $a['url'];
 	switch ($a['method']) {
@@ -97,13 +107,13 @@ function get_public_key($appid) {
 // 通过其它应用的公钥加密
 function my_encrypt($str, $appid = null) {
 	$public_key = $appid ? openssl_pkey_get_public(get_public_key($appid)) : openssl_pkey_get_public(PUBLIC_KEY);
-	openssl_public_encrypt($str, $encrypted, $public_key) || die('failed');
+	if (!openssl_public_encrypt($str, $encrypted, $public_key)) return false;
 	return base64_encode($encrypted);
 }
 // 通过本应用的私钥解密
 function my_decrypt($str) {
 	$encrypted = base64_decode($str);
 	$private_key = openssl_pkey_get_private(PRIVATE_KEY);
-	openssl_private_decrypt($encrypted, $str, $private_key) || die('failed');
+	if (!openssl_private_decrypt($encrypted, $str, $private_key)) return false;
 	return $str;
 }

@@ -2,9 +2,7 @@
 
 (!isset($_COOKIE['myauth_uid'])) && die();
 
-$uid = my_decrypt($_COOKIE['myauth_uid']) || setcookie('myauth_uid', '', time() - 3600);
-$uid = json_decode($uid, true);
-$uid = intval($uid['uid']);
+$uid = getuid();
 
 $auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = $uid");
 
