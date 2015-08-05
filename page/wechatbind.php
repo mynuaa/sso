@@ -1,15 +1,16 @@
 <?
 
+$errormsg = '';
+
 // 此页面必须登录
 isset($_COOKIE['myauth_uid']) || $errormsg = '请先登录！';
 
 // 获取用户信息
 $uid = getuid();
+die($uid);
 $user = uc_get_user($uid, 1)[1];
 
 $auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = $uid");
-$authcount = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '$auth_ded'");
-$errormsg = '';
 if (in_array($auth_ded, array('JUST4TEST', 'FRESHMAN'/*, 'MALLUSER'*/)))
 	$errormsg = '你的验证信息不完整，无法绑定微信。';
 $sql = "SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = $uid";
