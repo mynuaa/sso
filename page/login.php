@@ -43,7 +43,7 @@ $code = sha1(rand(10000) . "\t" . time());
 ?>
 <? createHeader('用户登录'); ?>
 		<div class="tip tip-info">最快捷的方法就是用学号/工号登录</div>
-		<div class="tip tip-info">不知道学号/工号？2015级新生请点击<a class="green" href="?page=freshman"><b>这里</b></a>，商家请<!-- 点击<a class="green" href="?page=malluser"><b>这里</b></a> --><a class="green" href="/mall/?m=mall&a=team#contact_us">联系我们</a></div>
+		<div class="tip tip-info">不知道学号/工号？2015级新生请点击<a class="green" href="?page=freshman"><b>这里</b></a>，商家请<!-- 点击<a class="green" href="?page=malluser"><b>这里</b></a> --><a class="green" href="/mall/?m=mall&a=team#contact_us"><b>联系我们</b></a></div>
 		<div id="frame1" class="frame">
 		<? if ($user != null) : ?>
 			<h2>你好，<?=$user?>。</h2>
