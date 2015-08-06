@@ -1,5 +1,8 @@
 <?
 
+// 临时关闭
+die();
+
 $redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI'];
 
 if (isset($_POST['token'])) {
