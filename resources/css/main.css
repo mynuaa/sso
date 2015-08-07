@@ -8,6 +8,7 @@ html,body{
 	padding:0;
 	font-size:1em;
 	overflow-x:hidden;
+	position:relative;
 }
 .hidden{display:none;}
 b{font-weight:bold !important;}
