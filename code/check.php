@@ -19,6 +19,7 @@ case 'email':
 	break;
 case 'username':
 	$result['code'] = uc_user_checkname($_GET['value']);
+	if ($result['code'] == -3) $result['uid'] = intval(uc_get_user($_GET['value'])[0]);
 	break;
 }
 
