@@ -15,11 +15,12 @@ $msgArray = [
 
 switch ($_GET['param']) {
 case 'email':
-	$result['msg'] = $msgArray[uc_user_checkemail($_GET['value'])];
+	$result['code'] = uc_user_checkemail($_GET['value']);
 	break;
 case 'username':
-	$result['msg'] = $msgArray[uc_user_checkname($_GET['value'])];
+	$result['code'] = uc_user_checkname($_GET['value']);
 	break;
 }
 
+$result['msg'] = $msgArray[$result['code']];
 echo json_encode($result);
