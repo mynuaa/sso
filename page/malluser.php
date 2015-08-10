@@ -14,7 +14,7 @@ if (isset($_POST['token'])) {
 	$uid = uc_user_register($_POST['username'], $_POST['password'], $_POST['email']);
 	if ($uid > 0) {
 		$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, 'MALLUSER')");
-		make_login($uid, null, 'MALLUSER');
+		make_login($uid);
 		unset($_COOKIE['myauth_token']);
 		jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 	}
