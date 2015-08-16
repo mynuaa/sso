@@ -3,16 +3,16 @@
 (!isset($_COOKIE['myauth_token'])) && die();
 
 $arr = my_decrypt($_COOKIE['myauth_token']);
-$arr = json_decode($arr, true);
+$arr = explode("\t", $arr);
 
 if (isset($_POST['action'])) {
 	switch ($_POST['action']) {
 	case 'new':
 		switch ($_POST['target']) {
 		case 'dz':
-			$uid = uc_user_register($_POST['username'], $arr['password'], $_POST['email']);
+			$uid = uc_user_register($_POST['username'], $arr[2], $_POST['email']);
 			if ($uid > 0) {
-				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')");
+				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr[1]}')");
 				make_login($uid);
 				unset($_COOKIE['myauth_token']);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
@@ -44,8 +44,8 @@ if (isset($_POST['action'])) {
 			$result = json_decode($result, true);
 			if ($result['uid'] >= 0) {
 				$uid = uc_get_user($_POST['username'])[0];
-				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr['username']}')
-								ON DUPLICATE KEY UPDATE `auth_ded` = '{$arr['username']}'");
+				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$arr[1]}')
+								ON DUPLICATE KEY UPDATE `auth_ded` = '{$arr[1]}'");
 				make_login($uid);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
 			}
@@ -68,7 +68,7 @@ if (isset($_POST['action'])) {
 				if ($number >= 2) {
 					alert('该学号/工号已绑定两个账号，无法继续绑定', $_SERVER['REQUEST_URI']);
 				}
-				$uid = uc_get_user($arr['username'])[0];
+				$uid = uc_get_user($arr[1])[0];
 				$myauth->query("INSERT INTO `sso` (`auth_id`, `auth_ded`) VALUES ($uid, '{$_POST['username']}')");
 				make_login($uid);
 				jumpTo(isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI']);
@@ -79,12 +79,11 @@ if (isset($_POST['action'])) {
 		break;
 	}
 }
-
 ?>
 <? createHeader('完善信息'); ?>
 		<h2>请完善您的信息</h2>
 		<div id="frame1" class="frame">
-<? if ($arr['from'] === 'dz') : ?>
+<? if ($arr[0] === 'dz') : ?>
 			<div class="tabs v2">
 				<div id="tab1" class="tab tab-current">绑定</div>
 				<div id="tab2" class="tab">放弃</div>
@@ -98,7 +97,7 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="target" value="ded">
 						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
-							<div><input type="text" value="<?=$arr['username']?>" disabled></div>
+							<div><input type="text" value="<?=$arr[1]?>" disabled></div>
 						</div>
 						<div class="form-group">
 							<div><span class="field">学号/工号</span></div>
@@ -121,7 +120,7 @@ if (isset($_POST['action'])) {
 				</div>
 			</div>
 <? endif; ?>
-<? if ($arr['from'] === 'ded') : ?>
+<? if ($arr[0] === 'ded') : ?>
 			<div class="tabs v3">
 				<div id="tab1" class="tab tab-current">注册</div>
 				<div id="tab2" class="tab">绑定</div>
@@ -135,7 +134,7 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="target" value="dz">
 						<div class="form-group">
 							<div><span class="field">学号/工号</span></div>
-							<div><span class="area"><input type="text" value="<?=$arr['username']?>" disabled></span></div>
+							<div><span class="area"><input type="text" value="<?=$arr[1]?>" disabled></span></div>
 						</div>
 						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
@@ -159,7 +158,7 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="target" value="dz">
 						<div class="form-group">
 							<div><span class="field">学号/工号</span></div>
-							<div><span class="area"><input type="text" value="<?=$arr['username']?>" disabled></span></div>
+							<div><span class="area"><input type="text" value="<?=$arr[1]?>" disabled></span></div>
 						</div>
 						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
