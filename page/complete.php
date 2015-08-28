@@ -91,7 +91,7 @@ if (isset($_POST['action'])) {
 			<div class="groups">
 				<div id="group1" class="group group-current">
 					<p>请验证你的学号/工号信息</p>
-					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off">
+					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="action" value="bind">
 						<input type="hidden" name="target" value="ded">
@@ -128,7 +128,7 @@ if (isset($_POST['action'])) {
 			</div>
 			<div class="groups">
 				<div id="group1" class="group group-current">
-					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off">
+					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="action" value="new">
 						<input type="hidden" name="target" value="dz">
@@ -152,7 +152,7 @@ if (isset($_POST['action'])) {
 				</div>
 				<div id="group2" class="group">
 					<p>请验证你的论坛信息</p>
-					<form id="dzlogin" action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off">
+					<form id="dzlogin" action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="action" value="bind">
 						<input type="hidden" name="target" value="dz">
