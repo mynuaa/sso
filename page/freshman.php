@@ -1,5 +1,8 @@
 <?
 
+// 新生可以登录教务处之后此页面隐藏
+die();
+
 $redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI'];
 
 if (isset($_POST['token'])) {
