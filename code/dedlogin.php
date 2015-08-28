@@ -40,7 +40,7 @@ if (dedverify($param['username'], $param['password'])) {
 else {
 	$result = array(
 		'uid' => -1,
-		'msg' => '教务处验证失败'
+		'msg' => '学号/工号验证失败'
 	);
 }
 

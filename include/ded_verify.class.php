@@ -34,8 +34,11 @@ function gsmverify($gsmid, $password) {
 	preg_match('/name="__VIEWSTATE" value=".+?"/', curl_exec($prepare_curl), $viewstate);
 	$viewstate = substr($viewstate[0], 26);
 	$viewstate = preg_replace('/"/', '', $viewstate);
+	$viewstate = urlencode($viewstate);
 	curl_close($prepare_curl);
-	$post = "__VIEWSTATE={$viewstate}&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x=31&_ctl0%3AImageButton1.y=36&_ctl0%3Atxtpassword={$password}";
+	$x = intval(rand(60));
+	$y = intval(rand(60));
+	$post = "__VIEWSTATE={$viewstate}&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x={$x}&_ctl0%3AImageButton1.y={$y}&_ctl0%3Atxtpassword={$password}";
 	$url = "http://gsmis.nuaa.edu.cn/nuaapyxx/login.aspx";
 	$curl = curl_init();
 	curl_setopt_array($curl, [
