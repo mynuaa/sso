@@ -58,37 +58,39 @@ $code = sha1(rand(10000) . "\t" . time());
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="ded">
-						<div class="form-group">
-							<div><span class="field">学号/工号</span></div>
-							<div><input type="text" name="username" class="area" required></div>
-						</div>
-						<div class="form-group">
-							<div><span class="field">密码</span></div>
-							<div><input type="password" name="password" class="area" required></div>
-						</div>
-						<input type="submit" class="hidden">
+						<table>
+							<tr class="form-group">
+								<td><span class="field">学号/工号</span></td>
+								<td><input type="text" name="username" class="area" required></td>
+							</tr>
+							<tr class="form-group">
+								<td><span class="field">密码</span></td>
+								<td><input type="password" name="password" class="area" required></td>
+							</tr>
+							<tr class="form-footer">
+								<td colspan="2"><input type="submit" value="登录"></td>
+							</tr>
+						</table>
 					</form>
-					<div class="form-footer">
-						<input type="button" value="登录" onclick="encrypt(document.querySelector('#group1>form'))">
-					</div>
 				</div>
 				<div id="group2" class="group">
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="dz">
-						<div class="form-group">
-							<div><span class="field">论坛昵称</span></div>
-							<div><input type="text" name="username" class="area" required></div>
-						</div>
-						<div class="form-group">
-							<div><span class="field">论坛密码</span></div>
-							<div><input type="password" name="password" class="area" required></div>
-						</div>
-						<input type="submit" class="hidden">
+						<table>
+							<tr class="form-group">
+								<td><span class="field">论坛昵称</span></td>
+								<td><input type="text" name="username" class="area" required></td>
+							</tr>
+							<tr class="form-group">
+								<td><span class="field">论坛密码</span></td>
+								<td><input type="password" name="password" class="area" required></td>
+							</tr>
+							<tr class="form-footer">
+								<td colspan="2"><input type="submit" value="登录"></td>
+							</tr>
+						</table>
 					</form>
-					<div class="form-footer">
-						<input type="button" value="登录" onclick="encrypt(document.querySelector('#group2>form'))">
-					</div>
 				</div>
 				<div id="group3" class="group">
 					<div>

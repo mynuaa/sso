@@ -95,23 +95,24 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="action" value="bind">
 						<input type="hidden" name="target" value="ded">
-						<div class="form-group">
-							<div><span class="field">论坛昵称</span></div>
-							<div><input type="text" value="<?=$arr[1]?>" disabled></div>
-						</div>
-						<div class="form-group">
-							<div><span class="field">学号/工号</span></div>
-							<div><input type="text" name="username" class="area"></div>
-						</div>
-						<div class="form-group">
-							<div><span class="field">密码</span></div>
-							<div><input type="password" name="password" class="area"></div>
-						</div>
-						<input type="submit" class="hidden">
+						<table>
+							<tr class="form-group">
+								<td><span class="field">论坛昵称</span></td>
+								<td><input type="text" value="<?=$arr[1]?>" disabled></td>
+							</tr>
+							<tr class="form-group">
+								<td><span class="field">学号/工号</span></td>
+								<td><input type="text" name="username" class="area"></td>
+							</tr>
+							<tr class="form-group">
+								<td><span class="field">密码</span></td>
+								<td><input type="password" name="password" class="area"></td>
+							</tr>
+							<tr class="form-footer">
+								<td colspan="2"><input type="submit" value="学号/工号激活"></td>
+							</tr>
+						</table>
 					</form>
-					<div class="form-footer">
-						<input type="button" value="学号/工号激活" onclick="document.querySelector('#group1>form').submit()">
-					</div>
 				</div>
 				<div id="group2" class="group">
 					<p>中断登录流程</p>
@@ -132,23 +133,24 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="action" value="new">
 						<input type="hidden" name="target" value="dz">
-						<div class="form-group">
-							<div><span class="field">学号/工号</span></div>
-							<div><span class="area"><input type="text" value="<?=$arr[1]?>" disabled></span></div>
-						</div>
-						<div class="form-group">
-							<div><span class="field">论坛昵称</span></div>
-							<div><input type="text" name="username" class="area" required check-valid="username"></div>
-						</div>
-						<div class="form-group">
-							<div><span class="field">邮箱</span></div>
-							<div><input type="email" name="email" class="area" required check-valid="email"></div>
-						</div>
-						<input type="submit" class="hidden">
+						<table>
+							<tr class="form-group">
+								<td><span class="field">学号/工号</span></td>
+								<td><span class="area"><input type="text" value="<?=$arr[1]?>" disabled></span></td>
+							</tr>
+							<tr class="form-group">
+								<td><span class="field">论坛昵称</span></td>
+								<td><input type="text" name="username" class="area" required check-valid="username"></td>
+							</tr>
+							<tr class="form-group">
+								<td><span class="field">邮箱</span></td>
+								<td><input type="email" name="email" class="area" required check-valid="email"></td>
+							</tr>
+							<tr class="form-footer">
+								<td colspan="2"><input type="submit" value="完成注册"></td>
+							</tr>
+						</table>
 					</form>
-					<div class="form-footer">
-						<input type="button" value="完成注册" onclick="document.querySelector('#group1>form').submit()">
-					</div>
 				</div>
 				<div id="group2" class="group">
 					<p>请验证你的论坛信息</p>
@@ -156,23 +158,24 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="action" value="bind">
 						<input type="hidden" name="target" value="dz">
-						<div class="form-group">
-							<div><span class="field">学号/工号</span></div>
-							<div><span class="area"><input type="text" value="<?=$arr[1]?>" disabled></span></div>
-						</div>
-						<div class="form-group">
-							<div><span class="field">论坛昵称</span></div>
-							<div><input type="text" name="username" class="area"></div>
-						</div>
-						<div class="form-group">
-							<div><span class="field">密码</span></div>
-							<div><input type="password" name="password" class="area"></div>
-						</div>
-						<input type="submit" class="hidden">
+						<table>
+							<tr class="form-group">
+								<td><span class="field">学号/工号</span></td>
+								<td><span class="area"><input type="text" value="<?=$arr[1]?>" disabled></span></td>
+							</tr>
+							<tr class="form-group">
+								<td><span class="field">论坛昵称</span></td>
+								<td><input type="text" name="username" class="area"></td>
+							</tr>
+							<tr class="form-group">
+								<td><span class="field">密码</span></td>
+								<td><input type="password" name="password" class="area"></td>
+							</tr>
+							<tr class="form-footer">
+								<td colspan="2"><input type="submit" value="绑定论坛账号"></td>
+							</tr>
+						</table>
 					</form>
-					<div class="form-footer mb1">
-						<input type="button" value="绑定论坛" onclick="document.querySelector('#group2>form').submit()">
-					</div>
 				</div>
 				<div id="group3" class="group">
 					<p>中断登录流程</p>
