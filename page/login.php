@@ -42,7 +42,7 @@ $code = sha1(rand(10000) . "\t" . time());
 
 ?>
 <? createHeader('用户登录'); ?>
-		<div class="tip tip-warning">2015级新生可以用教务处账号登录啦！</div>
+		<div class="tip tip-warning">2015级新生也可以用教务处账号登录啦！</div>
 		<div id="frame1" class="frame">
 		<? if ($user != null) : ?>
 			<h2>你好，<?=$user?>。</h2>
