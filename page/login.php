@@ -109,7 +109,6 @@ $code = sha1(rand(10000) . "\t" . time());
 		var oauth=false;
 		function encrypt(form){
 			form.password.value=my_encrypt(form.password.value,key);
-			form.submit();
 		}
 	</script>
 	<script src="resources/js/wechat_query.js"></script>

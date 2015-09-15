@@ -188,7 +188,6 @@ if (isset($_POST['action'])) {
 		<script>
 			function encrypt(form){
 				form.password.value=my_encrypt(form.password.value,key);
-				form.submit();
 			}
 		</script>
 	</div>
