@@ -2,7 +2,7 @@
 
 isset($_GET['openid']) ? $openid = $_GET['openid'] : die('未设置openid！');
 
-$info = $myauth->query("SELECT `auth_id`, `auth_ded` FROM `sso` WHERE `auth_wechat` = '{$openid}'");
+$info = $myauth->query("SELECT `auth_id`, `auth_ded` FROM `sso` WHERE `auth_wechat` = '{$openid}' ORDER BY `auth_id` LIMIT 1");
 $info = $myauth->fetch_array($info);
 $user = uc_get_user($info['auth_id'], 1);
 
