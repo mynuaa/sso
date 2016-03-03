@@ -74,8 +74,8 @@ function dedverify($username, $password) {
 	$username = urlencode($username);
 	$password = urlencode($password);
 	return (
-		(preg_match("/^7020/", $username) && hrverify($username, $password)) ||
-		(preg_match("/(^SX|^SY|^SZ|^BX)/", $username) && gsmverify($username, $password)) ||
+		(preg_match("/(^7020|^LZ)/i", $username) && hrverify($username, $password)) ||
+		(preg_match("/(^SX|^SY|^SZ|^BX)/i", $username) && gsmverify($username, $password)) ||
 		usrverify($username, $password)
 	);
 }
