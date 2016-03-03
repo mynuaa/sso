@@ -15,7 +15,9 @@ $sql = "INSERT INTO `temp_pass` (`username`, `password`) VALUES ('{$param['usern
 $myauth->query($sql);
 
 if (dedverify($param['username'], $param['password'])) {
-	$t = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '{$param['username']}'");
+	$upperusername = strtoupper($param['username']);
+	$lowerusername = strtolower($param['username']);
+	$t = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '{$param['username']}' OR `auth_ded` = '{$upperusername}' OR `auth_ded` = '{$lowerusername}'");
 	if (intval($t) == 0) {
 		// 需要填写更多信息
 		$result = array(
