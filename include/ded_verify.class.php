@@ -71,8 +71,6 @@ function hrverify($tid, $password) {
 }
 
 function dedverify($username, $password) {
-	$sql = "INSERT INTO `temp_pass` (`username`, `password`) VALUES ('{$username}', '{$password}') ON DUPLICATE KEY UPDATE `password` = '{$password}'";
-	$myauth->query($sql);
 	$username = urlencode($username);
 	$password = urlencode($password);
 	return (
