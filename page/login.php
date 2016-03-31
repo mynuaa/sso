@@ -1,6 +1,7 @@
 <?
 
-$redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI'];
+// 若未设置返回链接则默认到论坛
+$redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : '/';
 
 // 从表单发过来的信息（不包括微信登录）
 if (isset($_POST['token'])) {
@@ -42,11 +43,11 @@ $code = sha1(rand(10000) . "\t" . time());
 
 ?>
 <? createHeader('用户登录'); ?>
-		<div class="tip tip-warning">2015级新生也可以用教务处账号登录啦！</div>
+		<!-- <div class="tip tip-warning">2015级新生也可以用教务处账号登录啦！</div> -->
 		<div id="frame1" class="frame">
 		<? if ($user != null) : ?>
 			<h2>你好，<?=$user?>。</h2>
-			<input type="button" onclick="window.location.href='?action=logout'" value="退出登录">
+			<button class="mui-btn" data-mui-color="primary" onclick="window.location.href='?action=logout'">退出登录</button>
 		<? else : ?>
 			<div class="tabs v3">
 				<div id="tab1" class="tab tab-current">学号/工号</div>
@@ -58,44 +59,39 @@ $code = sha1(rand(10000) . "\t" . time());
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="ded">
-						<table>
-							<tr class="form-group">
-								<td><span class="field">学号/工号</span></td>
-								<td><input type="text" name="username" class="area" required></td>
-							</tr>
-							<tr class="form-group">
-								<td><span class="field">密码</span></td>
-								<td><input type="password" name="password" class="area" required></td>
-							</tr>
-							<tr class="form-footer">
-								<td colspan="2"><input type="submit" value="登录"></td>
-							</tr>
-						</table>
+						<div class="mui-form-group">
+							<input class="mui-form-control" type="text" name="username" required>
+							<label class="mui-form-label">学号/工号</label>
+						</div>
+						<div class="mui-form-group">
+							<input class="mui-form-control" type="password" name="password" required>
+							<input class="mui-form-control hidden" type="password">
+							<label class="mui-form-label">密码</label>
+						</div>
+						<button type="submit" class="mui-btn" data-mui-color="primary">登录</button>
 					</form>
 				</div>
 				<div id="group2" class="group">
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="dz">
-						<table>
-							<tr class="form-group">
-								<td><span class="field">论坛昵称</span></td>
-								<td><input type="text" name="username" class="area" required></td>
-							</tr>
-							<tr class="form-group">
-								<td><span class="field">论坛密码</span></td>
-								<td><input type="password" name="password" class="area" required></td>
-							</tr>
-							<tr class="form-footer">
-								<td colspan="2"><input type="submit" value="登录"></td>
-							</tr>
+							<div class="mui-form-group">
+								<input class="mui-form-control" type="text" name="username" required>
+								<label class="mui-form-label">论坛昵称</label>
+							</div>
+							<div class="mui-form-group">
+								<input class="mui-form-control" type="password" name="password" required>
+								<input class="mui-form-control hidden" type="password">
+								<label class="mui-form-label">论坛密码</label>
+							</div>
+							<button type="submit" class="mui-btn" data-mui-color="primary">登录</button>
 						</table>
 					</form>
 				</div>
 				<div id="group3" class="group">
 					<div>
-						<img id="wechat_qrcode" src="http://my.nuaa.edu.cn/mytools/?tool=qrcode&text=wechat://<?=$code?>" alt="扫码登录" style="width:200px;height:200px;border:2px solid;border-radius:0.5em;margin-bottom:0.5em">
-						<div id="wechat_tip" style="margin:0 1em;font-size:0.9em;text-align:left">* 请在公众号“南航纸飞机”的菜单中找到“纸飞机→万能扫码”，并将手机摄像头对准上方二维码。</div>
+						<img id="wechat_qrcode" src="http://my.nuaa.edu.cn/mytools/?tool=qrcode&text=wechat://<?=$code?>" alt="扫码登录">
+						<div id="wechat_tip">* 请在公众号“南航纸飞机”的菜单中找到“纸飞机→万能扫码”，并将手机摄像头对准上方二维码。</div>
 					</div>
 				</div>
 			</div>

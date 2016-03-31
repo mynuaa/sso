@@ -63,6 +63,7 @@ function createHeader($pagetitle = '用户登录') {
 	<meta name="msapplication-tap-highlight" content="no">
 	<title>$pagetitle - 纸飞机南航青年网络社区</title>
 	<link rel="stylesheet" href="resources/css/main.css">
+	<link rel="stylesheet" href="/lib/mui/css/mui.min.css">
 	<!--[if lt IE 10]>
 	<script src="resources/js/base64.js"></script>
 	<script src="resources/js/ieBetter.js"></script>
@@ -73,8 +74,7 @@ function createHeader($pagetitle = '用户登录') {
 	<script>var key=makeKeyPair("{$public_key}")</script>
 </head>
 <body>
-	<div class="background"></div>
-	<header>
+	<!-- <header>
 		<div class="container">
 			<nav>
 				<ul class="nav-ul">
@@ -84,20 +84,21 @@ function createHeader($pagetitle = '用户登录') {
 				</ul>
 			</nav>
 		</div>
-	</header>
-	<div class="container center">
-		<img src="resources/img/logo.png" alt="纸飞机南航青年网络社区" class="zfjlogo mt1 mb1">
-		<!--[if IE 8]>
-		<div class="tip tip-warning">你正在使用IE的一个旧版本，<a href="http://browsehappy.com/" target="_blank">点击这里</a>下载现代浏览器。</div>
-		<![endif]-->
-		<!--[if IE 7]>
-		<div class="tip tip-danger">你正在使用的IE浏览器已不被支持！<a href="http://browsehappy.com/" target="_blank">点击这里</a>下载现代浏览器。</div>
-		<![endif]-->
+	</header> -->
+	<div class="wrapper">
+		<div class="container center">
+			<img src="resources/img/logo.png" alt="纸飞机南航青年网络社区" class="zfjlogo mt1 mb1">
+			<!--[if IE 8]>
+			<div class="tip tip-warning">你正在使用IE的一个旧版本，<a href="http://browsehappy.com/" target="_blank">点击这里</a>下载现代浏览器。</div>
+			<![endif]-->
+			<!--[if IE 7]>
+			<div class="tip tip-danger">你正在使用的IE浏览器已不被支持！<a href="http://browsehappy.com/" target="_blank">点击这里</a>下载现代浏览器。</div>
+			<![endif]-->
 EOF;
 	echo $str;
 }
 function createFooter() {
-	echo '<script src="resources/js/main.js"></script></body></html>';
+	echo '</div><script src="/lib/mui/js/mui.min.js"></script><script src="resources/js/main.js"></script></body></html>';
 }
 function get_public_key($appid) {
 	$result = $GLOBALS['myauth']->result_first("SELECT `public_key` FROM `oauth_info` WHERE `appid` = '{$appid}'");

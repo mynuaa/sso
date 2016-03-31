@@ -40,31 +40,29 @@ if (isset($_POST['token'])) {
 			<div class="groups">
 				<div id="group1" class="group group-current">
 				<? if ($errormsg == '') : ?>
-					<form action="<? echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off" onsubmit="formCheck()">
-						<input type="hidden" name="token" value="<? echo base64_encode(sha1(rand(10000))) ?>">
-						<div class="form-group">
-							<div><span class="field">论坛昵称</span></div>
-							<div><input type="text" name="username" class="area" required check-valid="username"></div>
+					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="formCheck()">
+						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
+						<div class="mui-form-group">
+							<input class="mui-form-control" type="text" name="username" class="area" required check-valid="username">
+							<label class="mui-form-label">论坛昵称</label>
 						</div>
-						<div class="form-group">
-							<div><span class="field">邮箱</span></div>
-							<div><input type="email" name="email" class="area" required check-valid="email"></div>
+						<div class="mui-form-group">
+							<input class="mui-form-control" type="email" name="email" class="area" required check-valid="email">
+							<label class="mui-form-label">邮箱</label>
 						</div>
-						<div class="form-group">
-							<div><span class="field">密码</span></div>
-							<div><input type="password" name="password" class="area" required></div>
+						<div class="mui-form-group">
+							<input class="mui-form-control" type="password" name="password" class="area" required>
+							<label class="mui-form-label">密码</label>
 						</div>
-						<div class="form-group">
-							<div><span class="field">重复密码</span></div>
-							<div><input type="password" name="reppassword" class="area" required></div>
+						<div class="mui-form-group">
+							<input class="mui-form-control" type="password" name="reppassword" class="area" required>
+							<label class="mui-form-label">重复密码</label>
 						</div>
 					</form>
-					<div class="form-footer">
-						<input type="button" value="完成注册" onclick="document.querySelector('#group1>form').submit()">
-					</div>
+					<button class="mui-btn" data-mui-color="primary" onclick="document.querySelector('#group1>form').submit()">完成注册</button>
 				<? else : ?>
 					<h4><?=$errormsg?></h4>
-					<input type="button" value="返回" onclick="history.go(-1)">
+					<button class="mui-btn" data-mui-color="primary" onclick="history.go(-1)">返回</button>
 				<? endif; ?>
 				</div>
 			</div>

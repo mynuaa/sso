@@ -83,7 +83,7 @@ if (isset($_POST['action'])) {
 <? createHeader('完善信息'); ?>
 		<h2>请完善您的信息</h2>
 		<div id="frame1" class="frame">
-<? if ($arr[0] === 'dz') : ?>
+			<? if ($arr[0] === 'dz') : ?>
 			<div class="tabs v2">
 				<div id="tab1" class="tab tab-current">绑定</div>
 				<div id="tab2" class="tab">放弃</div>
@@ -95,23 +95,20 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="action" value="bind">
 						<input type="hidden" name="target" value="ded">
-						<table>
-							<tr class="form-group">
-								<td><span class="field">论坛昵称</span></td>
-								<td><input type="text" value="<?=$arr[1]?>" disabled></td>
-							</tr>
-							<tr class="form-group">
-								<td><span class="field">学号/工号</span></td>
-								<td><input type="text" name="username" class="area"></td>
-							</tr>
-							<tr class="form-group">
-								<td><span class="field">密码</span></td>
-								<td><input type="password" name="password" class="area"></td>
-							</tr>
-							<tr class="form-footer">
-								<td colspan="2"><input type="submit" value="学号/工号激活"></td>
-							</tr>
-						</table>
+						<div class="mui-form-group">
+							<input class="mui-form-control" type="text" value="<?=$arr[1]?>" disabled>
+							<label class="mui-form-label">论坛昵称</label>
+						</div>
+						<div class="mui-form-group">
+							<input class="mui-form-control" type="text" name="username">
+							<label class="mui-form-label">学号/工号</label>
+						</div>
+						<div class="mui-form-group">
+							<input class="mui-form-control" type="password" name="password">
+							<input class="hidden" type="password">
+							<label class="mui-form-label">密码</label>
+						</div>
+						<button type="submit" class="mui-btn" data-mui-color="primary">学号/工号激活</button>
 					</form>
 				</div>
 				<div id="group2" class="group">
@@ -120,8 +117,8 @@ if (isset($_POST['action'])) {
 					<input type="button" onclick="window.location.href='?action=logout'" style="background:#D00" value="点此取消登录">
 				</div>
 			</div>
-<? endif; ?>
-<? if ($arr[0] === 'ded') : ?>
+			<? endif; ?>
+			<? if ($arr[0] === 'ded') : ?>
 			<div class="tabs v3">
 				<div id="tab1" class="tab tab-current">注册</div>
 				<div id="tab2" class="tab">绑定</div>
@@ -134,21 +131,19 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="action" value="new">
 						<input type="hidden" name="target" value="dz">
 						<table>
-							<tr class="form-group">
-								<td><span class="field">学号/工号</span></td>
-								<td><span class="area"><input type="text" value="<?=$arr[1]?>" disabled></span></td>
-							</tr>
-							<tr class="form-group">
-								<td><span class="field">论坛昵称</span></td>
-								<td><input type="text" name="username" class="area" required check-valid="username"></td>
-							</tr>
-							<tr class="form-group">
-								<td><span class="field">邮箱</span></td>
-								<td><input type="email" name="email" class="area" required check-valid="email"></td>
-							</tr>
-							<tr class="form-footer">
-								<td colspan="2"><input type="submit" value="完成注册"></td>
-							</tr>
+							<div class="mui-form-group">
+								<input class="mui-form-control" type="text" value="<?=$arr[1]?>" disabled>
+								<label class="mui-form-label">学号/工号</label>
+							</div>
+							<div class="mui-form-group">
+								<input class="mui-form-control" type="text" name="username" required check-valid="username">
+								<label class="mui-form-label">论坛昵称</label>
+							</div>
+							<div class="mui-form-group">
+								<input class="mui-form-control" type="email" name="email" required check-valid="email">
+								<label class="mui-form-label">邮箱</label>
+							</div>
+							<button type="submit" class="mui-btn" data-mui-color="primary">完成注册</button>
 						</table>
 					</form>
 				</div>
@@ -159,38 +154,37 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="action" value="bind">
 						<input type="hidden" name="target" value="dz">
 						<table>
-							<tr class="form-group">
-								<td><span class="field">学号/工号</span></td>
-								<td><span class="area"><input type="text" value="<?=$arr[1]?>" disabled></span></td>
-							</tr>
-							<tr class="form-group">
-								<td><span class="field">论坛昵称</span></td>
-								<td><input type="text" name="username" class="area"></td>
-							</tr>
-							<tr class="form-group">
-								<td><span class="field">密码</span></td>
-								<td><input type="password" name="password" class="area"></td>
-							</tr>
-							<tr class="form-footer">
-								<td colspan="2"><input type="submit" value="绑定论坛账号"></td>
-							</tr>
+							<div class="mui-form-group">
+								<input class="mui-form-control" type="text" value="<?=$arr[1]?>" disabled>
+								<label class="mui-form-label">学号/工号</label>
+							</div>
+							<div class="mui-form-group">
+								<input class="mui-form-control" type="text" name="username" required>
+								<label class="mui-form-label">论坛昵称</label>
+							</div>
+							<div class="mui-form-group">
+								<input class="mui-form-control" type="password" name="password" required>
+								<input class="hidden" type="password">
+								<label class="mui-form-label">密码</label>
+							</div>
+							<button type="submit" class="mui-btn" data-mui-color="primary">绑定论坛账号</button>
 						</table>
 					</form>
 				</div>
 				<div id="group3" class="group">
 					<p>中断登录流程</p>
 					<p>你的数据不会被插入到数据库中</p>
-					<input type="button" onclick="window.location.href='?action=logout'" style="background:#D00" value="点此取消登录">
+					<button class="mui-btn" data-mui-color="danger" onclick="window.location.href='?action=logout'">点此取消登录</button>
 				</div>
+			<? endif; ?>
 			</div>
-<? endif; ?>
 		</div>
-		<script>
-			function encrypt(form){
-				form.password.value=my_encrypt(form.password.value,key);
-			}
-		</script>
 	</div>
+	<script>
+		function encrypt(form){
+			form.password.value=my_encrypt(form.password.value,key);
+		}
+	</script>
 <?
 
 createFooter();

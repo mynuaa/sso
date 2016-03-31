@@ -47,8 +47,8 @@ else {
 		<? else : ?>
 			<div class="groups">
 				<div id="group1" class="group-current">
-					<form action="<? echo $_SERVER['REQUEST_URI']; ?>" method="post" class="center" autocomplete="off">
-						<input type="hidden" name="token" value="<? echo base64_encode(sha1(rand(10000))) ?>">
+					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off">
+						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="dz">
 						<div class="form-group">
 							<div><span class="field">论坛昵称</span></div>
