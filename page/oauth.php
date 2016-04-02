@@ -69,38 +69,34 @@ $code = sha1(rand(10000) . "\t" . time());
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="ded">
-						<table>
-							<tr class="form-group">
-								<td><span class="field">学号/工号</span></td>
-								<td><input type="text" name="username" class="area" required></td>
-							</tr>
-							<tr class="form-group">
-								<td><span class="field">密码</span></td>
-								<td><input type="password" name="password" class="area" required></td>
-							</tr>
-							<tr class="form-footer">
-								<td colspan="2"><input type="submit" value="登录"></td>
-							</tr>
-						</table>
+						<div class="mui-form-group">
+							<input type="text" class="mui-form-control" name="username" required>
+							<label class="mui-form-label">学号/工号</label>
+						</div>
+						<div class="mui-form-group">
+							<input type="password" class="mui-form-control" name="password" required>
+							<label class="mui-form-label">密码</label>
+						</div>
+						<div class="form-footer">
+							<button type="submit" class="mui-btn" data-mui-color="primary">登录</button>
+						</div>
 					</form>
 				</div>
 				<div id="group2" class="group">
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="dz">
-						<table>
-							<tr class="form-group">
-								<td><span class="field">论坛昵称</span></td>
-								<td><input type="text" name="username" class="area" required></td>
-							</tr>
-							<tr class="form-group">
-								<td><span class="field">论坛密码</span></td>
-								<td><input type="password" name="password" class="area" required></td>
-							</tr>
-							<tr class="form-footer">
-								<td colspan="2"><input type="submit" value="登录"></td>
-							</tr>
-						</table>
+						<div class="mui-form-group">
+							<input type="text" class="mui-form-control" name="username" required>
+							<label class="mui-form-label">论坛昵称</label>
+						</div>
+						<div class="mui-form-group">
+							<input type="password" class="mui-form-control" name="password" required>
+							<label class="mui-form-label">论坛密码</label>
+						</div>
+						<div class="form-footer">
+							<button type="submit" class="mui-btn" data-mui-color="primary">登录</button>
+						</div>
 					</form>
 				</div>
 				<div id="group3" class="group">
