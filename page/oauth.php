@@ -75,7 +75,7 @@ $code = sha1(rand(10000) . "\t" . time());
 						</div>
 						<div class="mui-form-group">
 							<input type="password" class="mui-form-control" name="password" required>
-							<input type="password" class="hidden">
+							<input type="password" class="mui-form-control hidden">
 							<label class="mui-form-label">密码</label>
 						</div>
 						<div class="form-footer">
@@ -93,7 +93,7 @@ $code = sha1(rand(10000) . "\t" . time());
 						</div>
 						<div class="mui-form-group">
 							<input type="password" class="mui-form-control" name="password" required>
-							<input type="password" class="hidden">
+							<input type="password" class="mui-form-control hidden">
 							<label class="mui-form-label">论坛密码</label>
 						</div>
 						<div class="form-footer">
