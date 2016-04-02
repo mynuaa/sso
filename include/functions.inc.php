@@ -37,6 +37,7 @@ function ajax($a) {
 	}
 }
 function alert($content, $redirect = NULL) {
+	header('Content-type: text/html; charset=utf-8');
 	echo '<script>';
 	echo 'alert("' . $content . '");';
 	echo 'window.location.replace("' . ($redirect ? $redirect : $_SERVER['REQUEST_URI']) . '")';
@@ -44,6 +45,7 @@ function alert($content, $redirect = NULL) {
 	exit();
 }
 function jumpTo($url = NULL) {
+	header('Content-type: text/html; charset=utf-8');
 	echo '<script>';
 	echo 'window.location.replace("' . ($url ? $url : $_SERVER['REQUEST_URI']) . '")';
 	echo '</script>';

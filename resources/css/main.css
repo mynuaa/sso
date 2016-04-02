@@ -139,31 +139,24 @@ input[disabled] {
     margin-bottom: 1em;
 }
 .tip {
-    margin: 1em 0;
+    margin: 1em 0.5em;
     padding: 0.5em 0;
-    border: 1px solid;
     font-size: 0.9em;
     border-radius: 0.3em;
+    box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+    color: #FFF;
 }
 .tip-warning {
-    border-color: #BF6500;
-    color: #BF6500;
-    background: #FF9;
+    background: rgba(243, 156, 18, 0.5);
 }
 .tip-info {
-    border-color: #06C;
-    color: #06C;
-    background: #D4F0FF;
+    background: rgba(41, 128, 185, 0.5);
 }
 .tip-success {
-    border-color: green;
-    color: green;
-    background: #CFC;
+    background: rgba(39, 174, 96, 0.5);
 }
 .tip-danger {
-    border-color: red;
-    color: red;
-    background: #FDD;
+    background: rgba(192, 57, 43, 0.5);
 }
 .green {
     color: #1ABC9C;
