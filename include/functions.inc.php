@@ -1,6 +1,7 @@
 <?
 
 function make_login($uid, $appid = null) {
+	header('P3P: CP="CURa ADMa DEVa PSAo PSDo OUR BUS UNI PUR INT DEM STA PRE COM NAV OTC NOI DSP COR"');
 	$arr = ['uid' => $uid];
 	setcookie('myauth_uid', my_encrypt(json_encode($arr), $appid), time() + 3600 * 10000, '/', NULL, NULL, true);
 }
