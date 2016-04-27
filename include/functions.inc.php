@@ -1,6 +1,6 @@
 <?
 
-function make_login($uid, $appid = null) {
+function make_login($uid, $appid = '') {
 	$arr = ['uid' => $uid];
 	setcookie('myauth_uid', my_encrypt(json_encode($arr), $appid), time() + 3600 * 10000, '/', NULL, NULL, true);
 }
@@ -52,7 +52,7 @@ function jumpTo($url = NULL) {
 	exit();
 }
 function createHeader($pagetitle = '用户登录') {
-	$public_key = PUBLIC_KEY_FOR_JS;
+	$public_key = get_pubkey_for_js();
 	$str = <<<EOF
 <!DOCTYPE html>
 <html lang="zh">
@@ -102,20 +102,20 @@ EOF;
 function createFooter() {
 	echo '</div><script src="/lib/mui/js/mui.min.js"></script><script src="resources/js/main.js"></script></body></html>';
 }
-function get_public_key($appid) {
-	$result = $GLOBALS['myauth']->result_first("SELECT `public_key` FROM `oauth_info` WHERE `appid` = '{$appid}'");
-	return $result ? $result : '';
-}
-// 通过其它应用的公钥加密
-function my_encrypt($str, $appid = null) {
-	$public_key = $appid ? openssl_pkey_get_public(get_public_key($appid)) : openssl_pkey_get_public(PUBLIC_KEY);
+function my_encrypt($str, $appid = '') {
+	if ($appid != '') $appid .= '_';
+	$public_key = openssl_pkey_get_public(file_get_contents(MYAUTH_CERT_PATH . "/{$appid}public_key.pem"));
 	if (!openssl_public_encrypt($str, $encrypted, $public_key)) return false;
 	return base64_encode($encrypted);
 }
-// 通过本应用的私钥解密
-function my_decrypt($str) {
+function my_decrypt($str, $appid = '') {
+	if ($appid != '') $appid .= '_';
 	$encrypted = base64_decode($str);
-	$private_key = openssl_pkey_get_private(PRIVATE_KEY);
+	$private_key = openssl_pkey_get_private(file_get_contents(MYAUTH_CERT_PATH . "/{$appid}private_key.pem"));
 	if (!openssl_private_decrypt($encrypted, $str, $private_key)) return false;
 	return $str;
+}
+function get_pubkey_for_js($appid = '') {
+	if ($appid != '') $appid .= '_';
+	return trim(file_get_contents(MYAUTH_CERT_PATH . "/{$appid}js_public_key.dat"));
 }

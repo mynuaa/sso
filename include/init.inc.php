@@ -1,7 +1,5 @@
 <?
 
-require_once 'defines.inc.php';
-
 // 设置数据库
 require_once 'db_mysql.class.php';
 $myauth = new dbstuff;

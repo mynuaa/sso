@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS `oauth_info` (
   `appname` varchar(50) NOT NULL COMMENT '应用名称',
   `appid` varchar(50) NOT NULL COMMENT '应用ID',
   `appsecret` varchar(50) NOT NULL COMMENT '应用Secret',
-  `public_key` text NOT NULL,
   UNIQUE KEY `appname` (`appname`,`appid`,`appsecret`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='OAuth的应用信息';
 
