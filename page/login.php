@@ -43,7 +43,6 @@ $code = sha1(rand(10000) . "\t" . time());
 
 ?>
 <? createHeader('用户登录'); ?>
-		<!-- <div class="tip tip-warning">2015级新生也可以用教务处账号登录啦！</div> -->
 		<div id="frame1" class="frame">
 		<? if ($user != null) : ?>
 			<h2>你好，<?=$user?>。</h2>
@@ -56,6 +55,7 @@ $code = sha1(rand(10000) . "\t" . time());
 			</div>
 			<div class="groups">
 				<div id="group1" class="group group-current">
+					<div class="tip tip-info">使用你的教务处/研究生院/教师账号登录。</div>
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="ded">
@@ -72,6 +72,7 @@ $code = sha1(rand(10000) . "\t" . time());
 					</form>
 				</div>
 				<div id="group2" class="group">
+					<div class="tip tip-info">使用你在纸飞机的昵称和密码登录。</div>
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="dz">
@@ -89,10 +90,8 @@ $code = sha1(rand(10000) . "\t" . time());
 					</form>
 				</div>
 				<div id="group3" class="group">
-					<div>
-						<img id="wechat_qrcode" src="http://my.nuaa.edu.cn/mytools/?tool=qrcode&text=wechat://<?=$code?>" alt="扫码登录">
-						<div id="wechat_tip">* 请在公众号“南航纸飞机”的菜单中找到“纸飞机→万能扫码”，并将手机摄像头对准上方二维码。</div>
-					</div>
+					<div class="tip tip-info">点击公众号“南航纸飞机”菜单中的“纸飞机→万能扫码”，并将手机摄像头对准上方二维码。</div>
+					<img id="wechat_qrcode" src="http://my.nuaa.edu.cn/mytools/?tool=qrcode&text=wechat://<?=$code?>" alt="扫码登录">
 				</div>
 			</div>
 		<? endif; ?>

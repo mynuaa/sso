@@ -206,7 +206,8 @@ input[disabled] {
 #wechat_qrcode {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 	border-radius: 0.5em;
-	margin-bottom: 0.5em;
+	margin-top: 1em;
+	margin-bottom: 1.5em;
 }
 #wechat_tip {
 	margin: 0.5em 2em;
