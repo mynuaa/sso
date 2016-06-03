@@ -7,7 +7,6 @@ $param['password'] = my_decrypt($param['password']);
 
 // 验证登录
 list($uid, $username, $password, $email) = uc_user_login($param['username'], $param['password']);
-
 if($uid > 0) {
 	$t = $myauth->result_first("SELECT `auth_id` FROM `sso` WHERE `auth_id` = $uid");
 	if(!$t) {

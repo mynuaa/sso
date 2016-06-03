@@ -4,7 +4,6 @@
 
 $arr = my_decrypt($_COOKIE['myauth_token']);
 $arr = explode("\t", $arr);
-
 if (isset($_POST['action'])) {
 	switch ($_POST['action']) {
 	case 'new':
@@ -80,6 +79,7 @@ if (isset($_POST['action'])) {
 	}
 }
 ?>
+
 <? createHeader('完善信息'); ?>
 		<h2>请完善您的信息</h2>
 		<div id="frame1" class="frame">
