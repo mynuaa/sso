@@ -50,7 +50,7 @@ $code = sha1(rand(10000) . "\t" . time());
 			<h3>点击访问
 			<a href="http://my.nuaa.edu.cn">纸飞机论坛</a>
 			<a href="http://my.nuaa.edu.cn/mall/">南航mall</a>
-			<a href="http://my.nuaa.edu.cn/sso/?page=wechatbind">微信绑定</a>
+			<a href="http://my.nuaa.edu.cn/sso/?page=wechatbind" target="_banket">微信绑定</a>
 			<a href="http://my.nuaa.edu.cn/xiaohongmao">小红帽</a></h3>
 			</div>
 			<button class="mui-btn" data-mui-color="primary" onclick="window.location.href='?action=logout'">退出登录</button>
