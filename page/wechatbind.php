@@ -8,23 +8,30 @@ isset($_COOKIE['myauth_uid']) || $errormsg = '请先登录！';
 // 获取用户信息
 $uid = getuid();
 $user = uc_get_user($uid, 1)[1];
+if($uid) {
+	$auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = $uid");
+	if (in_array($auth_ded, array('JUST4TEST', 'FRESHMAN'/*, 'MALLUSER'*/)))
+		$errormsg = '你的验证信息不完整，无法绑定微信。';
+	$sql = "SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = $uid";
+	$result = $myauth->result_first($sql);
+	if ($result != null)
+		$errormsg = '你的纸飞机账号已经绑定微信了哦:)';
 
-$auth_ded = $myauth->result_first("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = $uid");
-if (in_array($auth_ded, array('JUST4TEST', 'FRESHMAN'/*, 'MALLUSER'*/)))
-	$errormsg = '你的验证信息不完整，无法绑定微信。';
-$sql = "SELECT `auth_wechat` FROM `sso` WHERE `auth_id` = $uid";
-$result = $myauth->result_first($sql);
-if ($result != null)
-	$errormsg = '你的纸飞机账号已经绑定微信了哦:)';
-
-// 生成微信绑定的加密串
-$logincode = my_encrypt($uid, 'zfjoffice');
+	// 生成微信绑定的加密串
+	$logincode = my_encrypt($uid, 'zfjoffice');
+}
 
 ?>
 <? createHeader('微信绑定'); ?>
 		<div id="frame1" class="frame">
 			<div class="groups">
+			<?php
+				if($uid) {
+			?>
 				<h3>你正在绑定的账号是：<?=$user?></h3>
+			<?php	
+				}
+			?>
 				<div id="group3" class="group group-current">
 				<? if ($errormsg == '') : ?>
 					<div>

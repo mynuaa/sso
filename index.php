@@ -26,6 +26,11 @@ if (isset($_GET['action'])) {
 }
 else if (isset($_GET['page'])) {
 	// 通过page判断需要的页面
+	$error1 = strstr($_GET['page'],'..');
+	$error2 = strstr($_GET['page'],':');
+	if(preg_match('/(\.\.)|:/', $_GET['page'])) {
+		die("");
+	}
 	$file = "page/{$_GET['page']}.php";
 	if (file_exists($file))
 		require_once $file;

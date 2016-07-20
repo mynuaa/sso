@@ -1,7 +1,7 @@
 <?
 
 // 新生可以登录教务处之后此页面隐藏
-die();
+//die();
 
 $redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI'];
 
@@ -40,7 +40,7 @@ else {
 ?>
 <? createHeader('新生注册'); ?>
 		<div class="tip tip-info">注册成功后，请使用论坛账号登录</div>
-		<div class="tip tip-warning">本页面将在2015级新生允许登录教务处后关闭，届时新生请通过<b>教务处账号</b>激活</div>
+		<div class="tip tip-warning">本页面将在2016级新生允许登录教务处后关闭，届时新生请通过<b>教务处账号</b>激活</div>
 		<div id="frame1" class="frame">
 		<? if ($user != NULL) : ?>
 			<h2>你好，<?=$user?>。</h2>
