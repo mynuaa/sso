@@ -2,7 +2,6 @@
 
 // 新生可以登录教务处之后此页面隐藏
 //die();
-
 $redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI'];
 
 if (isset($_POST['token'])) {
@@ -36,7 +35,6 @@ if (isset($_COOKIE['myauth_uid'])) {
 else {
 	$user = NULL;
 }
-
 ?>
 <? createHeader('新生注册'); ?>
 		<div class="tip tip-info">注册成功后，请使用论坛账号登录</div>
@@ -51,34 +49,30 @@ else {
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="dz">
-						<div class="form-group">
-							<div><span class="field">论坛昵称</span></div>
-							<div><input type="text" name="username" class="area" required autofocus check-valid="username"></div>
+						<div class="mui-form-group">
+							<label class="mui-form-label">论坛昵称</label>
+							<input type="text" name="username" class="mui-form-control" required autofocus check-valid="username">	
 						</div>
-						<div class="form-group">
-							<div><span class="field">论坛密码</span></div>
-							<div><input type="password" name="password" class="area" required></div>
+						<div class="mui-form-group">
+							<label class="mui-form-label">论坛密码</label>
+							<input type="password" name="password" class="mui-form-control" required>
 						</div>
-						<div class="form-group">
-							<div><span class="field">确认密码</span></div>
-							<div><input type="password" name="passwordrep" class="area" required></div>
+						<div class="mui-form-group">
+							<label class="mui-form-label">确认密码</label>
+							<input type="password" name="passwordrep" class="mui-form-control" required>
 						</div>
-						<div class="form-group">
-							<div><span class="field">邮箱</span></div>
-							<div><input type="email" name="email" class="area" required check-valid="email"></div>
+						<div class="mui-form-group">
+							<label class="mui-form-label">邮箱</label>
+							<input type="email" name="email" class="mui-form-control" required check-valid="email">
 						</div>
-						<div class="form-group">
-							<div><span class="field">验证信息</span></div>
-							<div><input type="text" name="intro" class="area" required placeholder="让我们认识一下你！"></div>
+						<div class="mui-form-group">
+							<label class="mui-form-label">验证消息</label>
+							<input type="text" name="intro" class="mui-form-control" required placeholder="让我们认识一下你！">
 						</div>
 						<input type="submit" class="hidden">
 					</form>
 					<div class="form-footer">
-						<div class="mb1">
-							<input type="checkbox" name="like">
-							<label for="like">喜欢纸飞机就点个赞吧</label>
-						</div>
-						<input type="button" value="立即注册" onclick="document.querySelector('#group1>form').submit()">
+						<input type="button" value="立即注册" onclick="document.querySelector('#group1>form').submit()" class="mui-btn" data-mui-color="primary">
 					</div>
 				</div>
 			</div>
