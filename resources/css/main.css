@@ -136,7 +136,7 @@ input[disabled] {
 	margin-top: 1em;
 }
 .mb1 {
-	margin-bottom: 1em;
+	margin-bottom: 3em;
 }
 .tip {
 	margin: 1em 0.5em;
@@ -214,4 +214,15 @@ input[disabled] {
 	font-size: 0.9em;
 	text-align: left;
 	color: #666;
+}
+.new-man
+{
+	color: rgba(148,149,220);
+	font-size: 150%;
+	display: inline-block;
+	border-top:10px;
+}
+.new-man:hover
+{
+	text-decoration: none;
 }

@@ -46,15 +46,9 @@ $code = sha1(rand(10000) . "\t" . time());
 		<div id="frame1" class="frame">
 		<? if ($user != null) : ?>
 			<h2>你好，<?=$user?>。</h2>
-			<div>
-			<h3>点击访问
-			<a href="http://my.nuaa.edu.cn">纸飞机论坛</a>
-			<a href="http://my.nuaa.edu.cn/mall/">南航mall</a>
-			<a href="http://my.nuaa.edu.cn/sso/?page=wechatbind">微信绑定</a>
-			<a href="http://my.nuaa.edu.cn/xiaohongmao">小红帽</a></h3>
-			</div>
 			<button class="mui-btn" data-mui-color="primary" onclick="window.location.href='?action=logout'">退出登录</button>
 		<? else : ?>
+		<div ><a href="page/freshman.php" data-mui-color="primary" class="new-man">2016新生请点击这里注册</a></div>
 			<div class="tabs v3">
 				<div id="tab1" class="tab tab-current">学号/工号</div>
 				<div id="tab2" class="tab">论坛账号</div>
@@ -114,6 +108,7 @@ $code = sha1(rand(10000) . "\t" . time());
 		}
 	</script>
 	<script src="resources/js/wechat_query.js"></script>
+
 <?
 
 createFooter();
