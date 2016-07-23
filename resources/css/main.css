@@ -226,3 +226,14 @@ input[disabled] {
 {
 	text-decoration: none;
 }
+.a_link
+{
+	color: rgba(148,149,220);
+	margin-left: 10px;
+	display: inline-block;
+	border-top:10px;
+}
+.a_link:hover
+{
+	text-decoration: none;
+}
