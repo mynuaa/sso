@@ -101,6 +101,7 @@ EOF;
 }
 function createFooter() {
 	echo '</div><script src="/lib/mui/js/mui.min.js"></script><script src="resources/js/main.js"></script></body></html>';
+	//echo '</div><script src="resources/js/mui.min.js"></script><script src="resources/js/main.js"></script></body></html>';
 }
 function my_encrypt($str, $appid = '') {
 	if ($appid != '') $appid .= '_';
