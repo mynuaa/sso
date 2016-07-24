@@ -10,7 +10,8 @@ html, body {
 body {
 	background: url(/template/zfj4.0/images/bg.png) #FFF no-repeat;
 	display: table;
-	position: fixed;
+	position: absolute;
+	overflow: scroll;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -136,7 +137,7 @@ input[disabled] {
 	margin-top: 1em;
 }
 .mb1 {
-	margin-bottom: 0em;
+	margin-bottom: 3em;
 }
 .tip {
 	margin: 1em 0.5em;
@@ -218,11 +219,22 @@ input[disabled] {
 .new-man
 {
 	color: rgba(148,149,220);
-	font-size: 150%;
+	font-size: 125%;
 	display: inline-block;
 	border-top:10px;
 }
 .new-man:hover
+{
+	text-decoration: none;
+}
+.a_link
+{
+	color: rgba(148,149,220);
+	margin-left: 10px;
+	display: inline-block;
+	border-top:10px;
+}
+.a_link:hover
 {
 	text-decoration: none;
 }

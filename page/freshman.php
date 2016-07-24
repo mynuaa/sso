@@ -41,14 +41,16 @@ else {
 		<div class="tip tip-warning">本页面将在2016级新生允许登录教务处后关闭，届时新生请通过<b>教务处账号</b>激活</div>
 		<div id="frame1" class="frame">
 		<? if ($user != NULL) : ?>
-			<h2>你好，<?=$user?>。</h2>
+		<h2>你好，<?=$user?>。</h2>
+		<div>
 			<h3>点击访问
-			<a href="http://my.nuaa.edu.cn">纸飞机论坛</a>
-			<a href="http://my.nuaa.edu.cn/mall/">南航mall</a>
-			<a href="http://my.nuaa.edu.cn/sso/?page=wechatbind" target="_banket">微信绑定</a>
-			<a href="http://my.nuaa.edu.cn/xiaohongmao">小红帽</a></h3>
-			</div>
-			<button class="mui-btn" data-mui-color="primary" onclick="window.location.href='?action=logout'">退出登录</button>
+				<a href="http://my.nuaa.edu.cn" data-mui-color="primary" class="a_link">纸飞机论坛</a>
+				<a href="http://my.nuaa.edu.cn/mall/" data-mui-color="primary" class="a_link">南航mall</a>
+				<a href="http://my.nuaa.edu.cn/sso/?page=wechatbind" target="_banket" data-mui-color="primary" class="a_link">微信绑定</a>
+				<a href="http://my.nuaa.edu.cn/xiaohongmao" data-mui-color="primary" class="a_link">小红帽</a>
+			</h3>
+		</div>
+		<button class="mui-btn" data-mui-color="primary" onclick="window.location.href='?action=logout'">退出登录</button>
 		<? else : ?>
 			<div class="groups">
 				<div id="group1" class="group-current">
