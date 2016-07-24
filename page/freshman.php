@@ -42,7 +42,13 @@ else {
 		<div id="frame1" class="frame">
 		<? if ($user != NULL) : ?>
 			<h2>你好，<?=$user?>。</h2>
-			<input type="button" onclick="window.location.href='?action=logout'" value="退出登录">
+			<h3>点击访问
+			<a href="http://my.nuaa.edu.cn">纸飞机论坛</a>
+			<a href="http://my.nuaa.edu.cn/mall/">南航mall</a>
+			<a href="http://my.nuaa.edu.cn/sso/?page=wechatbind" target="_banket">微信绑定</a>
+			<a href="http://my.nuaa.edu.cn/xiaohongmao">小红帽</a></h3>
+			</div>
+			<button class="mui-btn" data-mui-color="primary" onclick="window.location.href='?action=logout'">退出登录</button>
 		<? else : ?>
 			<div class="groups">
 				<div id="group1" class="group-current">
@@ -51,7 +57,7 @@ else {
 						<input type="hidden" name="type" value="dz">
 						<div class="mui-form-group">
 							<label class="mui-form-label">论坛昵称</label>
-							<input type="text" name="username" class="mui-form-control" required autofocus check-valid="username">	
+							<input type="text" name="username" class="mui-form-control" required autofocus check-valid="username">
 						</div>
 						<div class="mui-form-group">
 							<label class="mui-form-label">论坛密码</label>
