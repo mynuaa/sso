@@ -11,7 +11,7 @@ body {
 	background: url(/template/zfj4.0/images/bg.png) #FFF no-repeat;
 	display: table;
 	position: absolute;
-	overflow: scroll;
+	overflow: auto;
 	top: 0;
 	left: 0;
 	width: 100%;
@@ -137,7 +137,7 @@ input[disabled] {
 	margin-top: 1em;
 }
 .mb1 {
-	margin-bottom: 3em;
+	margin-bottom: 1em;
 }
 .tip {
 	margin: 1em 0.5em;

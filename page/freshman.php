@@ -53,7 +53,7 @@ else {
 		<button class="mui-btn" data-mui-color="primary" onclick="window.location.href='?action=logout'">退出登录</button>
 		<? else : ?>
 			<div class="groups">
-				<div id="group1" class="group-current">
+				<div id="group1" class="group-current group_up">
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="dz">
