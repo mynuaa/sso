@@ -48,15 +48,15 @@ $code = sha1(rand(10000) . "\t" . time());
 			<h2>你好，<?=$user?>。</h2>
 			<div>
 				<h3>点击访问
-					<a href="http://my.nuaa.edu.cn" data-mui-color="primary" class="a_link">纸飞机论坛</a>
-					<a href="http://my.nuaa.edu.cn/mall/" data-mui-color="primary" class="a_link">南航mall</a>
-					<a href="http://my.nuaa.edu.cn/sso/?page=wechatbind" target="_banket" data-mui-color="primary" class="a_link">微信绑定</a>
-					<a href="http://my.nuaa.edu.cn/xiaohongmao" data-mui-color="primary" class="a_link">小红帽</a>
+					<a href="http://localhost/zfj/" data-mui-color="primary" class="a_link">纸飞机论坛</a>
+					<a href="http://localhost/zfj/mall/" data-mui-color="primary" class="a_link">南航mall</a>
+					<a href="http://localhost/zfj/sso/?page=wechatbind" target="_banket" data-mui-color="primary" class="a_link">微信绑定</a>
+					<a href="http://localhost/zfj/xiaohongmao" data-mui-color="primary" class="a_link">小红帽</a>
 				</h3>
 			</div>
 			<button class="mui-btn" data-mui-color="primary" onclick="window.location.href='?action=logout'">退出登录</button>
 		<? else : ?>
-			<div><h3><a href="http://my.nuaa.edu.cn/sso/?page=freshman" data-mui-color="primary" class="new-man">2016新生请点击这里注册</a></h3></div>
+			<!-- <div><h3><a href="http://localhost/sso/?page=freshman" data-mui-color="primary" class="new-man">2016新生请点击这里注册</a></h3></div> -->
 			<div class="tabs v3">
 				<div id="tab1" class="tab tab-current">学号/工号</div>
 				<div id="tab2" class="tab">论坛账号</div>
@@ -100,7 +100,7 @@ $code = sha1(rand(10000) . "\t" . time());
 				</div>
 				<div id="group3" class="group">
 					<div class="tip tip-info">点击公众号“南航纸飞机”菜单中的“纸飞机→万能扫码”，并将手机摄像头对准上方二维码。</div>
-					<img id="wechat_qrcode" src="http://my.nuaa.edu.cn/mytools/?tool=qrcode&text=wechat://<?=$code?>" alt="扫码登录">
+					<img id="wechat_qrcode" src="http://localhost/zfj/mytools/?tool=qrcode&text=wechat://<?=$code?>" alt="扫码登录">
 				</div>
 			</div>
 		<? endif; ?>

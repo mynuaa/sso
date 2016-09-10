@@ -35,7 +35,7 @@ if($uid) {
 				<div id="group3" class="group group-current">
 				<? if ($errormsg == '') : ?>
 					<div>
-						<img id="wechat_qrcode" src="http://my.nuaa.edu.cn/mytools/?tool=qrcode&text=wechatbind://<?=rawurlencode($logincode)?>" alt="扫码登录">
+						<img id="wechat_qrcode" src="http://localhost/zfj/mytools/?tool=qrcode&text=wechatbind://<?=rawurlencode($logincode)?>" alt="扫码登录">
 						<div id="wechat_tip">* 请在公众号“南航纸飞机”的菜单中找到“纸飞机→万能扫码”，并将手机摄像头对准上方二维码。</div>
 					</div>
 					<h2 id="bind-successful" style="display:none;text-align:center">绑定成功！三秒后页面关闭……</h2>
