@@ -44,10 +44,10 @@ else {
 		<h2>你好，<?=$user?>。</h2>
 		<div>
 			<h3>点击访问
-				<a href="http://localhost/zfj/" data-mui-color="primary" class="a_link">纸飞机论坛</a>
-				<a href="http://localhost/zfj/mall/" data-mui-color="primary" class="a_link">南航mall</a>
-				<a href="http://localhost/zfj/sso/?page=wechatbind" target="_banket" data-mui-color="primary" class="a_link">微信绑定</a>
-				<a href="http://localhost/zfj/xiaohongmao" data-mui-color="primary" class="a_link">小红帽</a>
+				<a href="http://my.nuaa.edu.cn/" data-mui-color="primary" class="a_link">纸飞机论坛</a>
+				<a href="http://my.nuaa.edu.cn/mall/" data-mui-color="primary" class="a_link">南航mall</a>
+				<a href="http://my.nuaa.edu.cn/sso/?page=wechatbind" target="_banket" data-mui-color="primary" class="a_link">微信绑定</a>
+				<a href="http://my.nuaa.edu.cn/xiaohongmao" data-mui-color="primary" class="a_link">小红帽</a>
 			</h3>
 		</div>
 		<button class="mui-btn" data-mui-color="primary" onclick="window.location.href='?action=logout'">退出登录</button>

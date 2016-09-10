@@ -5,7 +5,6 @@
 // $arr = my_decrypt($_COOKIE['myauth_token']);
 // $arr = explode("\t", $arr);
 if (isset($_POST['action'])) {
-	print_r($_POST);
 	switch ($_POST['action']) {
 	case 'bind':
 		switch ($_POST['target']) {
@@ -57,10 +56,10 @@ if (isset($_POST['action'])) {
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="action" value="bind">
 						<input type="hidden" name="target" value="ded">
-						<div class="mui-form-group">
+						<!-- <div class="mui-form-group">
 							<input class="mui-form-control" type="text" value="<?=$arr[1]?>" disabled>
 							<label class="mui-form-label">论坛昵称</label>
-						</div>
+						</div> -->
 						<div class="mui-form-group">
 							<input class="mui-form-control" type="text" name="username">
 							<label class="mui-form-label">学号/工号</label>
