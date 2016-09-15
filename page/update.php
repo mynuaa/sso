@@ -45,9 +45,11 @@ if (isset($_POST['action'])) {
 <? createHeader('完善信息'); ?>
 		<h2>请完善您的信息</h2>
 		<div id="frame1" class="frame">
-			<div class="tabs v2">
-				<div id="tab1" class="tab tab-current">绑定</div>
-				<div id="tab2" class="tab">放弃</div>
+			<div class="tabs v1 ">
+				<!-- <div class="max"> -->
+				<div id="tab1" class="tab tab-current" >绑定</div>
+				<!-- <div id="tab2" class="tab">放弃</div> -->
+				<!-- </div> -->
 			</div>
 			<div class="groups">
 				<div id="group1" class="group group-current">
@@ -72,11 +74,11 @@ if (isset($_POST['action'])) {
 						<button type="submit" class="mui-btn" data-mui-color="primary">学号/工号激活</button>
 					</form>
 				</div>
-				<div id="group2" class="group">
+				<!-- <div id="group2" class="group">
 					<p>中断登录流程</p>
 					<p>你的数据不会被插入到数据库中</p>
 					<input type="button" onclick="window.location.href='?action=logout'" style="background:#D00" value="点此取消登录">
-				</div>
+				</div> -->
 			</div>
 			</div>
 		</div>
