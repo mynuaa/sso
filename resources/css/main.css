@@ -96,7 +96,9 @@ header a {
 	box-sizing: border-box;
 }
 .tabs.v1 .tab {
-	width: 100%;
+	width: 84%;
+	margin-left: 7%;
+	margin-right: 7%;
 }
 .tabs.v2 .tab {
 	width: 50%;
@@ -110,6 +112,12 @@ header a {
 .tab-current {
 	border-bottom: 2px solid #2196F3;
 	color: #2196F3;
+}
+.max{
+	max-width: 400px;
+	height: 36px;
+/*	margin-left:10%;
+	margin-right: 10%;*/
 }
 .groups {
 	max-width: 400px;

@@ -1,7 +1,7 @@
 <?
 
 // 新生可以登录教务处之后此页面隐藏
-//die();
+die();
 $redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri']) : $_SERVER['REQUEST_URI'];
 
 if (isset($_POST['token'])) {
@@ -44,7 +44,7 @@ else {
 		<h2>你好，<?=$user?>。</h2>
 		<div>
 			<h3>点击访问
-				<a href="http://my.nuaa.edu.cn" data-mui-color="primary" class="a_link">纸飞机论坛</a>
+				<a href="http://my.nuaa.edu.cn/" data-mui-color="primary" class="a_link">纸飞机论坛</a>
 				<a href="http://my.nuaa.edu.cn/mall/" data-mui-color="primary" class="a_link">南航mall</a>
 				<a href="http://my.nuaa.edu.cn/sso/?page=wechatbind" target="_banket" data-mui-color="primary" class="a_link">微信绑定</a>
 				<a href="http://my.nuaa.edu.cn/xiaohongmao" data-mui-color="primary" class="a_link">小红帽</a>
