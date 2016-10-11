@@ -9,7 +9,7 @@ $user = uc_get_user($info['auth_id'], 1);
 $return = [
 	'uid' => $user[0],
 	'username' => $user[1],
-	'stuid' => $info['auth_ded']
+	'stu_num' => $info['auth_ded']
 ];
 
 echo json_encode($return);
