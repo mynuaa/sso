@@ -9,7 +9,7 @@
 
 !defined('IN_UC') && exit('Access Denied');
 
-class appcontrol extends uc_base {
+class appcontrol extends base {
 
 	function __construct() {
 		$this->appcontrol();

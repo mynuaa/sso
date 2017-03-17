@@ -9,7 +9,7 @@
 
 !defined('IN_UC') && exit('Access Denied');
 
-class friendcontrol extends uc_base {
+class friendcontrol extends base {
 
 	function __construct() {
 		$this->friendcontrol();

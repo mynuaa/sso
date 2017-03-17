@@ -9,7 +9,7 @@
 
 !defined('IN_UC') && exit('Access Denied');
 
-class domaincontrol extends uc_base {
+class domaincontrol extends base {
 
 	function __construct() {
 		$this->domaincontrol();
