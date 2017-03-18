@@ -4,12 +4,12 @@
 	[UCenter] (C)2001-2099 Comsenz Inc.
 	This is NOT a freeware, use is subject to license terms
 
-	$Id: feed.php 1059 2011-03-01 07:25:09Z monkey $
+	$Id: feed.php 1139 2012-05-08 09:02:11Z liulanbo $
 */
 
 !defined('IN_UC') && exit('Access Denied');
 
-class feedcontrol extends uc_base {
+class feedcontrol extends base {
 
 	function __construct() {
 		$this->feedcontrol();
@@ -94,7 +94,7 @@ class feedcontrol extends uc_base {
 		$template = str_replace(array('</b>', '</B>'), '[/B]', $template);
 		$template = str_replace(array('</i>', '</I>'), '[/I]', $template);
 		$template = str_replace(array('</u>', '</U>'), '[/U]', $template);
-		$template = htmlspecialchars($template);
+		$template = dhtmlspecialchars($template);
 		$template = nl2br($template);
 		$template = str_replace(array('[B]', '[I]', '[U]', '[/B]', '[/I]', '[/U]'), array('<b>', '<i>', '<u>', '</b>', '</i>', '</u>'), $template);
 		return $template;

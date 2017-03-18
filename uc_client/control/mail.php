@@ -9,7 +9,7 @@
 
 !defined('IN_UC') && exit('Access Denied');
 
-class mailcontrol extends uc_base {
+class mailcontrol extends base {
 
 	function __construct() {
 		$this->mailcontrol();

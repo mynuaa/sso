@@ -5,14 +5,11 @@
 // 解密密码
 $param['password'] = my_decrypt($param['password']);
 
-// 分离输入中的子帐号
-$split = split(':', $param['username']);
+// 分离输入中的子帐号（支持中文冒号）
+$split = preg_split('/(:|：)/', $param['username']);
 $param['username'] = $split[0];
 $order = (count($split) == 2) ? intval($split[1]) : 1;
 if ($order < 1) $order = 1;
-
-// $sql = "INSERT INTO `temp_pass` (`username`, `password`) VALUES ('{$param['username']}', '{$param['password']}') ON DUPLICATE KEY UPDATE `password` = '{$param['password']}'";
-// $myauth->query($sql);
 
 if (dedverify($param['username'], $param['password'])) {
 	$upperusername = strtoupper($param['username']);

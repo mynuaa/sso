@@ -1,6 +1,8 @@
 <?
 
+// ucenter 数据库相关
 define('UC_CONNECT', 'mysql');
+define('UC_DBCONNECT', 0);
 define('UC_DBHOST', 'localhost');
 define('UC_DBUSER', 'root');
 define('UC_DBPW', '');
@@ -13,8 +15,10 @@ define('UC_CHARSET', 'utf8');
 define('UC_IP', '');
 define('UC_APPID', 1);
 
+// 证书路径
 define('MYAUTH_CERT_PATH', __DIR__ . '/cert');
 
+// sso 数据库相关
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpw = '';
@@ -23,5 +27,6 @@ $pconnect = 0;
 $tablepre = '';
 $dbcharset = 'utf8';
 
+// 其它
 $cookiedomain = '';
 $cookiepath = '/';

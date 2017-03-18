@@ -9,7 +9,7 @@
 
 !defined('IN_UC') && exit('Access Denied');
 
-class cachecontrol extends uc_base {
+class cachecontrol extends base {
 
 	function __construct() {
 		$this->cachecontrol();

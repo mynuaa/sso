@@ -9,7 +9,7 @@
 
 !defined('IN_UC') && exit('Access Denied');
 
-class tagcontrol extends uc_base {
+class tagcontrol extends base {
 
 	function __construct() {
 		$this->tagcontrol();

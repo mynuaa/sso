@@ -16,7 +16,7 @@ define('PMSENDREGDAYS', -4);
 define('CHATPMTHREADLIMIT_ERROR', -5);
 define('CHATPMMEMBERLIMIT_ERROR', -7);
 
-class pmcontrol extends uc_base {
+class pmcontrol extends base {
 
 	function __construct() {
 		$this->pmcontrol();
@@ -195,14 +195,6 @@ class pmcontrol extends uc_base {
 		if($filter == 'newpm') {
 			$type = 0;
 			$new = 1;
-/*
-		} elseif($filter == 'privatepm') {
-			$type = 1;
-			$new = 0;
-		} elseif($filter == 'chatpm') {
-			$type = 2;
-			$new = 0;
-*/
 		} elseif($filter == 'privatepm') {
 			$type = 0;
 			$new = 0;
