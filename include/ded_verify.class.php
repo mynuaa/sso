@@ -28,7 +28,7 @@ function gsmverify($gsmid, $password) {
 	$password = $password;
 	$prepare_curl = curl_init();
 	curl_setopt_array($prepare_curl, [
-		CURLOPT_URL => "http://gsmis.nuaa.edu.cn/nuaapyxx/login.aspx",
+		CURLOPT_URL => "http://gsmis.nuaa.edu.cn/pyxx/login.aspx",
 		CURLOPT_RETURNTRANSFER => 1,
 	]);
 	preg_match('/name="__VIEWSTATE" value=".+?"/', curl_exec($prepare_curl), $viewstate);
@@ -39,7 +39,7 @@ function gsmverify($gsmid, $password) {
 	$x = intval(rand(60));
 	$y = intval(rand(60));
 	$post = "__VIEWSTATE={$viewstate}&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x={$x}&_ctl0%3AImageButton1.y={$y}&_ctl0%3Atxtpassword={$password}";
-	$url = "http://gsmis.nuaa.edu.cn/nuaapyxx/login.aspx";
+	$url = "http://gsmis.nuaa.edu.cn/pyxx/login.aspx";
 	$curl = curl_init();
 	curl_setopt_array($curl, [
 		CURLOPT_HTTPHEADER, array(
@@ -54,7 +54,7 @@ function gsmverify($gsmid, $password) {
 	$response = curl_exec($curl);
 	$http_code = curl_getinfo($curl, CURLINFO_HTTP_CODE);
 	curl_close($curl);
-	return $http_code == 302;
+	return $http_code == 302 || preg_match('/您已超过学习期限/', $response);
 }
 // 教师登录
 function hrverify($tid, $password) {
