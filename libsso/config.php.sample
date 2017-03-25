@@ -1,0 +1,25 @@
+<?php
+
+$GLOBALS['__CONFIG'] = [
+    'debug' => true,
+    'sso' => [
+        'host' => 'localhost',
+        'user' => 'root',
+        'pass' => 'root',
+        'port' => 3306,
+        'dbnm' => 'myauth',
+        'cert' => 'cert',
+    ],
+    'uc' => [
+        'host' => 'localhost',
+        'user' => 'root',
+        'pass' => 'root',
+        'port' => 3306,
+        'dbnm' => 'ucenter',
+    ],
+];
+
+if ($__CONFIG['debug']) {
+    ini_set('display_errors', 'On');
+    error_reporting(E_ALL);
+}
