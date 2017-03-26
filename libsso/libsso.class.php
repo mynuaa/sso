@@ -42,11 +42,18 @@ class SSO {
     public static function getPubkeyForJs() {
         return trim(file_get_contents(self::$cert . "/js_public_key.dat"));
     }
+    public static function generateLoginUrl() {
+        if (self::$uid != -1) {
+            return "http://{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
+        }
+        $uri = base64_encode($_SERVER['REQUEST_URI']);
+        return "http://{$_SERVER['HTTP_HOST']}/sso/?page=login&redirect_uri={$uri}";
+    }
     public static function gotoLogin() {
         if (self::$uid != -1) {
             return;
         }
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/sso/?page=login&redirect_uri=' . $_SERVER['REQUEST_URI']);
+        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/sso/?page=login&redirect_uri=' . base64_encode($_SERVER['REQUEST_URI']));
         die();
     }
     public static function getUser() {
