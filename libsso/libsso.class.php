@@ -53,11 +53,10 @@ class SSO {
         if (self::$uid != -1) {
             return;
         }
-        header('Location: http://' . $_SERVER['HTTP_HOST'] . '/sso/?page=login&redirect_uri=' . base64_encode($_SERVER['REQUEST_URI']));
+        header("Location: http://{$_SERVER['HTTP_HOST']}/sso/?page=login&redirect_uri=" . base64_encode($_SERVER['REQUEST_URI']));
         die();
     }
     public static function getUser() {
-        $id = intval(self::$uid);
         $ucRow = $ssoRow = null;
         $ucResult = self::$ucdb->query("SELECT `username`, `email` FROM `members` WHERE `uid` = {$id}");
         $ssoResult = self::$ssodb->query("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = {$id}");
@@ -72,6 +71,39 @@ class SSO {
         ];
         if (!$ssoRow) return null;
         return $row;
+    }
+    public static function getUserByOpenid($openid) {
+        $info = self::$ssodb->query("SELECT `auth_id`, `auth_ded` FROM `sso` WHERE `auth_wechat` = '{$openid}' LIMIT 1");
+        $info = $info->fetch_array();
+        if (!$info) {
+            $return = [
+                'uid' => -1,
+                'username' => '',
+                'stu_num' => ''
+            ];
+        } else {
+            $user = self::$ucdb->query("SELECT `username` FROM `members` WHERE `uid` = {$info['auth_id']}");
+            $user = $user->fetch_array();
+            $return = [
+                'uid' => $info['auth_id'],
+                'username' => $user['username'],
+                'stu_num' => $info['auth_ded']
+            ];
+        }
+        return $return;
+    }
+    public static function getUserRepeats() {
+        $auth_ded = self::$ssodb->query('SELECT `auth_ded` FROM `sso` WHERE `auth_id` = ' . self::$uid);
+        $auth_ded = $auth_ded->fetch_array()['auth_ded'];
+        if (in_array($auth_ded, array('JUST4TEST', 'FRESHMAN', 'MALLUSER'))) {
+            return false;
+        }
+        $result = self::$ssodb->query("SELECT `auth_id` FROM `sso` WHERE `auth_ded` = '{$auth_ded}'");
+        $t = [];
+        while ($row = $result->fetch_array()) {
+            $t []= $row['auth_id'];
+        }
+        return $t;
     }
 }
 
