@@ -5,6 +5,7 @@ function usrverify($stuid, $password) {
 	$url = "http://ded.nuaa.edu.cn/NetEAn/User/check.asp";
 	$post = "user=" . $stuid . "&pwd=" . $password;
 	$cookie = tempnam('/tmp', 'MYAUTH_');
+	$newCookie = tempnam('/tmp', 'MYAUTH_');
 	$curl = curl_init();
 	curl_setopt_array($curl, [
 		CURLOPT_URL => $url,
@@ -16,11 +17,27 @@ function usrverify($stuid, $password) {
 	curl_exec($curl);
 	curl_setopt_array($curl, [
 		CURLOPT_COOKIEFILE => $cookie,
-		CURLOPT_REFERER => 'http://ded.nuaa.edu.cn'
+		CURLOPT_REFERER => 'http://ded.nuaa.edu.cn',
+		CURLOPT_COOKIEJAR => $newCookie,
 	]);
 	$response = curl_exec($curl);
+	$success = strstr($response, 'switch (0){') != false;
+	if ($success) {
+		global $myauth;
+		if (!$myauth->result_first("SELECT `name` FROM `sso` WHERE `auth_ded` = '{$stuid}'")) {
+			$url = 'http://ded.nuaa.edu.cn/netean/newpage/xsyh/title.asp';
+			curl_setopt_array($curl, [
+				CURLOPT_URL => $url,
+				CURLOPT_COOKIEFILE => $newCookie,
+				CURLOPT_RETURNTRANSFER => 1,
+			]);
+			$result = iconv('GB2312', 'UTF-8', curl_exec($curl));
+			preg_match('/^.+\.(.+?)\).+$/s', $result, $arr);
+			$myauth->query("UPDATE `sso` SET `name`= '{$arr[1]}' WHERE `auth_ded` = '{$stuid}'");
+		}
+	}
 	curl_close($curl);
-	return (strstr($response, 'switch (0){') != false);
+	return $success;
 }
 // 研究生登录
 function gsmverify($gsmid, $password) {

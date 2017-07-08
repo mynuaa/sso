@@ -58,6 +58,7 @@ CREATE TABLE IF NOT EXISTS `oauth_tokens` (
 
 CREATE TABLE IF NOT EXISTS `sso` (
   `auth_id` int(11) NOT NULL,
+  `name` varchar(40) DEFAULT NULL,
   `auth_ded` varchar(20) NOT NULL,
   `auth_wechat` varchar(100) DEFAULT NULL,
   `auth_logincode` varchar(100) DEFAULT NULL COMMENT '登录用的凭证',

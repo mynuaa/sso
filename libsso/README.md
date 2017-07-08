@@ -26,8 +26,8 @@ Array
 目前可以使用的函数有：
 
 ```php
-// 获取用户信息
-getUser()
+// 获取用户信息,$uid缺省则获取当前登录用户的信息
+getUserInfo([$uid])
 // 通过 openid 获取用户
 getUserByOpenid($openid)
 // 获取用户马甲列表
@@ -41,4 +41,6 @@ getPubkeyForJs()
 generateLoginUrl()
 // 跳至登录界面，登录后跳回现有页面
 gotoLogin()
+// 通过 学号 获取用户的uid和姓名信息
+getUserByDed($stuid)
 ```

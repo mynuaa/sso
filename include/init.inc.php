@@ -2,6 +2,7 @@
 
 // 设置数据库
 require_once 'db_mysql.class.php';
+global $myauth;
 $myauth = new dbstuff;
 $myauth->connect($dbhost, $dbuser, $dbpw, $dbname, $pconnect);
 unset($dbhost, $dbuser, $dbpw, $dbname, $pconnect);

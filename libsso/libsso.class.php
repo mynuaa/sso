@@ -1,6 +1,6 @@
 <?php
 
-require_once 'config.php';
+require_once __DIR__ . '/config.php';
 
 class SSO {
     protected static $ssodb = null;
@@ -11,6 +11,7 @@ class SSO {
     protected static $uid = -1;
     protected static function ssoInit($args) {
         self::$ssodb = new mysqli($args['host'], $args['user'], $args['pass'], $args['dbnm'], $args['port']);
+        self::$ssodb->set_charset('utf8mb4');
         self::$cert = $args['cert'];
         self::$pbkey = openssl_pkey_get_public(file_get_contents(self::$cert . "/public_key.pem"));
         self::$prkey = openssl_pkey_get_private(file_get_contents(self::$cert . "/private_key.pem"));
@@ -25,6 +26,7 @@ class SSO {
     }
     protected static function ucInit($args) {
         self::$ucdb = new mysqli($args['host'], $args['user'], $args['pass'], $args['dbnm'], $args['port']);
+        self::$ucdb->set_charset('utf8mb4');
     }
     public static function init() {
         self::ssoInit($GLOBALS['__CONFIG']['sso']);
@@ -56,7 +58,8 @@ class SSO {
         header("Location: http://{$_SERVER['HTTP_HOST']}/sso/?page=login&redirect_uri=" . base64_encode($_SERVER['REQUEST_URI']));
         die();
     }
-    public static function getUser() {
+    public static function getUserInfo($id = null) {
+        if ($id == null) $id = self::$uid;
         $ucRow = $ssoRow = null;
         $ucResult = self::$ucdb->query("SELECT `username`, `email` FROM `members` WHERE `uid` = {$id}");
         $ssoResult = self::$ssodb->query("SELECT `auth_ded` FROM `sso` WHERE `auth_id` = {$id}");
@@ -68,6 +71,7 @@ class SSO {
             'username' => $ucRow['username'],
             'email' => $ucRow['email'],
             'auth_ded' => $ssoRow['auth_ded'],
+            'name' => $ssoRow['name'],
         ];
         if (!$ssoRow) return null;
         return $row;
@@ -104,6 +108,12 @@ class SSO {
             $t []= $row['auth_id'];
         }
         return $t;
+    }
+    public static function getUserByDed($stuid){
+        if (!$stuid) return NULL;
+        $auth = self::$ssodb->query("SELECT * FROM `sso` WHERE `auth_ded` = '$stuid'");
+        $auth = $auth->fetch_assoc();
+        return $auth;
     }
 }
 
