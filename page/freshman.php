@@ -37,8 +37,8 @@ else {
 }
 ?>
 <? createHeader('新生注册'); ?>
-		<div class="tip tip-info">注册成功后，请使用论坛账号登录</div>
-		<div class="tip tip-warning">本页面将在2017级新生允许登录教务处后关闭，届时新生请通过<b>教务处账号</b>激活</div>
+		<div class="tip tip-info">注册成功后，请使用论坛账号登录，仅可访问新生版块。</div>
+		<div class="tip tip-warning">本页面将在新生允许登录教务处后关闭，届时请重新登录，以获取更多权限。</div>
 		<div id="frame1" class="frame">
 		<? if ($user != NULL) : ?>
 		<h2>你好，<?=$user?>。</h2>
