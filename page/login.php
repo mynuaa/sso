@@ -56,7 +56,7 @@ $code = sha1(rand(10000) . "\t" . time());
 			</div>
 			<button class="mui-btn" data-mui-color="primary" onclick="window.location.href='?action=logout'">退出登录</button>
 		<? else : ?>
-			<!-- <div><h3><a href="http://localhost/sso/?page=freshman" data-mui-color="primary" class="new-man">2016新生请点击这里注册</a></h3></div> -->
+			<div><h3><a href="http://localhost/sso/?page=freshman" data-mui-color="primary" class="new-man">2017新生请点击这里注册</a></h3></div>
 			<div class="tabs v3">
 				<div id="tab1" class="tab tab-current">学号/工号</div>
 				<div id="tab2" class="tab">论坛账号</div>
