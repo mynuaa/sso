@@ -18,6 +18,10 @@ define('UC_APPID', 1);
 // 证书路径
 define('MYAUTH_CERT_PATH', __DIR__ . '/cert');
 
+// 验证域名
+define('DED_HOST', 'ded.nuaa.edu.cn');
+define('GSM_HOST', 'gsmis.nuaa.edu.cn');
+
 // sso 数据库相关
 $dbhost = 'localhost';
 $dbuser = 'root';

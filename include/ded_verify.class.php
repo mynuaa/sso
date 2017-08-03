@@ -2,8 +2,8 @@
 
 // 本科生登录
 function usrverify($stuid, $password) {
-	$url = "http://ded.nuaa.edu.cn/NetEAn/User/check.asp";
-	$post = "user=" . $stuid . "&pwd=" . $password;
+	$url = 'http://' . DED_HOST . '/NetEAn/User/check.asp';
+	$post = 'user=' . $stuid . '&pwd=' . $password;
 	$cookie = tempnam('/tmp', 'MYAUTH_');
 	$newCookie = tempnam('/tmp', 'MYAUTH_');
 	$curl = curl_init();
@@ -17,7 +17,7 @@ function usrverify($stuid, $password) {
 	curl_exec($curl);
 	curl_setopt_array($curl, [
 		CURLOPT_COOKIEFILE => $cookie,
-		CURLOPT_REFERER => 'http://ded.nuaa.edu.cn',
+		CURLOPT_REFERER => 'http://' . DED_HOST . '',
 		CURLOPT_COOKIEJAR => $newCookie,
 	]);
 	$response = curl_exec($curl);
@@ -25,7 +25,7 @@ function usrverify($stuid, $password) {
 	if ($success) {
 		global $myauth;
 		if (!$myauth->result_first("SELECT `name` FROM `sso` WHERE `auth_ded` = '{$stuid}'")) {
-			$url = 'http://ded.nuaa.edu.cn/netean/newpage/xsyh/title.asp';
+			$url = 'http://' . DED_HOST . '/netean/newpage/xsyh/title.asp';
 			curl_setopt_array($curl, [
 				CURLOPT_URL => $url,
 				CURLOPT_COOKIEFILE => $newCookie,
@@ -45,7 +45,7 @@ function gsmverify($gsmid, $password) {
 	$password = $password;
 	$prepare_curl = curl_init();
 	curl_setopt_array($prepare_curl, [
-		CURLOPT_URL => "http://gsmis.nuaa.edu.cn/pyxx/login.aspx",
+		CURLOPT_URL => 'http://' . GSM_HOST . '/pyxx/login.aspx',
 		CURLOPT_RETURNTRANSFER => 1,
 	]);
 	preg_match('/name="__VIEWSTATE" value=".+?"/', curl_exec($prepare_curl), $viewstate);
@@ -56,7 +56,7 @@ function gsmverify($gsmid, $password) {
 	$x = intval(rand(60));
 	$y = intval(rand(60));
 	$post = "__VIEWSTATE={$viewstate}&_ctl0%3Atxtusername={$gsmid}&_ctl0%3AImageButton1.x={$x}&_ctl0%3AImageButton1.y={$y}&_ctl0%3Atxtpassword={$password}";
-	$url = "http://gsmis.nuaa.edu.cn/pyxx/login.aspx";
+	$url = 'http://' . GSM_HOST . '/pyxx/login.aspx';
 	$curl = curl_init();
 	curl_setopt_array($curl, [
 		CURLOPT_HTTPHEADER, array(
