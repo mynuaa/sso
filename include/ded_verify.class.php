@@ -2,34 +2,35 @@
 
 // 本科生登录
 function usrverify($stuid, $password) {
-	$url = 'http://' . DED_HOST . '/NetEAn/User/check.asp';
-	$post = 'user=' . $stuid . '&pwd=' . $password;
 	$cookie = tempnam('/tmp', 'MYAUTH_');
-	$newCookie = tempnam('/tmp', 'MYAUTH_');
 	$curl = curl_init();
 	curl_setopt_array($curl, [
-		CURLOPT_URL => $url,
-		CURLOPT_POST => 1,
-		CURLOPT_POSTFIELDS => $post,
+		CURLOPT_NOBODY => true,
+		CURLOPT_URL => 'http://' . DED_HOST . '/NetEAn/User/login.asp',
 		CURLOPT_COOKIEJAR => $cookie,
-		CURLOPT_RETURNTRANSFER => 1,
+		CURLOPT_RETURNTRANSFER => true,
 	]);
 	curl_exec($curl);
 	curl_setopt_array($curl, [
-		CURLOPT_COOKIEFILE => $cookie,
-		CURLOPT_REFERER => 'http://' . DED_HOST . '',
-		CURLOPT_COOKIEJAR => $newCookie,
+		CURLOPT_POST => true,
+		CURLOPT_URL => 'http://' . DED_HOST . '/NetEAn/User/check.asp',
+		CURLOPT_POSTFIELDS => 'user=' . $stuid . '&pwd=' . $password,
+		CURLOPT_REFERER => 'http://ded.nuaa.edu.cn/netean/user/login.asp',
+		CURLOPT_HTTPHEADER => [
+			'Origin: http://ded.nuaa.edu.cn',
+			'Content-type: application/x-www-form-urlencoded'
+		],
+		CURLOPT_COOKIEFILE => $cookie
 	]);
 	$response = curl_exec($curl);
 	$success = strstr($response, 'switch (0){') != false;
 	if ($success) {
 		global $myauth;
 		if (!$myauth->result_first("SELECT `name` FROM `sso` WHERE `auth_ded` = '{$stuid}'")) {
-			$url = 'http://' . DED_HOST . '/netean/newpage/xsyh/title.asp';
 			curl_setopt_array($curl, [
-				CURLOPT_URL => $url,
-				CURLOPT_COOKIEFILE => $newCookie,
-				CURLOPT_RETURNTRANSFER => 1,
+				CURLOPT_URL => 'http://' . DED_HOST . '/netean/newpage/xsyh/title.asp',
+				CURLOPT_COOKIEFILE => $cookie,
+				CURLOPT_RETURNTRANSFER => true,
 			]);
 			$result = iconv('GB2312', 'UTF-8', curl_exec($curl));
 			preg_match('/^.+\.(.+?)\).+$/s', $result, $arr);
@@ -37,6 +38,7 @@ function usrverify($stuid, $password) {
 		}
 	}
 	curl_close($curl);
+	unlink($cookie);
 	return $success;
 }
 // 研究生登录
@@ -59,10 +61,10 @@ function gsmverify($gsmid, $password) {
 	$url = 'http://' . GSM_HOST . '/pyxx/login.aspx';
 	$curl = curl_init();
 	curl_setopt_array($curl, [
-		CURLOPT_HTTPHEADER, array(
+		CURLOPT_HTTPHEADER, [
 			"Content-type: application/x-www-form-urlencoded",
 			"Origin: http://gsmis.nuaa.edu.cn"
-		),
+		],
 		CURLOPT_URL => $url,
 		CURLOPT_POST => 1,
 		CURLOPT_POSTFIELDS => $post,
