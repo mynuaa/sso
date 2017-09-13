@@ -8,7 +8,7 @@ $GLOBALS['__CONFIG'] = [
         'pass' => 'root',
         'port' => 3306,
         'dbnm' => 'myauth',
-        'cert' => 'cert',
+        'cert' => __DIR__ . '/cert',
     ],
     'uc' => [
         'host' => 'localhost',
@@ -16,6 +16,7 @@ $GLOBALS['__CONFIG'] = [
         'pass' => 'root',
         'port' => 3306,
         'dbnm' => 'ucenter',
+        'dbpre' => ''
     ],
 ];
 

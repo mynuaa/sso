@@ -61,7 +61,7 @@ class SSO {
     public static function getUserInfo($id = null) {
         if ($id == null) $id = self::$uid;
         $ucRow = $ssoRow = null;
-        $ucResult = self::$ucdb->query("SELECT `username`, `email` FROM `members` WHERE `uid` = {$id}");
+        $ucResult = self::$ucdb->query("SELECT `username`, `email` FROM `{$GLOBALS['__CONFIG']['uc']['dbpre']}members` WHERE `uid` = {$id}");
         $ssoResult = self::$ssodb->query("SELECT `auth_ded`,`name` FROM `sso` WHERE `auth_id` = {$id}");
         if ($ucResult) $ucRow = $ucResult->fetch_array();
         if ($ssoResult) $ssoRow = $ssoResult->fetch_array();
@@ -86,7 +86,7 @@ class SSO {
                 'stu_num' => ''
             ];
         } else {
-            $user = self::$ucdb->query("SELECT `username` FROM `members` WHERE `uid` = {$info['auth_id']}");
+            $user = self::$ucdb->query("SELECT `username` FROM `{$GLOBALS['__CONFIG']['uc']['dbpre']}members` WHERE `uid` = {$info['auth_id']}");
             $user = $user->fetch_array();
             $return = [
                 'uid' => $info['auth_id'],
