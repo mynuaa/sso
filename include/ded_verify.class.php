@@ -138,6 +138,7 @@ function dedverify($username, $password) {
 	return (
 		(preg_match("/(^7020|^LZ)/i", $username) && hrverify($username, $password)) ||
 		(preg_match("/(^SX|^SY|^SZ|^BX|^BL)/i", $username) && gsmverify($username, $password)) ||
+		(preg_match("/(^CZ)/i", $username) && clverify($username, $password)) ||
 		usrverify($username, $password)
 	);
 }
