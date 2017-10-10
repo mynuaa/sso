@@ -95,14 +95,14 @@ function clverify($stuid, $password) {
 	$curl = curl_init();
 	curl_setopt_array($curl, [
 		CURLOPT_NOBODY => true,
-		CURLOPT_URL => 'http://cce.nuaa.edu.cn/NetEAn/User/login.asp',
+		CURLOPT_URL => 'http://' . CCE_HOST . '/NetEAn/User/login.asp',
 		CURLOPT_COOKIEJAR => $cookie,
 		CURLOPT_RETURNTRANSFER => true,
 	]);
 	curl_exec($curl);
 	curl_setopt_array($curl, [
 		CURLOPT_POST => true,
-		CURLOPT_URL => 'http://cce.nuaa.edu.cn/netean/user/check.asp',
+		CURLOPT_URL => 'http://' . CCE_HOST . '/netean/user/check.asp',
 		CURLOPT_POSTFIELDS => 'user=' . $stuid . '&pwd=' . $password,
 		CURLOPT_REFERER => 'http://ded.nuaa.edu.cn/netean/user/login.asp',
 		CURLOPT_HTTPHEADER => [
@@ -118,7 +118,7 @@ function clverify($stuid, $password) {
 		global $myauth;
 		if (!$myauth->result_first("SELECT `name` FROM `sso` WHERE `auth_ded` = '{$stuid}'")) {
 			curl_setopt_array($curl, [
-				CURLOPT_URL => 'http://cce.nuaa.edu.cn/netean/newpage/xsyh/title.asp',
+				CURLOPT_URL => 'http://' . CCE_HOST . '/netean/newpage/xsyh/title.asp',
 				CURLOPT_COOKIEFILE => $cookie,
 				CURLOPT_RETURNTRANSFER => true,
 			]);
