@@ -90,7 +90,7 @@ function hrverify($tid, $password) {
 }
 
 //继续教育学生登入
-function clverify($stuid, $password) {
+function cceverify($stuid, $password) {
 	$cookie = tempnam('/tmp', 'MYAUTH_');
 	$curl = curl_init();
 	curl_setopt_array($curl, [
@@ -104,9 +104,9 @@ function clverify($stuid, $password) {
 		CURLOPT_POST => true,
 		CURLOPT_URL => 'http://' . CCE_HOST . '/netean/user/check.asp',
 		CURLOPT_POSTFIELDS => 'user=' . $stuid . '&pwd=' . $password,
-		CURLOPT_REFERER => 'http://ded.nuaa.edu.cn/netean/user/login.asp',
+		CURLOPT_REFERER => 'http://cce.nuaa.edu.cn/netean/user/login.asp',
 		CURLOPT_HTTPHEADER => [
-			'Origin: http://ded.nuaa.edu.cn',
+			'Origin: http://cce.nuaa.edu.cn',
 			'Content-type: application/x-www-form-urlencoded'
 		],
 		CURLOPT_COOKIEFILE => $cookie
@@ -138,6 +138,7 @@ function dedverify($username, $password) {
 	return (
 		(preg_match("/(^7020|^LZ)/i", $username) && hrverify($username, $password)) ||
 		(preg_match("/(^SX|^SY|^SZ|^BX|^BL)/i", $username) && gsmverify($username, $password)) ||
+		(preg_match("/(^CZ)/i", $username) && cceverify($username, $password)) ||
 		usrverify($username, $password)
 	);
 }
