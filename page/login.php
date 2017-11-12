@@ -64,7 +64,7 @@ $code = sha1(rand(10000) . "\t" . time());
 			</div>
 			<div class="groups">
 				<div id="group1" class="group group-current">
-					<div class="tip tip-info">使用你的教务处/研究生院/教师账号登录。</div>
+					<div class="tip tip-info">使用你的学号/工号登录或注册。</div>
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="ded">
