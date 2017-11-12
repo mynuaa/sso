@@ -126,6 +126,7 @@ if (isset($_POST['action'])) {
 			</div>
 			<div class="groups">
 				<div id="group1" class="group group-current">
+					<p>完善信息，即可使用纸飞机的全部产品</p>
 					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="action" value="new">
@@ -137,7 +138,7 @@ if (isset($_POST['action'])) {
 							</div>
 							<div class="mui-form-group">
 								<input class="mui-form-control" type="text" name="username" required check-valid="username">
-								<label class="mui-form-label">论坛昵称</label>
+								<label class="mui-form-label">昵称</label>
 							</div>
 							<div class="mui-form-group">
 								<input class="mui-form-control" type="email" name="email" required check-valid="email">
