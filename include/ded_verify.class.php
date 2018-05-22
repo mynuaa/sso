@@ -37,6 +37,7 @@ function usrverify($stuid, $password) {
 	curl_setopt_array($curl, [
 		CURLOPT_URL => $url,
 		CURLOPT_REFERER => 'http://aao.nuaa.edu.cn/',
+		CURLOPT_RETURNTRANSFER => true,
 		CURLOPT_HTTPHEADER => [
 			'User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36',
 			'Accept: text/html,application/xhtml+xml,application/xml;q=0.9'
