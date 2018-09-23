@@ -44,7 +44,7 @@ if (isset($_POST['token'])) {
 		exit();
 	}
 	else if ($result['uid'] === 0) {
-		setcookie('myauth_token', $result['token'], time() + 3600 * 10000, '/');
+		setcookie('myauth_token', $result['token'], time() + 3600 * 100, '/');
 		jumpTo('?page=complete&relogin=1');
 	}
 	else {
