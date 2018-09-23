@@ -65,7 +65,7 @@ $code = sha1(rand(10000) . "\t" . time());
 			<div class="groups">
 				<div id="group1" class="group group-current">
 					<div class="tip tip-info">使用你的学号/工号登录或注册。</div>
-					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="encrypt(this)">
+					<form action="<?=$_SERVER['REQUEST_URI']?>" method="post" class="center" autocomplete="off" onsubmit="return encrypt(this, true)">
 						<input type="hidden" name="token" value="<?=base64_encode(sha1(rand(10000)))?>">
 						<input type="hidden" name="type" value="ded">
 						<div class="mui-form-group">
@@ -77,6 +77,7 @@ $code = sha1(rand(10000) . "\t" . time());
 							<input class="mui-form-control hidden" type="password">
 							<label class="mui-form-label">密码</label>
 						</div>
+						<input class="mui-form-control hidden" type="text" name="code" id="codeI" >
 						<div id="captchaBox" class="mui-form-group"></div>
 						<button type="submit" class="mui-btn" data-mui-color="primary">登录</button>
 					</form>
@@ -112,7 +113,11 @@ $code = sha1(rand(10000) . "\t" . time());
 		var redirect_uri="<?=$redirect_uri?>";
 		var bredirect_uri="<?=base64_encode($redirect_uri)?>";
 		var oauth=false;
-		function encrypt(form){
+		function encrypt(form, valid = false){
+			if(valid && document.getElementById('codeI').value.length < 2){
+				alert('请拖动验证码验证身份~')
+				return false
+			}
 			form.password.value=my_encrypt(form.password.value,key);
 		}
 	</script>
@@ -126,7 +131,7 @@ $code = sha1(rand(10000) . "\t" . time());
 				style: 'inline',
 				inlineFloatPosition: 'up',
 				success: function(token){
-					console.log('token:', token)
+					document.getElementById('codeI').value = token
 				},
 				fail: function(e){
 					console.log(e)
