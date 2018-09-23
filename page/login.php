@@ -36,7 +36,7 @@ if (isset($_POST['token'])) {
 		alert('验证失败：' . $result['msg'], $_SERVER['REQUEST_URI']);
 		break;
 	case 0:
-		setcookie('myauth_token', $result['token'], time() + 3600 * 10000, '/');
+		setcookie('myauth_token', $result['token'], time() + 3600 * 100, '/');
 		jumpTo('?page=complete&redirect_uri=' . (isset($_GET['redirect_uri']) ? $_GET['redirect_uri'] : base64_encode($_SERVER['REQUEST_URI'])));
 		break;
 	default:
