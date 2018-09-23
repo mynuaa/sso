@@ -77,6 +77,7 @@ $code = sha1(rand(10000) . "\t" . time());
 							<input class="mui-form-control hidden" type="password">
 							<label class="mui-form-label">密码</label>
 						</div>
+						<div id="captchaBox" class="mui-form-group"></div>
 						<button type="submit" class="mui-btn" data-mui-color="primary">登录</button>
 					</form>
 				</div>
@@ -116,6 +117,24 @@ $code = sha1(rand(10000) . "\t" . time());
 		}
 	</script>
 	<script src="resources/js/wechat_query.js"></script>
+	<script src="https://cdn.dingxiang-inc.com/ctu-group/captcha-ui/index.js"></script>
+	<script>
+		function dxCap(){
+			console.log(6)
+			var Captcha = _dx.Captcha(document.getElementById('captchaBox'), {
+				appId: '069ae57274e54291f373478057e1d796',
+				style: 'inline',
+				inlineFloatPosition: 'up',
+				success: function(token){
+					console.log('token:', token)
+				},
+				fail: function(e){
+					console.log(e)
+				}
+			})
+		}
+		window.onload = dxCap()
+	</script>
 <?
 
 createFooter();
