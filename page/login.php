@@ -5,6 +5,22 @@ $redirect_uri = isset($_GET['redirect_uri']) ? base64_decode($_GET['redirect_uri
 
 // 从表单发过来的信息（不包括微信登录）
 if (isset($_POST['token'])) {
+	if($_POST['type'] == 'ded'){//教务处登录需要验证码
+		if(!isset($_POST['code'])){
+			alert('验证码错误', $_SERVER['REQUEST_URI']);
+		}
+		require_once SSO_ROOT . '/dxcode/CaptchaClient.php';
+		$appId = "069ae57274e54291f373478057e1d796";
+		$appSecret = "b684a38e770f263dd1e306b26937363c";
+		$client = new \CaptchaClient($appId,$appSecret);
+		$client->setTimeOut(2);
+	
+		$response = $client->verifyToken($_POST['code']);
+		if($response->result != true){
+			alert('验证码错误', $_SERVER['REQUEST_URI']);
+		}
+
+	}
 	$result = ajax([
 		'url' => '?action=login',
 		'method' => 'POST',
@@ -114,7 +130,7 @@ $code = sha1(rand(10000) . "\t" . time());
 		var bredirect_uri="<?=base64_encode($redirect_uri)?>";
 		var oauth=false;
 		function encrypt(form, valid = false){
-			if(valid && document.getElementById('codeI').value.length < 2){
+			if(valid && form.code.value.length < 2){
 				alert('请拖动验证码验证身份~')
 				return false
 			}

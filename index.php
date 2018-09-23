@@ -1,5 +1,7 @@
 <?
 
+define('SSO_ROOT', dirname(__FILE__) );
+
 require_once 'config.inc.php';
 require_once 'include/init.inc.php';
 
