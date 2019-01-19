@@ -8,6 +8,10 @@ if (isset($_GET['access_token'])) {
 }
 
 $appid = $_GET['appid'];
+if(strlen($appid > 16) || preg_match('/[^\w]/', $appid) !== 0){
+	echo 'welcome to Winnies pot';
+	die();
+}
 $appsecret = $myauth->result_first("SELECT `appsecret` FROM `oauth_info` WHERE `appid` = '{$appid}'");
 $getappsecret = my_decrypt($_GET['appsecret']);
 if ($getappsecret !== $appsecret) die('APPSECRET错误！');
